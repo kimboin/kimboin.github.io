@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-label="kimboin.github.io">
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#0f766e" />
+      <stop offset="100%" stop-color="#0f172a" />
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)" />
+  <circle cx="1030" cy="120" r="180" fill="#14b8a6" fill-opacity="0.18" />
+  <circle cx="180" cy="560" r="220" fill="#22d3ee" fill-opacity="0.14" />
+  <text x="84" y="290" fill="#ffffff" font-family="Pretendard, Noto Sans KR, Arial, sans-serif" font-size="66" font-weight="700">
+    kimboin.github.io
+  </text>
+  <text x="84" y="360" fill="#d1fae5" font-family="Pretendard, Noto Sans KR, Arial, sans-serif" font-size="34">
+    도구와 아이디어 서비스 허브
+  </text>
+</svg>
