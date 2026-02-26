@@ -29,6 +29,7 @@ function SiteLayout({ children }) {
           <nav className="desktop-nav" aria-label="주요 메뉴">
             <NavLink to="/">Home</NavLink>
             <NavLink to="/tools">Tools</NavLink>
+            <NavLink to="/travel-japanese">Travel JP</NavLink>
             <NavLink to="/products">Products</NavLink>
             <NavLink to="/now">Now</NavLink>
           </nav>
@@ -49,6 +50,9 @@ function SiteLayout({ children }) {
             </NavLink>
             <NavLink to="/tools" onClick={() => setMenuOpen(false)}>
               Tools
+            </NavLink>
+            <NavLink to="/travel-japanese" onClick={() => setMenuOpen(false)}>
+              Travel JP
             </NavLink>
             <NavLink to="/products" onClick={() => setMenuOpen(false)}>
               Products

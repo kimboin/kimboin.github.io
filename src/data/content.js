@@ -37,6 +37,19 @@ export const tools = [
     ],
     learned: '규칙 데이터를 화면 로직에서 분리하면 신규 로또 추가가 쉬워졌습니다.',
     openUrl: '/lotto-random-generator/'
+  },
+  {
+    slug: 'kana-trace',
+    name: 'Kana Trace',
+    oneLiner: '히라가나/가타카나를 직접 써보고 정확도를 채점하는 도구',
+    why: '손으로 직접 쓰면서 빠르게 반복 학습할 수 있는 환경이 필요했습니다.',
+    how: [
+      '히라가나 또는 가타카나, 학습 모드를 선택합니다.',
+      '캔버스에 글자를 직접 써봅니다.',
+      '채점 결과를 보고 다음 글자로 이동합니다.'
+    ],
+    learned: '간단한 패턴 인식이라도 사용자 피드백이 학습 지속에 큰 영향을 줍니다.',
+    openUrl: '/kana-trace/'
   }
 ];
 

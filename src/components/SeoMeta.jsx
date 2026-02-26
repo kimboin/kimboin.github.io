@@ -36,6 +36,16 @@ const META_BY_ROUTE = [
     description: '입력한 텍스트의 글자수, 공백 제외 글자수, 단어 수, 줄 수를 실시간으로 계산하는 도구'
   },
   {
+    match: (path) => path === '/kana-trace',
+    title: 'Kana Trace | 히라가나 가타카나 따라쓰기',
+    description: '마우스와 터치로 직접 쓰고 정확도를 채점하는 히라가나/가타카나 학습 도구'
+  },
+  {
+    match: (path) => path === '/travel-japanese',
+    title: 'Travel Japanese | 여행 일본어',
+    description: '일본 여행에서 자주 쓰는 회화를 카테고리별로 빠르게 확인하는 페이지'
+  },
+  {
     match: (path) => path === '/products',
     title: 'Products | kimboin.github.io',
     description: '필요와 아이디어에서 시작해 실제 서비스로 만든 프로젝트 링크 모음'
