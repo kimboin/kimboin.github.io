@@ -9,8 +9,9 @@ function TextCounterPage() {
     const charactersNoSpaces = text.replace(/\s/g, '').length;
     const words = text.trim() ? text.trim().split(/\s+/).length : 0;
     const lines = text ? text.split(/\r\n|\r|\n/).length : 0;
+    const bytes = new TextEncoder().encode(text).length;
 
-    return { characters, charactersNoSpaces, words, lines };
+    return { characters, charactersNoSpaces, words, lines, bytes };
   }, [text]);
 
   useEffect(() => {
@@ -31,7 +32,7 @@ function TextCounterPage() {
         <header className="hero tool-hero">
           <p className="kicker">TEXT COUNTER</p>
           <h1>글자수 세기</h1>
-          <p>텍스트를 입력하면 글자수, 공백 제외 글자수, 단어 수, 줄 수를 바로 확인할 수 있습니다.</p>
+          <p>텍스트를 입력하면 글자수, 바이트 수, 공백 제외 글자수, 단어 수, 줄 수를 바로 확인할 수 있습니다.</p>
         </header>
 
         <section className="card">
@@ -56,6 +57,10 @@ function TextCounterPage() {
             <article className="counter-stat">
               <p className="counter-label">글자수</p>
               <strong>{stats.characters.toLocaleString()}</strong>
+            </article>
+            <article className="counter-stat">
+              <p className="counter-label">바이트 (UTF-8)</p>
+              <strong>{stats.bytes.toLocaleString()}</strong>
             </article>
             <article className="counter-stat">
               <p className="counter-label">공백 제외</p>
