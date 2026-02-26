@@ -38,7 +38,7 @@ function ProductsPage() {
         </div>
       </section>
       <section className="section">
-        <div className="container grid three">
+        <div className="container products-list">
           {products.map((product) => (
             <article className="card" key={product.slug}>
               <span className={badgeClass(product.status)}>{product.status.toUpperCase()}</span>

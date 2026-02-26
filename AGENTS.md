@@ -6,7 +6,7 @@
 ## 프로젝트 구조 및 모듈 구성
 이 저장소는 Vite + React 기반의 GitHub Pages 사이트입니다.
 - `src/`: React 앱 코드(페이지, 컴포넌트, 기능 로직)
-- `public/`: 정적 템플릿 파일(`404.html`, `.nojekyll`)
+- `public/`: 정적 파일 템플릿/SEO 파일(`404.html`, `.nojekyll`, `robots.txt`, `sitemap.xml`)
 - `index.html`: Vite 엔트리 HTML(공통 스크립트 포함)
 - `docs/`: `npm run build` 결과물(배포 대상)
 - `README.md`: 실행/배포/운영 문서
@@ -32,9 +32,10 @@
 ## 테스트 가이드
 자동 테스트 프레임워크는 아직 없습니다.
 - 데스크톱/모바일 뷰포트 수동 렌더링 확인
-- 주요 라우트 직접 진입 확인(`/`, `/tools`, `/products`, `/now`, 도구 경로)
+- 주요 라우트 직접 진입 확인(`/`, `/tools`, `/sites`, `/now`, `/blog`, 도구 경로)
 - 배포 전 브라우저 콘솔 오류(스크립트/리소스 로드 실패) 확인
 - 빌드 성공 여부 확인(`npm run build`)
+- SEO 파일 점검: `public/robots.txt`, `public/sitemap.xml`의 URL/경로 최신화 확인
 
 테스트 도입 시 `tests/` 디렉터리를 만들고 실행 명령 및 커버리지 목표를 명시하세요.
 

@@ -1,13 +1,16 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import {
   basicMenus,
+  buildMenuCsv,
   CUSTOM_STORAGE_KEY,
   loadCustomMenus,
+  parseUploadedMenuCsv,
   splitMenuName,
   toCategoryToken
 } from '../features/food-menu-picker/logic';
 import { trackEvent } from '../lib/analytics';
 import { useLanguage } from '../lib/language';
+import ToolListBackLink from '../components/ToolListBackLink';
 
 const SPIN_DURATION_MS = 3000;
 const SPIN_INTERVAL_MS = 100;
@@ -39,7 +42,17 @@ function FoodMenuPickerPage() {
           deleted: (name) => `${name} 삭제 완료`,
           deletedMeta: '커스텀 목록에서 제거되었습니다.',
           csvNo: '번호',
+          csvCategory: '음식종류',
           csvMenu: '메뉴',
+          template: '엑셀 양식 다운로드',
+          upload: '엑셀 업로드',
+          uploadHint: '양식(.csv)에 음식종류와 메뉴를 채운 뒤 업로드하면 커스텀 목록으로 반영됩니다.',
+          uploadDone: (n) => `${n}개 메뉴 업로드 완료`,
+          uploadDoneMeta: '커스텀 목록이 업로드 데이터로 갱신되었습니다.',
+          uploadEmpty: '업로드된 메뉴가 없습니다.',
+          uploadEmptyMeta: '양식의 메뉴 컬럼을 확인해 주세요.',
+          uploadError: '업로드에 실패했습니다.',
+          uploadErrorMeta: 'CSV 형식을 확인 후 다시 시도해 주세요.',
           title: '오늘 뭐먹지?',
           subtitle: '기본 메뉴 또는 내 커스텀 메뉴에서 하나를 랜덤으로 뽑습니다.',
           modeAria: '메뉴 모드 선택',
@@ -81,7 +94,17 @@ function FoodMenuPickerPage() {
           deleted: (name) => `${name} deleted`,
           deletedMeta: 'Removed from your custom list.',
           csvNo: 'No',
+          csvCategory: 'Category',
           csvMenu: 'Menu',
+          template: 'Download Excel Template',
+          upload: 'Upload Excel',
+          uploadHint: 'Fill the template (.csv) with category and menu, then upload to replace your custom list.',
+          uploadDone: (n) => `${n} menus uploaded`,
+          uploadDoneMeta: 'Custom list was replaced with uploaded data.',
+          uploadEmpty: 'No valid menu rows were found.',
+          uploadEmptyMeta: 'Please check the menu column in your template.',
+          uploadError: 'Failed to upload.',
+          uploadErrorMeta: 'Please check CSV format and try again.',
           title: 'What should I eat today?',
           subtitle: 'Randomly pick one menu from the basic list or your custom list.',
           modeAria: 'Menu mode selection',
@@ -113,6 +136,7 @@ function FoodMenuPickerPage() {
   });
 
   const timersRef = useRef({ spinInterval: null, finishTimeout: null });
+  const fileInputRef = useRef(null);
 
   const sourceMenus = useMemo(
     () => (activeTab === 'basic' ? basicMenus : customMenus),
@@ -276,24 +300,22 @@ function FoodMenuPickerPage() {
     });
   }
 
-  function downloadMenuListAsExcelCsv(menus, scope) {
-    if (!menus.length) {
+  function downloadMenuListAsExcelCsv(menus, scope, isTemplate = false) {
+    if (!menus.length && !isTemplate) {
       return;
     }
 
-    const header = [copy.csvNo, copy.csvMenu];
-    const rows = menus.map((name, index) => [String(index + 1), name]);
-    const csv = [header, ...rows]
-      .map((row) =>
-        row
-          .map((cell) => `"${String(cell).replace(/"/g, '""')}"`)
-          .join(',')
-      )
-      .join('\n');
+    const csv = buildMenuCsv(menus, {
+      no: copy.csvNo,
+      category: copy.csvCategory,
+      menu: copy.csvMenu
+    });
 
     const blob = new Blob([`\uFEFF${csv}`], { type: 'text/csv;charset=utf-8;' });
     const dateToken = new Date().toISOString().slice(0, 10);
-    const fileName = `food-menu-${scope}-${dateToken}.csv`;
+    const fileName = isTemplate
+      ? `food-menu-${scope}-template-${dateToken}.csv`
+      : `food-menu-${scope}-${dateToken}.csv`;
     const url = URL.createObjectURL(blob);
 
     const link = document.createElement('a');
@@ -307,8 +329,53 @@ function FoodMenuPickerPage() {
     trackEvent('tool_export', {
       tool_name: 'food-menu-picker',
       scope,
-      count: menus.length
+      count: menus.length,
+      template: isTemplate
     });
+  }
+
+  function onClickUploadButton() {
+    fileInputRef.current?.click();
+  }
+
+  async function onUploadCustomMenus(event) {
+    const file = event.target.files?.[0];
+    if (!file) {
+      return;
+    }
+
+    try {
+      const text = await file.text();
+      const parsedMenus = parseUploadedMenuCsv(text);
+      if (!parsedMenus.length) {
+        setResult({
+          title: copy.uploadEmpty,
+          meta: copy.uploadEmptyMeta,
+          mode: 'idle'
+        });
+        return;
+      }
+
+      setCustomMenus(parsedMenus);
+      setActiveTab('custom');
+      setResult({
+        title: copy.uploadDone(parsedMenus.length),
+        meta: copy.uploadDoneMeta,
+        mode: 'picked'
+      });
+      trackEvent('tool_import', {
+        tool_name: 'food-menu-picker',
+        count: parsedMenus.length
+      });
+    } catch (_error) {
+      setResult({
+        title: copy.uploadError,
+        meta: copy.uploadErrorMeta,
+        mode: 'idle'
+      });
+    } finally {
+      event.target.value = '';
+    }
   }
 
   const resultParts = splitMenuName(result.title);
@@ -317,6 +384,7 @@ function FoodMenuPickerPage() {
     <section className="section">
       <div className="container tool-layout">
         <header className="hero tool-hero">
+          <ToolListBackLink />
           <p className="kicker">MENU PICKER</p>
           <h1>{copy.title}</h1>
           <p>{copy.subtitle}</p>
@@ -421,15 +489,35 @@ function FoodMenuPickerPage() {
               <h2>{copy.customList}</h2>
               <p>{copy.total(customMenus.length)}</p>
             </div>
-            <button
-              type="button"
-              className="button ghost"
-              onClick={() => downloadMenuListAsExcelCsv(customMenus, 'custom')}
-              disabled={customMenus.length === 0}
-            >
-              {copy.excel}
-            </button>
+            <div className="menu-tools">
+              <button
+                type="button"
+                className="button ghost"
+                onClick={() => downloadMenuListAsExcelCsv([], 'custom', true)}
+              >
+                {copy.template}
+              </button>
+              <button type="button" className="button ghost" onClick={onClickUploadButton}>
+                {copy.upload}
+              </button>
+              <button
+                type="button"
+                className="button ghost"
+                onClick={() => downloadMenuListAsExcelCsv(customMenus, 'custom')}
+                disabled={customMenus.length === 0}
+              >
+                {copy.excel}
+              </button>
+            </div>
+            <input
+              ref={fileInputRef}
+              className="sr-only"
+              type="file"
+              accept=".csv,text/csv,application/vnd.ms-excel"
+              onChange={onUploadCustomMenus}
+            />
           </div>
+          <p className="menu-upload-hint">{copy.uploadHint}</p>
           <ul className="menu-list">
             {customMenus.map((name, index) => {
               const parts = splitMenuName(name);

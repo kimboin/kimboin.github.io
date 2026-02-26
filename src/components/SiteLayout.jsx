@@ -16,6 +16,7 @@ function SiteLayoutBody({ children }) {
           tools: '도구',
           products: '사이트',
           now: '현재',
+          blog: '블로그',
           languageSwitch: '언어 변경: 영어로 전환',
           mobileMenuOpen: '모바일 메뉴 열기',
           mobileNav: '모바일 메뉴',
@@ -27,6 +28,7 @@ function SiteLayoutBody({ children }) {
           tools: 'Tools',
           products: 'Sites',
           now: 'Now',
+          blog: 'Blog',
           languageSwitch: 'Language switch: change to Korean',
           mobileMenuOpen: 'Open mobile menu',
           mobileNav: 'Mobile navigation',
@@ -58,6 +60,7 @@ function SiteLayoutBody({ children }) {
             <NavLink to="/tools">{copy.tools}</NavLink>
             <NavLink to="/sites">{copy.products}</NavLink>
             <NavLink to="/now">{copy.now}</NavLink>
+            <NavLink to="/blog">{copy.blog}</NavLink>
           </nav>
           <div className="header-actions">
             <button
@@ -96,6 +99,9 @@ function SiteLayoutBody({ children }) {
             <NavLink to="/now" onClick={() => setMenuOpen(false)}>
               {copy.now}
             </NavLink>
+            <NavLink to="/blog" onClick={() => setMenuOpen(false)}>
+              {copy.blog}
+            </NavLink>
           </div>
         </nav>
       </header>
@@ -126,6 +132,9 @@ function resolvePageTheme(pathname) {
   }
   if (pathname.startsWith('/now')) {
     return 'now';
+  }
+  if (pathname.startsWith('/blog')) {
+    return 'blog';
   }
   return 'home';
 }

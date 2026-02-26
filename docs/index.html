@@ -58,14 +58,27 @@
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
-        "@type": "WebSite",
-        "name": "kimboin.github.io",
-        "url": "https://kimboin.github.io/",
-        "description": "kimboin이 직접 필요하거나 좋은 아이디어라고 판단한 도구와 서비스를 모은 허브 페이지"
+        "@graph": [
+          {
+            "@type": "WebSite",
+            "@id": "https://kimboin.github.io/#website",
+            "name": "kimboin.github.io",
+            "url": "https://kimboin.github.io/",
+            "inLanguage": ["ko", "en"],
+            "description": "kimboin이 직접 필요하거나 좋은 아이디어라고 판단한 도구와 서비스를 모은 허브 페이지"
+          },
+          {
+            "@type": "Person",
+            "@id": "https://kimboin.github.io/#person",
+            "name": "kimboin",
+            "url": "https://kimboin.github.io/",
+            "sameAs": ["https://github.com/kimboin"]
+          }
+        ]
       }
     </script>
-    <script type="module" crossorigin src="/assets/index-CTyN02p2.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-Ch-ene6J.css">
+    <script type="module" crossorigin src="/assets/index-CpkWVH4v.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-CpBzZQg9.css">
   </head>
   <body>
     <div id="root"></div>

@@ -56,6 +56,16 @@ const META_BY_ROUTE = [
     description: '최근 집중하고 있는 개발 주제와 운영 관심사를 정리한 페이지'
   },
   {
+    match: (path) => path === '/blog',
+    title: 'Blog | kimboin.github.io',
+    description: '도구를 만들고 운영하며 남긴 개발 노트와 업데이트 기록'
+  },
+  {
+    match: (path) => path.startsWith('/blog/'),
+    title: 'Blog Post | kimboin.github.io',
+    description: '개별 블로그 글 상세 페이지'
+  },
+  {
     match: (path) => path.startsWith('/stories/'),
     title: 'Story | kimboin.github.io',
     description: '서비스 제작 배경과 핵심 아이디어를 정리한 스토리 페이지'

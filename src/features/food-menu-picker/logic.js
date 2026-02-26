@@ -164,3 +164,116 @@ export function toCategoryToken(label) {
   };
   return map[label] || 'etc';
 }
+
+function escapeCsvCell(value) {
+  return `"${String(value ?? '').replace(/"/g, '""')}"`;
+}
+
+function parseCsvRows(text) {
+  const rows = [];
+  let row = [];
+  let cell = '';
+  let inQuotes = false;
+
+  for (let index = 0; index < text.length; index += 1) {
+    const char = text[index];
+
+    if (inQuotes) {
+      if (char === '"') {
+        if (text[index + 1] === '"') {
+          cell += '"';
+          index += 1;
+        } else {
+          inQuotes = false;
+        }
+      } else {
+        cell += char;
+      }
+      continue;
+    }
+
+    if (char === '"') {
+      inQuotes = true;
+      continue;
+    }
+
+    if (char === ',') {
+      row.push(cell);
+      cell = '';
+      continue;
+    }
+
+    if (char === '\n') {
+      row.push(cell);
+      rows.push(row);
+      row = [];
+      cell = '';
+      continue;
+    }
+
+    if (char !== '\r') {
+      cell += char;
+    }
+  }
+
+  row.push(cell);
+  rows.push(row);
+  return rows.filter((cells) => cells.some((value) => String(value).trim().length > 0));
+}
+
+function resolveHeaderIndex(headerRow, candidates) {
+  const normalized = headerRow.map((value) => String(value).trim().toLowerCase());
+  return normalized.findIndex((value) => candidates.includes(value));
+}
+
+export function buildMenuCsv(menus, headers) {
+  const noHeader = headers?.no || '번호';
+  const categoryHeader = headers?.category || '음식종류';
+  const menuHeader = headers?.menu || '메뉴';
+  const rows = [[noHeader, categoryHeader, menuHeader]];
+
+  menus.forEach((raw, index) => {
+    const parts = splitMenuName(raw);
+    rows.push([String(index + 1), parts.label, parts.name]);
+  });
+
+  return rows.map((row) => row.map((cell) => escapeCsvCell(cell)).join(',')).join('\n');
+}
+
+export function parseUploadedMenuCsv(rawText) {
+  const text = String(rawText || '').replace(/^\uFEFF/, '');
+  const rows = parseCsvRows(text);
+  if (!rows.length) {
+    return [];
+  }
+
+  const categoryHeaders = ['음식종류', '카테고리', 'category', 'label', 'type', 'food type', 'foodtype'];
+  const menuHeaders = ['메뉴', 'menu', 'name', '음식'];
+
+  const categoryIndex = resolveHeaderIndex(rows[0], categoryHeaders);
+  const menuIndex = resolveHeaderIndex(rows[0], menuHeaders);
+  const hasHeader = categoryIndex >= 0 || menuIndex >= 0;
+  const startIndex = hasHeader ? 1 : 0;
+
+  const normalized = rows
+    .slice(startIndex)
+    .map((row) => {
+      const fallbackCategory = row.length >= 3 ? row[1] : '';
+      const fallbackMenu = row.length >= 3 ? row[2] : row.length >= 2 ? row[1] : row[0];
+      const sourceCategory = categoryIndex >= 0 ? row[categoryIndex] : fallbackCategory;
+      const sourceMenu = menuIndex >= 0 ? row[menuIndex] : fallbackMenu;
+      const category = String(sourceCategory || '').trim();
+      const menu = String(sourceMenu || '').trim();
+      if (!menu) {
+        return '';
+      }
+
+      const parts = splitMenuName(menu);
+      const label = category || parts.label;
+      const name = parts.name;
+      return label ? `[${label}] ${name}` : name;
+    })
+    .filter(Boolean);
+
+  return [...new Set(normalized)];
+}
