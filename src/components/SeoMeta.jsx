@@ -31,6 +31,11 @@ const META_BY_ROUTE = [
     description: '국가별 로또 규칙에 맞춰 중복 없는 번호를 빠르게 생성하는 도구'
   },
   {
+    match: (path) => path === '/text-counter',
+    title: '글자수 세기 | Text Counter',
+    description: '입력한 텍스트의 글자수, 공백 제외 글자수, 단어 수, 줄 수를 실시간으로 계산하는 도구'
+  },
+  {
     match: (path) => path === '/products',
     title: 'Products | kimboin.github.io',
     description: '필요와 아이디어에서 시작해 실제 서비스로 만든 프로젝트 링크 모음'

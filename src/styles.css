@@ -146,7 +146,8 @@ a {
 .text-link:focus-visible,
 .tab-btn:focus-visible,
 .lotto-tab:focus-visible,
-input:focus-visible {
+input:focus-visible,
+textarea:focus-visible {
   outline: 2px solid var(--primary);
   outline-offset: 2px;
 }
@@ -422,11 +423,21 @@ main {
 
 .menu-form input,
 .controls input,
-.custom-field input {
+.custom-field input,
+.text-counter-input {
   border: 1px solid var(--border);
   border-radius: 10px;
   padding: 10px 12px;
   font-size: 0.95rem;
+}
+
+.text-counter-input {
+  width: 100%;
+  min-height: 220px;
+  resize: vertical;
+  margin-bottom: 12px;
+  line-height: 1.6;
+  font-family: inherit;
 }
 
 .menu-form input {
@@ -610,6 +621,28 @@ main {
   border: 0;
 }
 
+.counter-stats {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.counter-stat {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 12px;
+  background: #f7fafc;
+}
+
+.counter-stat p {
+  margin: 0 0 8px;
+  font-size: 0.9rem;
+}
+
+.counter-stat strong {
+  font-size: 1.2rem;
+}
+
 @media (max-width: 980px) {
   .grid.three {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -624,6 +657,10 @@ main {
 
   .custom-controls {
     grid-template-columns: 1fr;
+  }
+
+  .counter-stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 

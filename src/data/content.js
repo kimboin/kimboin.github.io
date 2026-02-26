@@ -1,5 +1,18 @@
 export const tools = [
   {
+    slug: 'text-counter',
+    name: 'Text Counter',
+    oneLiner: '입력한 텍스트의 글자수와 단어 수를 실시간으로 확인하는 도구',
+    why: '글 작성이나 제출 전 분량을 빠르게 확인할 수 있는 간단한 도구가 필요했습니다.',
+    how: [
+      '텍스트 입력창에 문장을 붙여 넣거나 직접 입력합니다.',
+      '글자수, 공백 제외 글자수, 단어 수, 줄 수를 즉시 확인합니다.',
+      '필요하면 지우기 버튼으로 빠르게 초기화합니다.'
+    ],
+    learned: '즉시 피드백이 필요한 도구는 결과를 분리하지 않고 한 화면에서 보여주는 것이 효율적이었습니다.',
+    openUrl: '/text-counter/'
+  },
+  {
     slug: 'food-menu-picker',
     name: 'Food Menu Picker',
     oneLiner: '오늘 뭐 먹을지 빠르게 결정하는 랜덤 메뉴 추천 도구',
