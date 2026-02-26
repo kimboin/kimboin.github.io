@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 import {
   getBallColor,
   lotteries,
@@ -32,10 +32,6 @@ function LottoRandomGeneratorPage() {
         maxNumber: activeLotto.maxNumber,
         pickCount: activeLotto.pickCount
       };
-
-  useEffect(() => {
-    trackEvent('tool_open', { tool_name: 'lotto-random-generator' });
-  }, []);
 
   function getTabText(lotto) {
     if (lotto.isCustom) {

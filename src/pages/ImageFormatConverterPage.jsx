@@ -173,10 +173,6 @@ function ImageFormatConverterPage() {
   const [result, setResult] = useState(null);
   const [errorText, setErrorText] = useState('');
 
-  useEffect(() => {
-    trackEvent('tool_open', { tool_name: 'image-format-converter' });
-  }, []);
-
   const copy = COPY[language];
 
   useEffect(() => () => {

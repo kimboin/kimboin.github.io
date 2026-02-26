@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 import { trackEvent } from '../lib/analytics';
 import { useLanguage } from '../lib/language';
 
@@ -46,10 +46,6 @@ function TextCounterPage() {
 
     return { characters, charactersNoSpaces, words, lines, bytes };
   }, [text]);
-
-  useEffect(() => {
-    trackEvent('tool_open', { tool_name: 'text-counter' });
-  }, []);
 
   function onClear() {
     if (!text) {

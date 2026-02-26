@@ -58,10 +58,6 @@ function KanaTracePage() {
   const progressText = `${currentIndex + 1} / ${kanaList.length}`;
 
   useEffect(() => {
-    trackEvent('tool_open', { tool_name: 'kana-trace' });
-  }, []);
-
-  useEffect(() => {
     setIndex(0);
     setRandomIndex(0);
     setScore(null);

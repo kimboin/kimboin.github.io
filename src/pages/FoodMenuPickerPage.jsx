@@ -136,10 +136,6 @@ function FoodMenuPickerPage() {
   );
 
   useEffect(() => {
-    trackEvent('tool_open', { tool_name: 'food-menu-picker' });
-  }, []);
-
-  useEffect(() => {
     if (isPicking) {
       return;
     }
