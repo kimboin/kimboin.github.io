@@ -31,6 +31,11 @@ const META_BY_ROUTE = [
     description: '국가별 로또 규칙에 맞춰 중복 없는 번호를 빠르게 생성하는 도구'
   },
   {
+    match: (path) => path === '/kana-trace',
+    title: 'Kana Trace | 히라가나 가타카나 따라쓰기',
+    description: '마우스와 터치로 직접 쓰고 정확도를 채점하는 히라가나/가타카나 학습 도구'
+  },
+  {
     match: (path) => path === '/products',
     title: 'Products | kimboin.github.io',
     description: '필요와 아이디어에서 시작해 실제 서비스로 만든 프로젝트 링크 모음'

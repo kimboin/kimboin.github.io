@@ -8,6 +8,7 @@ import NowPage from './pages/NowPage';
 import StoryPage from './pages/StoryPage';
 import FoodMenuPickerPage from './pages/FoodMenuPickerPage';
 import LottoRandomGeneratorPage from './pages/LottoRandomGeneratorPage';
+import KanaTracePage from './pages/KanaTracePage';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route path="/stories/:storySlug" element={<StoryPage />} />
         <Route path="/food-menu-picker" element={<FoodMenuPickerPage />} />
         <Route path="/lotto-random-generator" element={<LottoRandomGeneratorPage />} />
+        <Route path="/kana-trace" element={<KanaTracePage />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </SiteLayout>
