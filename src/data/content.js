@@ -1,9 +1,44 @@
 export const tools = [
   {
+    slug: 'travel-japanese',
+    name: 'Travel Japanese',
+    nameKo: '여행 일본어',
+    oneLiner: '여행 상황에서 바로 쓰는 일본어 표현을 빠르게 익히는 도구',
+    oneLinerEn: 'A practical tool for quickly learning essential Japanese travel phrases.',
+    why: '일본 여행을 갈 때마다 “이번엔 일본어 써먹어야지” 했지만 캡처해둔 회화 문구만 쌓이고 제대로 써본 적은 거의 없었습니다. 중복되는 표현도 많고 정리도 안 되어 있어서, 자주 쓰는 문장만 모아 두고두고 쓸 수 있게 만들었습니다. (계속 업데이트 예정)',
+    whyEn: 'I needed a practical conversation tool focused on high-frequency travel phrases and fast repetition.',
+    how: [
+      '상황별 카드를 선택합니다.',
+      '일본어 문장, 발음, 뜻을 함께 확인합니다.',
+      '오늘 암기/소리 내어 읽기 흐름으로 반복합니다.'
+    ],
+    learned: '회화 도구는 문장 양보다 상황 맥락과 반복 동선이 학습 효율에 더 큰 영향을 줍니다.',
+    openUrl: '/travel-japanese/'
+  },
+  {
+    slug: 'image-format-converter',
+    name: 'Image Format Converter',
+    nameKo: '이미지 확장자 변환기',
+    oneLiner: '이미지 파일 포맷을 PNG/JPG/WEBP로 변환해 저장하는 도구',
+    oneLinerEn: 'Convert image files to PNG/JPG/WEBP and download instantly.',
+    why: '아이폰을 쓰다 보니 사진이 HEIC로 저장됩니다. 그런데 막상 업로드하려고 하면 PNG나 JPG를 요구하는 경우가 많습니다. 그때마다 변환하는 게 번거로워서 바로 바꿀 수 있는 도구를 만들었습니다.',
+    whyEn: 'I needed a fast converter because messengers, documents, and web uploads require different formats.',
+    how: [
+      '이미지 파일을 업로드합니다.',
+      '변환할 포맷(PNG/JPG/WEBP)을 선택합니다.',
+      '변환 후 다운로드 버튼으로 결과 파일을 저장합니다.'
+    ],
+    learned: '브라우저 기반 변환은 빠르고 개인정보 측면에서 유리하지만, HEIC 지원은 브라우저별 차이가 있다는 점을 반영해야 했습니다.',
+    openUrl: '/image-format-converter/'
+  },
+  {
     slug: 'text-counter',
     name: 'Text Counter',
+    nameKo: '글자수 세기',
     oneLiner: '입력한 텍스트의 글자수와 단어 수를 실시간으로 확인하는 도구',
-    why: '글 작성이나 제출 전 분량을 빠르게 확인할 수 있는 간단한 도구가 필요했습니다.',
+    oneLinerEn: 'Check characters and word counts in real time as you type.',
+    why: '이력서나 자기소개서를 쓰다 보면 글자 수 제한이 있는 경우가 많습니다. 다른 사이트를 찾지 않고 바로 확인할 수 있도록 간단하게 만들었습니다.',
+    whyEn: 'I needed a simple way to quickly verify text length before writing or submitting.',
     how: [
       '텍스트 입력창에 문장을 붙여 넣거나 직접 입력합니다.',
       '글자수, 공백 제외 글자수, 단어 수, 줄 수를 즉시 확인합니다.',
@@ -15,8 +50,11 @@ export const tools = [
   {
     slug: 'food-menu-picker',
     name: 'Food Menu Picker',
+    nameKo: '음식 메뉴 추천기',
     oneLiner: '오늘 뭐 먹을지 빠르게 결정하는 랜덤 메뉴 추천 도구',
-    why: '반복되는 메뉴 고민 시간을 줄이고 바로 다음 행동으로 넘어가기 위해 만들었습니다.',
+    oneLinerEn: 'A random menu picker that helps you decide what to eat quickly.',
+    why: '점심, 저녁 메뉴를 고르다 지칠 때가 있습니다. 고민만 하다가 시간 보내기 싫어서 가끔은 이런 돌림판이 필요했습니다.',
+    whyEn: 'I built this to reduce repeated menu indecision and move to action faster.',
     how: [
       '사용 가능한 메뉴 카테고리를 선택합니다.',
       '랜덤 추천으로 즉시 후보를 확인합니다.',
@@ -28,8 +66,11 @@ export const tools = [
   {
     slug: 'lotto-random-generator',
     name: 'Lotto Random Generator',
+    nameKo: '로또 번호 생성기',
     oneLiner: '국가별 로또 규칙에 맞는 번호를 랜덤 생성하는 도구',
-    why: '로또마다 다른 규칙을 외우지 않고도 빠르게 조합을 만들고 싶었습니다.',
+    oneLinerEn: 'Generate random lotto numbers based on country-specific rules.',
+    why: '복권집에서 자동으로 뽑으면 왠지 당첨 안 될 번호를 받은 느낌이 듭니다. 그래서 차라리 나만의 로또 번호 생성기를 만들었습니다. 다들 돈벼락 맞으시길 바랍니다.',
+    whyEn: 'I wanted to generate combinations quickly without memorizing each lottery rule.',
     how: [
       '국가 또는 로또 종류를 선택합니다.',
       '규칙에 맞는 번호 세트를 생성합니다.',
@@ -41,8 +82,11 @@ export const tools = [
   {
     slug: 'kana-trace',
     name: 'Kana Trace',
+    nameKo: '히라가나 가타카나 연습',
     oneLiner: '히라가나/가타카나를 직접 써보고 정확도를 채점하는 도구',
-    why: '손으로 직접 쓰면서 빠르게 반복 학습할 수 있는 환경이 필요했습니다.',
+    oneLinerEn: 'Practice writing Hiragana/Katakana and get an accuracy score.',
+    why: '히라가나, 가타카나는 외워지지 않고 괜찮은 앱은 대부분 유료였습니다. 그렇다면 직접 만들어서 써보자는 생각으로 시작했습니다.',
+    whyEn: 'I needed an environment for fast repetition through direct handwriting practice.',
     how: [
       '히라가나 또는 가타카나, 학습 모드를 선택합니다.',
       '캔버스에 글자를 직접 써봅니다.',
@@ -58,10 +102,13 @@ export const products = [
     slug: 'today-banner',
     name: 'Today Banner',
     value: '하루에 한 번, 선착순으로 입력된 한 줄 텍스트를 배너에 하루 동안 전시하는 서비스',
+    valueEn: 'A service that displays one first-come text submission as the daily banner.',
+    reason: '하루 1회 선착순으로 입력된 텍스트를 당일 배너로 전시하는 실험형 사이트를 직접 운영해보기 위해 만들었습니다.',
+    reasonEn: 'I built this to run a simple experimental site that displays one first-come text submission each day.',
     target: '오늘의 한 줄을 남기고 싶은 누구나',
+    targetEn: 'Anyone who wants to leave a one-line message for today.',
     status: 'Live',
-    visitUrl: 'https://today-banner.vercel.app',
-    storySlug: 'today-banner'
+    visitUrl: 'https://today-banner.vercel.app'
   }
 ];
 

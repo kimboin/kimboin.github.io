@@ -1,54 +1,67 @@
 import { Link } from 'react-router-dom';
 import { tools } from '../data/content';
+import { useLanguage } from '../lib/language';
 
 function HomePage() {
+  const { language } = useLanguage();
+  const copy =
+    language === 'ko'
+      ? {
+          kicker: '홈',
+          title: '내가 실제로 사용할 것들을 만든다.',
+          description:
+            '작게는 일상에서 쓰는 도구, 조금 더 크게는 직접 운영해볼 수 있는 서비스까지 하나씩 만들어가는 공간입니다.',
+          about: '소개',
+          aboutBody:
+            '아이디어를 길게 쌓아두기보다 먼저 만들고, 직접 써보고, 필요하면 확장합니다. 작은 유틸리티부터 조금 더 구조가 있는 제품까지 점점 범위를 넓혀가고 있습니다.',
+          toolsKicker: '도구',
+          openAria: '열기',
+          openLabel: '→'
+        }
+      : {
+          kicker: 'Home',
+          title: 'Light decisions, fast execution.',
+          description: 'A hub by kimboin for practical tools and runnable sites.',
+          about: 'About',
+          aboutBody: 'I simplify complex problems into small interactions, ship quickly, and iterate continuously.',
+          toolsKicker: 'Tools',
+          openAria: 'Open',
+          openLabel: '→'
+        };
+
   return (
     <>
       <section className="hero">
         <div className="container">
-          <p className="kicker">Home</p>
-          <h1>결정을 가볍게, 실행은 빠르게.</h1>
-          <p>실사용 중심의 작은 도구와 운영 가능한 제품을 만드는 개발자 kimboin의 허브입니다.</p>
+          <h1 className="home-hero-title">{copy.title}</h1>
+          <p>{copy.description}</p>
         </div>
       </section>
 
       <section className="section">
-        <div className="container grid two">
-          <article className="card">
-            <h2>About</h2>
-            <p>복잡한 문제를 작은 인터랙션으로 정리하고, 빠르게 배포해 개선하는 방식으로 개발합니다.</p>
-          </article>
-          <article className="card">
-            <h2>Now</h2>
-            <ul className="list">
-              <li>툴 상세 문서화 템플릿 정리</li>
-              <li>GitHub Pages 배포 자동화</li>
-              <li>Supabase 기반 데이터 조회 준비</li>
-            </ul>
-            <p />
-            <Link className="text-link" to="/now">
-              Now 전체 보기
-            </Link>
-          </article>
+        <div className="container home-intro">
+          <p className="kicker">{copy.about}</p>
+          <p>{copy.aboutBody}</p>
         </div>
       </section>
 
       <section className="section">
         <div className="container">
-          <p className="kicker">Recent Tools</p>
+          <p className="kicker">{copy.toolsKicker}</p>
           <div className="grid two">
-            {tools.slice(0, 2).map((tool) => (
-              <article className="card" key={tool.slug}>
-                <h3>{tool.name}</h3>
-                <p>{tool.oneLiner}</p>
-                <div className="actions">
-                  <Link className="button ghost" to={`/tools/${tool.slug}`}>
-                    Story
-                  </Link>
-                  <Link className="button primary" to={tool.openUrl}>
-                    열기
+            {tools.map((tool) => (
+              <article className="card home-tool-card" key={tool.slug}>
+                <div className="home-tool-head">
+                  <h3>{language === 'ko' ? tool.nameKo || tool.name : tool.name}</h3>
+                  <Link
+                    className="button primary home-tool-open-btn"
+                    to={tool.openUrl}
+                    aria-label={`${language === 'ko' ? tool.nameKo || tool.name : tool.name} ${copy.openAria}`}
+                  >
+                    {copy.openLabel}
                   </Link>
                 </div>
+                <p>{language === 'ko' ? tool.oneLiner : tool.oneLinerEn || tool.oneLiner}</p>
               </article>
             ))}
           </div>

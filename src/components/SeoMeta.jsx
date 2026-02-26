@@ -46,9 +46,9 @@ const META_BY_ROUTE = [
     description: '일본 여행에서 자주 쓰는 회화를 카테고리별로 빠르게 확인하는 페이지'
   },
   {
-    match: (path) => path === '/products',
-    title: 'Products | kimboin.github.io',
-    description: '필요와 아이디어에서 시작해 실제 서비스로 만든 프로젝트 링크 모음'
+    match: (path) => path === '/sites' || path === '/products',
+    title: 'Sites | kimboin.github.io',
+    description: '직접 만들고 운영하는 사이트를 모아둔 페이지'
   },
   {
     match: (path) => path === '/now',

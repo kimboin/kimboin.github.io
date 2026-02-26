@@ -1,10 +1,37 @@
 import { useEffect, useState } from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink, useLocation } from 'react-router-dom';
 import AnalyticsTracker from './AnalyticsTracker';
 import SeoMeta from './SeoMeta';
+import { LanguageProvider, useLanguage } from '../lib/language';
 
-function SiteLayout({ children }) {
+function SiteLayoutBody({ children }) {
   const [menuOpen, setMenuOpen] = useState(false);
+  const location = useLocation();
+  const { language, setLanguage } = useLanguage();
+  const copy =
+    language === 'ko'
+      ? {
+          mainNav: '주요 메뉴',
+          home: '홈',
+          tools: '도구',
+          products: '사이트',
+          now: '현재',
+          languageSwitch: '언어 변경: 영어로 전환',
+          mobileMenuOpen: '모바일 메뉴 열기',
+          mobileNav: '모바일 메뉴',
+          langButton: '한국어'
+        }
+      : {
+          mainNav: 'Main navigation',
+          home: 'Home',
+          tools: 'Tools',
+          products: 'Sites',
+          now: 'Now',
+          languageSwitch: 'Language switch: change to Korean',
+          mobileMenuOpen: 'Open mobile menu',
+          mobileNav: 'Mobile navigation',
+          langButton: 'English'
+        };
 
   useEffect(() => {
     function onKeyDown(event) {
@@ -18,7 +45,7 @@ function SiteLayout({ children }) {
   }, []);
 
   return (
-    <>
+    <div className="site-shell">
       <AnalyticsTracker />
       <SeoMeta />
       <header className="site-header">
@@ -26,44 +53,53 @@ function SiteLayout({ children }) {
           <Link className="brand" to="/">
             kimboin.github.io
           </Link>
-          <nav className="desktop-nav" aria-label="주요 메뉴">
-            <NavLink to="/">Home</NavLink>
-            <NavLink to="/tools">Tools</NavLink>
-            <NavLink to="/travel-japanese">Travel JP</NavLink>
-            <NavLink to="/products">Products</NavLink>
-            <NavLink to="/now">Now</NavLink>
+          <nav className="desktop-nav" aria-label={copy.mainNav}>
+            <NavLink to="/">{copy.home}</NavLink>
+            <NavLink to="/tools">{copy.tools}</NavLink>
+            <NavLink to="/sites">{copy.products}</NavLink>
+            <NavLink to="/now">{copy.now}</NavLink>
           </nav>
-          <button
-            type="button"
-            className="menu-toggle"
-            aria-label="모바일 메뉴 열기"
-            aria-expanded={menuOpen}
-            onClick={() => setMenuOpen((prev) => !prev)}
-          >
-            <span className="menu-icon" />
-          </button>
+          <div className="header-actions">
+            <button
+              type="button"
+              className="lang-toggle"
+              aria-label={copy.languageSwitch}
+              onClick={() => setLanguage((prev) => (prev === 'ko' ? 'en' : 'ko'))}
+            >
+              <span className="lang-icon" aria-hidden="true">
+                🌐
+              </span>
+              <span className="lang-text">{copy.langButton}</span>
+            </button>
+            <button
+              type="button"
+              className="menu-toggle"
+              aria-label={copy.mobileMenuOpen}
+              aria-expanded={menuOpen}
+              onClick={() => setMenuOpen((prev) => !prev)}
+            >
+              <span className="menu-icon" />
+            </button>
+          </div>
         </div>
-        <nav className="mobile-nav" data-open={menuOpen} aria-label="모바일 메뉴">
+        <nav className="mobile-nav" data-open={menuOpen} aria-label={copy.mobileNav}>
           <div className="container">
             <NavLink to="/" onClick={() => setMenuOpen(false)}>
-              Home
+              {copy.home}
             </NavLink>
             <NavLink to="/tools" onClick={() => setMenuOpen(false)}>
-              Tools
+              {copy.tools}
             </NavLink>
-            <NavLink to="/travel-japanese" onClick={() => setMenuOpen(false)}>
-              Travel JP
-            </NavLink>
-            <NavLink to="/products" onClick={() => setMenuOpen(false)}>
-              Products
+            <NavLink to="/sites" onClick={() => setMenuOpen(false)}>
+              {copy.products}
             </NavLink>
             <NavLink to="/now" onClick={() => setMenuOpen(false)}>
-              Now
+              {copy.now}
             </NavLink>
           </div>
         </nav>
       </header>
-      <main>{children}</main>
+      <main className={`page-view page-${resolvePageTheme(location.pathname)}`}>{children}</main>
       <footer className="site-footer">
         <div className="container footer-inner">
           <small>© 2026 kimboin. All rights reserved.</small>
@@ -74,7 +110,31 @@ function SiteLayout({ children }) {
           </small>
         </div>
       </footer>
-    </>
+    </div>
+  );
+}
+
+function resolvePageTheme(pathname) {
+  if (pathname === '/') {
+    return 'home';
+  }
+  if (pathname.startsWith('/tools')) {
+    return 'tools';
+  }
+  if (pathname.startsWith('/sites') || pathname.startsWith('/products')) {
+    return 'sites';
+  }
+  if (pathname.startsWith('/now')) {
+    return 'now';
+  }
+  return 'home';
+}
+
+function SiteLayout({ children }) {
+  return (
+    <LanguageProvider>
+      <SiteLayoutBody>{children}</SiteLayoutBody>
+    </LanguageProvider>
   );
 }
 
