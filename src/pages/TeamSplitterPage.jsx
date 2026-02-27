@@ -5,6 +5,7 @@ import { useLanguage } from '../lib/language';
 import {
   TEAM_MEMBERS_STORAGE_KEY,
   buildMemberCsvTemplate,
+  buildTeamResultCsv,
   buildRandomTeams,
   loadSavedMembers,
   parseNamesFromText,
@@ -44,6 +45,7 @@ function TeamSplitterPage() {
           uploadErrorMeta: 'CSV 파일의 이름 컬럼을 확인해 주세요.',
           teamLabel: (index) => `${index + 1}팀`,
           memberCount: (count) => `${count}명`,
+          downloadResult: '결과지 다운로드',
           memberListAria: '팀 배정 결과',
           initialResultTitle: '팀 나누기 버튼을 눌러주세요.',
           initialResultMeta: '명단과 팀 수를 설정하면 바로 랜덤 배정됩니다.'
@@ -77,6 +79,7 @@ function TeamSplitterPage() {
           uploadErrorMeta: 'Please check the name column in your CSV file.',
           teamLabel: (index) => `Team ${index + 1}`,
           memberCount: (count) => `${count} members`,
+          downloadResult: 'Download Result CSV',
           memberListAria: 'Team split result',
           initialResultTitle: 'Press split teams.',
           initialResultMeta: 'Set members and team count, then generate random teams.'
@@ -196,6 +199,35 @@ function TeamSplitterPage() {
     trackEvent('tool_export', {
       tool_name: 'team-splitter',
       template: true
+    });
+  }
+
+  function downloadTeamResult() {
+    if (!teams.length) {
+      return;
+    }
+
+    const csv = buildTeamResultCsv(teams);
+    if (!csv) {
+      return;
+    }
+
+    const blob = new Blob([`\uFEFF${csv}`], { type: 'text/csv;charset=utf-8;' });
+    const dateToken = new Date().toISOString().slice(0, 10);
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = `team-splitter-result-${dateToken}.csv`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+
+    trackEvent('tool_export', {
+      tool_name: 'team-splitter',
+      template: false,
+      team_count: teams.length,
+      member_count: teams.flat().length
     });
   }
 
@@ -328,6 +360,11 @@ function TeamSplitterPage() {
 
         {teams.length ? (
           <section className="card" aria-label={copy.memberListAria}>
+            <div className="actions">
+              <button type="button" className="button ghost" onClick={downloadTeamResult}>
+                {copy.downloadResult}
+              </button>
+            </div>
             <div className="team-grid">
               {teams.map((team, index) => (
                 <article key={`team-${index}`} className="team-card">

@@ -111,6 +111,22 @@ export function buildMemberCsvTemplate() {
   return rows.map((row) => row.map((cell) => escapeCsvCell(cell)).join(',')).join('\n');
 }
 
+export function buildTeamResultCsv(teams) {
+  if (!Array.isArray(teams) || !teams.length) {
+    return '';
+  }
+
+  const rows = [['팀', '순번', '이름']];
+
+  teams.forEach((team, teamIndex) => {
+    team.forEach((name, memberIndex) => {
+      rows.push([`${teamIndex + 1}팀`, String(memberIndex + 1), String(name || '')]);
+    });
+  });
+
+  return rows.map((row) => row.map((cell) => escapeCsvCell(cell)).join(',')).join('\n');
+}
+
 export function loadSavedMembers() {
   try {
     const saved = JSON.parse(localStorage.getItem(TEAM_MEMBERS_STORAGE_KEY) || 'null');
