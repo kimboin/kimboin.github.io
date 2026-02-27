@@ -18,10 +18,10 @@ export const tools = [
   {
     slug: 'travel-country-random',
     name: 'Travel Country Random',
-    nameKo: '랜덤 여행 나라 추천기',
+    nameKo: '여행 나라 추천기',
     oneLiner: '여행 가고 싶은 나라를 랜덤으로 뽑아주는 도구',
     oneLinerEn: 'Randomly pick your next travel country idea with one click.',
-    why: '여행 계획을 세울 때 가장 먼저 막히는 건 목적지 선택이었습니다. 고민 시간을 줄이고 빠르게 후보를 정하려고 만들었습니다.',
+    why: '가고 싶은 나라가 너무 많아서 대신 목적지를 정해줄 도구가 필요해서 만들었습니다.',
     whyEn: 'I built this to quickly narrow destination options when travel planning feels stuck.',
     how: ['랜덤 추천 버튼을 누릅니다.', '국가 1개를 즉시 추천받습니다.', '원하면 다시 눌러 다음 후보를 확인합니다.'],
     learned: '결정형 도구는 빠른 결과 확인과 재시도 흐름이 핵심입니다.',
@@ -171,10 +171,3 @@ export const products = [
     visitUrl: 'https://today-banner.vercel.app'
   }
 ];
-
-export const stories = {
-  'today-banner': {
-    title: 'Today Banner',
-    body: '하루 1회 선착순으로 입력된 텍스트를 당일 배너로 전시하는 실험형 서비스입니다.'
-  }
-};

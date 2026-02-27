@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useRef, useMemo, useState } from 'react';
 import ToolListBackLink from '../components/ToolListBackLink';
 import { trackEvent } from '../lib/analytics';
 import { useLanguage } from '../lib/language';
@@ -6,6 +6,7 @@ import { useLanguage } from '../lib/language';
 const THEME_ORDER = ['resort', 'city', 'nature', 'history'];
 
 const COUNTRY_POOL = [
+  { code: 'KR', continent: 'asia', nameKo: '한국', nameEn: 'South Korea', flag: '🇰🇷' },
   { code: 'JP', continent: 'asia', nameKo: '일본', nameEn: 'Japan', flag: '🇯🇵' },
   { code: 'TH', continent: 'asia', nameKo: '태국', nameEn: 'Thailand', flag: '🇹🇭' },
   { code: 'VN', continent: 'asia', nameKo: '베트남', nameEn: 'Vietnam', flag: '🇻🇳' },
@@ -69,6 +70,7 @@ const CONTINENT_THEME_DEFAULTS = {
 };
 
 const COUNTRY_THEME_OVERRIDES = {
+  KR: ['city', 'nature'],
   JP: ['city', 'history'],
   TH: ['resort', 'city'],
   VN: ['city', 'history'],
@@ -100,6 +102,274 @@ const COUNTRY_THEME_OVERRIDES = {
   ZA: ['nature']
 };
 
+const COUNTRY_CITY_MAP = {
+  KR: [
+    { ko: '서울', en: 'Seoul' },
+    { ko: '부산', en: 'Busan' },
+    { ko: '제주', en: 'Jeju' }
+  ],
+  JP: [
+    { ko: '도쿄', en: 'Tokyo' },
+    { ko: '오사카', en: 'Osaka' },
+    { ko: '오키나와', en: 'Okinawa' }
+  ],
+  TH: [
+    { ko: '방콕', en: 'Bangkok' },
+    { ko: '치앙마이', en: 'Chiang Mai' },
+    { ko: '푸껫', en: 'Phuket' }
+  ],
+  VN: [
+    { ko: '하노이', en: 'Hanoi' },
+    { ko: '다낭', en: 'Da Nang' },
+    { ko: '호치민', en: 'Ho Chi Minh City' }
+  ],
+  TW: [
+    { ko: '타이베이', en: 'Taipei' },
+    { ko: '타이중', en: 'Taichung' },
+    { ko: '가오슝', en: 'Kaohsiung' }
+  ],
+  SG: [
+    { ko: '마리나 베이', en: 'Marina Bay' },
+    { ko: '센토사', en: 'Sentosa' },
+    { ko: '오차드', en: 'Orchard' }
+  ],
+  US: [
+    { ko: '뉴욕', en: 'New York' },
+    { ko: '로스앤젤레스', en: 'Los Angeles' },
+    { ko: '하와이', en: 'Hawaii' }
+  ],
+  CA: [
+    { ko: '밴쿠버', en: 'Vancouver' },
+    { ko: '토론토', en: 'Toronto' },
+    { ko: '퀘벡', en: 'Quebec City' }
+  ],
+  AU: [
+    { ko: '시드니', en: 'Sydney' },
+    { ko: '멜버른', en: 'Melbourne' },
+    { ko: '골드코스트', en: 'Gold Coast' }
+  ],
+  GB: [
+    { ko: '런던', en: 'London' },
+    { ko: '맨체스터', en: 'Manchester' },
+    { ko: '에든버러', en: 'Edinburgh' }
+  ],
+  FR: [
+    { ko: '파리', en: 'Paris' },
+    { ko: '니스', en: 'Nice' },
+    { ko: '리옹', en: 'Lyon' }
+  ],
+  IT: [
+    { ko: '로마', en: 'Rome' },
+    { ko: '밀라노', en: 'Milan' },
+    { ko: '베네치아', en: 'Venice' }
+  ],
+  ES: [
+    { ko: '바르셀로나', en: 'Barcelona' },
+    { ko: '마드리드', en: 'Madrid' },
+    { ko: '세비야', en: 'Seville' }
+  ],
+  MY: [
+    { ko: '쿠알라룸푸르', en: 'Kuala Lumpur' },
+    { ko: '코타키나발루', en: 'Kota Kinabalu' },
+    { ko: '페낭', en: 'Penang' }
+  ],
+  ID: [
+    { ko: '발리', en: 'Bali' },
+    { ko: '자카르타', en: 'Jakarta' },
+    { ko: '욕야카르타', en: 'Yogyakarta' }
+  ],
+  PH: [
+    { ko: '마닐라', en: 'Manila' },
+    { ko: '세부', en: 'Cebu' },
+    { ko: '보홀', en: 'Bohol' }
+  ],
+  CN: [
+    { ko: '상하이', en: 'Shanghai' },
+    { ko: '베이징', en: 'Beijing' },
+    { ko: '광저우', en: 'Guangzhou' }
+  ],
+  MN: [
+    { ko: '울란바토르', en: 'Ulaanbaatar' },
+    { ko: '고비', en: 'Gobi' },
+    { ko: '테를지', en: 'Terelj' }
+  ],
+  IN: [
+    { ko: '델리', en: 'Delhi' },
+    { ko: '뭄바이', en: 'Mumbai' },
+    { ko: '벵갈루루', en: 'Bengaluru' }
+  ],
+  NP: [
+    { ko: '카트만두', en: 'Kathmandu' },
+    { ko: '포카라', en: 'Pokhara' },
+    { ko: '치트완', en: 'Chitwan' }
+  ],
+  LK: [
+    { ko: '콜롬보', en: 'Colombo' },
+    { ko: '캔디', en: 'Kandy' },
+    { ko: '갈레', en: 'Galle' }
+  ],
+  KH: [
+    { ko: '프놈펜', en: 'Phnom Penh' },
+    { ko: '씨엠립', en: 'Siem Reap' },
+    { ko: '시하누크빌', en: 'Sihanoukville' }
+  ],
+  LA: [
+    { ko: '비엔티안', en: 'Vientiane' },
+    { ko: '루앙프라방', en: 'Luang Prabang' },
+    { ko: '방비엥', en: 'Vang Vieng' }
+  ],
+  QA: [
+    { ko: '도하', en: 'Doha' },
+    { ko: '루사일', en: 'Lusail' },
+    { ko: '알와크라', en: 'Al Wakrah' }
+  ],
+  TR: [
+    { ko: '이스탄불', en: 'Istanbul' },
+    { ko: '카파도키아', en: 'Cappadocia' },
+    { ko: '안탈리아', en: 'Antalya' }
+  ],
+  AE: [
+    { ko: '두바이', en: 'Dubai' },
+    { ko: '아부다비', en: 'Abu Dhabi' },
+    { ko: '샤르자', en: 'Sharjah' }
+  ],
+  NZ: [
+    { ko: '오클랜드', en: 'Auckland' },
+    { ko: '퀸스타운', en: 'Queenstown' },
+    { ko: '크라이스트처치', en: 'Christchurch' }
+  ],
+  FJ: [
+    { ko: '난디', en: 'Nadi' },
+    { ko: '수바', en: 'Suva' },
+    { ko: '데나라우', en: 'Denarau' }
+  ],
+  MX: [
+    { ko: '멕시코시티', en: 'Mexico City' },
+    { ko: '칸쿤', en: 'Cancun' },
+    { ko: '과달라하라', en: 'Guadalajara' }
+  ],
+  BR: [
+    { ko: '리우데자네이루', en: 'Rio de Janeiro' },
+    { ko: '상파울루', en: 'Sao Paulo' },
+    { ko: '살바도르', en: 'Salvador' }
+  ],
+  AR: [
+    { ko: '부에노스아이레스', en: 'Buenos Aires' },
+    { ko: '멘도사', en: 'Mendoza' },
+    { ko: '우수아이아', en: 'Ushuaia' }
+  ],
+  CL: [
+    { ko: '산티아고', en: 'Santiago' },
+    { ko: '푸콘', en: 'Pucon' },
+    { ko: '발파라이소', en: 'Valparaiso' }
+  ],
+  PE: [
+    { ko: '리마', en: 'Lima' },
+    { ko: '쿠스코', en: 'Cusco' },
+    { ko: '아레키파', en: 'Arequipa' }
+  ],
+  CO: [
+    { ko: '보고타', en: 'Bogota' },
+    { ko: '메데인', en: 'Medellin' },
+    { ko: '카르타헤나', en: 'Cartagena' }
+  ],
+  PT: [
+    { ko: '리스본', en: 'Lisbon' },
+    { ko: '포르투', en: 'Porto' },
+    { ko: '파루', en: 'Faro' }
+  ],
+  DE: [
+    { ko: '베를린', en: 'Berlin' },
+    { ko: '뮌헨', en: 'Munich' },
+    { ko: '프랑크푸르트', en: 'Frankfurt' }
+  ],
+  CH: [
+    { ko: '취리히', en: 'Zurich' },
+    { ko: '루체른', en: 'Lucerne' },
+    { ko: '인터라켄', en: 'Interlaken' }
+  ],
+  NL: [
+    { ko: '암스테르담', en: 'Amsterdam' },
+    { ko: '로테르담', en: 'Rotterdam' },
+    { ko: '헤이그', en: 'The Hague' }
+  ],
+  BE: [
+    { ko: '브뤼셀', en: 'Brussels' },
+    { ko: '브뤼헤', en: 'Bruges' },
+    { ko: '앤트워프', en: 'Antwerp' }
+  ],
+  AT: [
+    { ko: '비엔나', en: 'Vienna' },
+    { ko: '잘츠부르크', en: 'Salzburg' },
+    { ko: '인스브루크', en: 'Innsbruck' }
+  ],
+  CZ: [
+    { ko: '프라하', en: 'Prague' },
+    { ko: '체스키크룸로프', en: 'Cesky Krumlov' },
+    { ko: '브르노', en: 'Brno' }
+  ],
+  HU: [
+    { ko: '부다페스트', en: 'Budapest' },
+    { ko: '세게드', en: 'Szeged' },
+    { ko: '데브레첸', en: 'Debrecen' }
+  ],
+  GR: [
+    { ko: '아테네', en: 'Athens' },
+    { ko: '산토리니', en: 'Santorini' },
+    { ko: '테살로니키', en: 'Thessaloniki' }
+  ],
+  HR: [
+    { ko: '자그레브', en: 'Zagreb' },
+    { ko: '두브로브니크', en: 'Dubrovnik' },
+    { ko: '스플리트', en: 'Split' }
+  ],
+  IS: [
+    { ko: '레이캬비크', en: 'Reykjavik' },
+    { ko: '비크', en: 'Vik' },
+    { ko: '아쿠레이리', en: 'Akureyri' }
+  ],
+  NO: [
+    { ko: '오슬로', en: 'Oslo' },
+    { ko: '베르겐', en: 'Bergen' },
+    { ko: '트롬쇠', en: 'Tromso' }
+  ],
+  SE: [
+    { ko: '스톡홀름', en: 'Stockholm' },
+    { ko: '예테보리', en: 'Gothenburg' },
+    { ko: '말뫼', en: 'Malmo' }
+  ],
+  FI: [
+    { ko: '헬싱키', en: 'Helsinki' },
+    { ko: '로바니에미', en: 'Rovaniemi' },
+    { ko: '투르쿠', en: 'Turku' }
+  ],
+  DK: [
+    { ko: '코펜하겐', en: 'Copenhagen' },
+    { ko: '오르후스', en: 'Aarhus' },
+    { ko: '오덴세', en: 'Odense' }
+  ],
+  IE: [
+    { ko: '더블린', en: 'Dublin' },
+    { ko: '골웨이', en: 'Galway' },
+    { ko: '코크', en: 'Cork' }
+  ],
+  EG: [
+    { ko: '카이로', en: 'Cairo' },
+    { ko: '룩소르', en: 'Luxor' },
+    { ko: '후르가다', en: 'Hurghada' }
+  ],
+  MA: [
+    { ko: '마라케시', en: 'Marrakech' },
+    { ko: '카사블랑카', en: 'Casablanca' },
+    { ko: '페스', en: 'Fes' }
+  ],
+  ZA: [
+    { ko: '케이프타운', en: 'Cape Town' },
+    { ko: '요하네스버그', en: 'Johannesburg' },
+    { ko: '더반', en: 'Durban' }
+  ]
+};
+
 function TravelCountryRandomPage() {
   const { language } = useLanguage();
   const copy =
@@ -111,11 +381,13 @@ function TravelCountryRandomPage() {
           filterTitle: '여행 테마 필터',
           allThemes: '전체',
           noMatch: '선택한 테마에 맞는 국가가 없습니다.',
-          pick: '랜덤 추천 받기',
+          pickCountry: '국가 추천',
+          picking: '추천 중...',
           resultTitle: '추천 결과',
           empty: '버튼을 눌러 여행 후보를 골라보세요.',
+          cityTitle: '추천 도시',
+          cityNone: '등록된 도시 정보가 없습니다.',
           hint: (filteredCount, totalCount) => `현재 ${filteredCount}개 / 전체 ${totalCount}개 국가`,
-          recentTitle: '최근 추천',
           groupedTitle: '대륙별 전체 국가 목록',
           themeLabels: {
             resort: '휴양',
@@ -138,11 +410,13 @@ function TravelCountryRandomPage() {
           filterTitle: 'Travel Theme Filter',
           allThemes: 'All',
           noMatch: 'No countries match the selected theme.',
-          pick: 'Pick Random Country',
+          pickCountry: 'Pick Country',
+          picking: 'Picking...',
           resultTitle: 'Suggested Country',
           empty: 'Press the button to get a random travel destination.',
+          cityTitle: 'Suggested Cities',
+          cityNone: 'No city data is available.',
           hint: (filteredCount, totalCount) => `${filteredCount} countries in filter / ${totalCount} total`,
-          recentTitle: 'Recent Picks',
           groupedTitle: 'All Countries by Continent',
           themeLabels: {
             resort: 'Resort',
@@ -161,16 +435,18 @@ function TravelCountryRandomPage() {
 
   const [activeTheme, setActiveTheme] = useState('all');
   const [selected, setSelected] = useState(null);
-  const [recentCodes, setRecentCodes] = useState([]);
+  const [isSpinning, setIsSpinning] = useState(false);
+  const spinIntervalRef = useRef(null);
+  const spinTimeoutRef = useRef(null);
   const themedCountries = useMemo(
     () =>
       COUNTRY_POOL.map((country) => {
         const themes = COUNTRY_THEME_OVERRIDES[country.code] || CONTINENT_THEME_DEFAULTS[country.continent] || [];
-        return { ...country, themes };
+        const cities = COUNTRY_CITY_MAP[country.code] || [];
+        return { ...country, themes, cities };
       }),
     []
   );
-  const countryMap = useMemo(() => new Map(themedCountries.map((item) => [item.code, item])), [themedCountries]);
   const filteredCountries = useMemo(() => {
     if (activeTheme === 'all') {
       return themedCountries;
@@ -187,13 +463,23 @@ function TravelCountryRandomPage() {
       .filter((group) => group.countries.length > 0);
   }, [filteredCountries]);
 
+  useEffect(() => {
+    return () => {
+      if (spinIntervalRef.current) {
+        clearInterval(spinIntervalRef.current);
+      }
+      if (spinTimeoutRef.current) {
+        clearTimeout(spinTimeoutRef.current);
+      }
+    };
+  }, []);
+
   function onSelectTheme(themeKey) {
-    if (activeTheme === themeKey) {
+    if (activeTheme === themeKey || isSpinning) {
       return;
     }
     setActiveTheme(themeKey);
     setSelected(null);
-    setRecentCodes([]);
     trackEvent('tool_filter_select', {
       tool_name: 'travel-country-random',
       theme: themeKey
@@ -201,21 +487,43 @@ function TravelCountryRandomPage() {
   }
 
   function onPickCountry() {
-    if (!filteredCountries.length) {
+    if (!filteredCountries.length || isSpinning) {
       return;
     }
+
+    if (spinIntervalRef.current) {
+      clearInterval(spinIntervalRef.current);
+    }
+    if (spinTimeoutRef.current) {
+      clearTimeout(spinTimeoutRef.current);
+    }
+
     const available = selected
       ? filteredCountries.filter((item) => item.code !== selected.code)
       : filteredCountries;
-    const picked = available[Math.floor(Math.random() * available.length)];
-    setSelected(picked);
-    setRecentCodes((prev) => [picked.code, ...prev.filter((code) => code !== picked.code)].slice(0, 5));
-    trackEvent('tool_generate', {
-      tool_name: 'travel-country-random',
-      country_code: picked.code,
-      theme: activeTheme,
-      candidate_count: filteredCountries.length
-    });
+    const candidatePool = available.length ? available : filteredCountries;
+    const picked = candidatePool[Math.floor(Math.random() * candidatePool.length)];
+
+    setIsSpinning(true);
+    spinIntervalRef.current = setInterval(() => {
+      const rolling = candidatePool[Math.floor(Math.random() * candidatePool.length)];
+      setSelected(rolling);
+    }, 90);
+
+    spinTimeoutRef.current = setTimeout(() => {
+      if (spinIntervalRef.current) {
+        clearInterval(spinIntervalRef.current);
+        spinIntervalRef.current = null;
+      }
+      setSelected(picked);
+      setIsSpinning(false);
+      trackEvent('tool_generate', {
+        tool_name: 'travel-country-random',
+        country_code: picked.code,
+        theme: activeTheme,
+        candidate_count: filteredCountries.length
+      });
+    }, 1000);
   }
 
   return (
@@ -235,6 +543,7 @@ function TravelCountryRandomPage() {
               type="button"
               className={`button ghost ${activeTheme === 'all' ? 'is-active' : ''}`}
               onClick={() => onSelectTheme('all')}
+              disabled={isSpinning}
             >
               {copy.allThemes}
             </button>
@@ -244,14 +553,20 @@ function TravelCountryRandomPage() {
                 type="button"
                 className={`button ghost ${activeTheme === themeKey ? 'is-active' : ''}`}
                 onClick={() => onSelectTheme(themeKey)}
+                disabled={isSpinning}
               >
                 {copy.themeLabels[themeKey]}
               </button>
             ))}
           </div>
           <div className="actions single">
-            <button type="button" className="button primary" onClick={onPickCountry} disabled={!filteredCountries.length}>
-              {copy.pick}
+            <button
+              type="button"
+              className="button primary"
+              onClick={onPickCountry}
+              disabled={!filteredCountries.length || isSpinning}
+            >
+              {isSpinning ? copy.picking : copy.pickCountry}
             </button>
           </div>
           <p className="travel-country-hint">{copy.hint(filteredCountries.length, COUNTRY_POOL.length)}</p>
@@ -260,36 +575,25 @@ function TravelCountryRandomPage() {
 
         <section className="card result-panel">
           <h2>{copy.resultTitle}</h2>
-          <div className={`result-card ${selected ? 'picked' : ''}`}>
+          <div className={`result-card ${isSpinning ? 'loading' : selected ? 'picked' : ''}`}>
             {selected ? (
-              <p className="travel-country-name" aria-live="polite">
-                <span>{selected.flag}</span> {language === 'ko' ? selected.nameKo : selected.nameEn}
-              </p>
+              <div aria-live="polite">
+                <p className="travel-country-name">
+                  <span>{selected.flag}</span> {language === 'ko' ? selected.nameKo : selected.nameEn}
+                </p>
+                <p className="travel-city-name">
+                  {selected.cities.length
+                    ? `${copy.cityTitle}: ${selected.cities
+                        .map((city) => (language === 'ko' ? city.ko : city.en))
+                        .join(', ')}`
+                    : copy.cityNone}
+                </p>
+              </div>
             ) : (
               <p>{copy.empty}</p>
             )}
           </div>
         </section>
-
-        {recentCodes.length ? (
-          <section className="card">
-            <h2>{copy.recentTitle}</h2>
-            <ul className="result-list">
-              {recentCodes.map((code) => {
-                const country = countryMap.get(code);
-                if (!country) {
-                  return null;
-                }
-                return (
-                  <li key={code} className="result-item">
-                    <span className="badge">{country.flag}</span>
-                    <strong>{language === 'ko' ? country.nameKo : country.nameEn}</strong>
-                  </li>
-                );
-              })}
-            </ul>
-          </section>
-        ) : null}
 
         <section className="card">
           <h2>{copy.groupedTitle}</h2>

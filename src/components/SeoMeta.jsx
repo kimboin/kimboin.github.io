@@ -16,11 +16,6 @@ const META_BY_ROUTE = [
     description: '일상에서 바로 사용할 수 있는 작은 도구들을 모아둔 페이지'
   },
   {
-    match: (path) => path.startsWith('/tools/'),
-    title: 'Tool Story | kimboin.github.io',
-    description: '도구를 만든 이유와 사용 흐름, 배운 점을 정리한 스토리 페이지'
-  },
-  {
     match: (path) => path === '/food-menu-picker',
     title: '오늘 뭐먹지? | Food Menu Picker',
     description: '기본 메뉴와 커스텀 메뉴에서 오늘의 메뉴를 랜덤으로 고르는 도구'
@@ -47,7 +42,7 @@ const META_BY_ROUTE = [
   },
   {
     match: (path) => path === '/travel-country-random',
-    title: '어느 나라 여행 가지? | 랜덤 여행 나라 추천기',
+    title: '어느 나라 여행 가지? | 여행 나라 추천기',
     description: '여행 후보 국가를 버튼 한 번으로 랜덤 추천받는 도구'
   },
   {
@@ -84,11 +79,6 @@ const META_BY_ROUTE = [
     match: (path) => path.startsWith('/blog/'),
     title: 'Blog Post | kimboin.github.io',
     description: '개별 블로그 글 상세 페이지'
-  },
-  {
-    match: (path) => path.startsWith('/stories/'),
-    title: 'Story | kimboin.github.io',
-    description: '서비스 제작 배경과 핵심 아이디어를 정리한 스토리 페이지'
   }
 ];
 
