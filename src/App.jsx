@@ -12,6 +12,7 @@ import TextCounterPage from './pages/TextCounterPage';
 import KanaTracePage from './pages/KanaTracePage';
 import TravelJapanesePage from './pages/TravelJapanesePage';
 import ImageFormatConverterPage from './pages/ImageFormatConverterPage';
+import DateAnniversaryCalculatorPage from './pages/DateAnniversaryCalculatorPage';
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
         <Route path="/kana-trace" element={<KanaTracePage />} />
         <Route path="/travel-japanese" element={<TravelJapanesePage />} />
         <Route path="/image-format-converter" element={<ImageFormatConverterPage />} />
+        <Route path="/date-anniversary-calculator" element={<DateAnniversaryCalculatorPage />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </SiteLayout>

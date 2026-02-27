@@ -80,6 +80,22 @@ export const tools = [
     openUrl: '/lotto-random-generator/'
   },
   {
+    slug: 'date-anniversary-calculator',
+    name: 'Date Anniversary Calculator',
+    nameKo: '기념일 날짜 계산기',
+    oneLiner: '특정 날짜 기준으로 100일/200일/300일과 n주년 기념일을 계산하는 도구',
+    oneLinerEn: 'Calculate 100/200/300-day milestones and yearly anniversaries from a base date.',
+    why: '기념일 날짜를 손으로 하나씩 계산할 때마다 헷갈려서, 기준일만 입력하면 자주 찾는 날짜를 바로 확인할 수 있도록 만들었습니다.',
+    whyEn: 'I wanted a quick way to check milestone dates without manual date counting each time.',
+    how: [
+      '기준이 되는 날짜를 입력합니다.',
+      '100일, 200일, 300일 등 일수 기념일을 확인합니다.',
+      '1주년, 2주년 등 연차 기념일을 함께 확인합니다.'
+    ],
+    learned: '날짜 계산 도구는 입력 단계를 줄이고 결과를 한 화면에 묶을 때 사용성이 높아집니다.',
+    openUrl: '/date-anniversary-calculator/'
+  },
+  {
     slug: 'kana-trace',
     name: 'Kana Trace',
     nameKo: '히라가나 가타카나 연습',

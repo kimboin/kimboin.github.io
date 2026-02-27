@@ -46,6 +46,11 @@ const META_BY_ROUTE = [
     description: '일본 여행에서 자주 쓰는 회화를 카테고리별로 빠르게 확인하는 페이지'
   },
   {
+    match: (path) => path === '/date-anniversary-calculator',
+    title: '기념일 날짜 계산기 | Date Anniversary Calculator',
+    description: '기준 날짜를 입력하면 100일/200일/300일과 1주년/2주년 같은 기념일 날짜를 빠르게 계산하는 도구'
+  },
+  {
     match: (path) => path === '/sites' || path === '/products',
     title: 'Sites | kimboin.github.io',
     description: '직접 만들고 운영하는 사이트를 모아둔 페이지'
