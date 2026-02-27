@@ -1,5 +1,21 @@
 export const tools = [
   {
+    slug: 'team-splitter',
+    name: 'Team Splitter',
+    nameKo: '랜덤 팀 나누기',
+    oneLiner: '명단을 입력하거나 엑셀 파일로 업로드해 랜덤으로 팀을 나누는 도구',
+    oneLinerEn: 'Split members into random teams from direct input or Excel-compatible CSV uploads.',
+    why: '행사나 스터디에서 팀을 나눌 때 직접 섞고 배분하는 시간이 계속 아까웠습니다. 명단과 팀 수만 넣으면 바로 랜덤으로 나눌 수 있게 만들었습니다.',
+    whyEn: 'I needed a quick way to split groups fairly without manual shuffling each time.',
+    how: [
+      '이름 명단을 직접 붙여넣거나 CSV 파일로 업로드합니다.',
+      '나누고 싶은 팀 수를 입력합니다.',
+      '팀 나누기 버튼으로 랜덤 배정 결과를 확인합니다.'
+    ],
+    learned: '입력 방식이 다양한 도구는 텍스트 입력과 파일 업로드를 함께 제공할 때 실제 사용성이 크게 좋아졌습니다.',
+    openUrl: '/team-splitter/'
+  },
+  {
     slug: 'travel-japanese',
     name: 'Travel Japanese',
     nameKo: '여행 일본어',

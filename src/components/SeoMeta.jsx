@@ -46,6 +46,11 @@ const META_BY_ROUTE = [
     description: '일본 여행에서 자주 쓰는 회화를 카테고리별로 빠르게 확인하는 페이지'
   },
   {
+    match: (path) => path === '/team-splitter',
+    title: '랜덤 팀 나누기 | Team Splitter',
+    description: '명단을 직접 입력하거나 CSV로 업로드해 원하는 팀 수로 랜덤 배정하는 도구'
+  },
+  {
     match: (path) => path === '/sites' || path === '/products',
     title: 'Sites | kimboin.github.io',
     description: '직접 만들고 운영하는 사이트를 모아둔 페이지'

@@ -8,7 +8,8 @@ const TOOL_NAME_BY_PATH = {
   '/text-counter': 'text-counter',
   '/kana-trace': 'kana-trace',
   '/travel-japanese': 'travel-japanese',
-  '/image-format-converter': 'image-format-converter'
+  '/image-format-converter': 'image-format-converter',
+  '/team-splitter': 'team-splitter'
 };
 
 function AnalyticsTracker() {
