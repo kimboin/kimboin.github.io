@@ -15,6 +15,7 @@ import ImageFormatConverterPage from './pages/ImageFormatConverterPage';
 import DateAnniversaryCalculatorPage from './pages/DateAnniversaryCalculatorPage';
 import TeamSplitterPage from './pages/TeamSplitterPage';
 import TravelCountryRandomPage from './pages/TravelCountryRandomPage';
+import LunarSolarConverterPage from './pages/LunarSolarConverterPage';
 
 function App() {
   return (
@@ -36,6 +37,7 @@ function App() {
         <Route path="/image-format-converter" element={<ImageFormatConverterPage />} />
         <Route path="/date-anniversary-calculator" element={<DateAnniversaryCalculatorPage />} />
         <Route path="/team-splitter" element={<TeamSplitterPage />} />
+        <Route path="/lunar-solar-converter" element={<LunarSolarConverterPage />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </SiteLayout>

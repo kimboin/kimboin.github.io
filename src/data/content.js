@@ -111,17 +111,33 @@ export const tools = [
     slug: 'date-anniversary-calculator',
     name: 'Date Anniversary Calculator',
     nameKo: '기념일 날짜 계산기',
-    oneLiner: '특정 날짜 기준으로 100일/200일/300일과 n주년 기념일을 계산하는 도구',
-    oneLinerEn: 'Calculate 100/200/300-day milestones and yearly anniversaries from a base date.',
+    oneLiner: '특정 날짜 기준으로 100일/200일/300일 같은 일수 기념일을 계산하는 도구',
+    oneLinerEn: 'Calculate day milestones like 100/200/300 days from a base date.',
     why: '기념일 날짜를 손으로 하나씩 계산할 때마다 헷갈려서, 기준일만 입력하면 자주 찾는 날짜를 바로 확인할 수 있도록 만들었습니다.',
     whyEn: 'I wanted a quick way to check milestone dates without manual date counting each time.',
     how: [
       '기준이 되는 날짜를 입력합니다.',
       '100일, 200일, 300일 등 일수 기념일을 확인합니다.',
-      '1주년, 2주년 등 연차 기념일을 함께 확인합니다.'
+      '400일, 500일 등 추가 일수 기념일도 함께 확인합니다.'
     ],
     learned: '날짜 계산 도구는 입력 단계를 줄이고 결과를 한 화면에 묶을 때 사용성이 높아집니다.',
     openUrl: '/date-anniversary-calculator/'
+  },
+  {
+    slug: 'lunar-solar-converter',
+    name: 'Lunar Solar Converter',
+    nameKo: '양력 음력 변환기',
+    oneLiner: '양력 날짜를 음력으로, 음력 날짜를 양력으로 변환하는 도구',
+    oneLinerEn: 'Convert dates between solar and lunar calendars in both directions.',
+    why: '부모님이 음력 생일을 지내셔서 매년 날짜를 다시 계산해야 했고, 그 과정을 빠르게 처리하려고 만들었습니다.',
+    whyEn: 'My parents celebrate birthdays in the lunar calendar, so I built this to avoid recalculating every year.',
+    how: [
+      '양력 날짜를 선택하면 해당 음력 날짜를 즉시 확인합니다.',
+      '음력 연/월/일(윤달 포함)을 입력하면 해당 양력 날짜를 찾습니다.',
+      '찾은 양력 날짜를 바로 저장하거나 공유합니다.'
+    ],
+    learned: '달력 변환 도구는 윤달 여부와 브라우저별 지원 여부를 함께 안내해야 혼동을 줄일 수 있었습니다.',
+    openUrl: '/lunar-solar-converter/'
   },
   {
     slug: 'kana-trace',

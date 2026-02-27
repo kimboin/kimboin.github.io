@@ -10,7 +10,8 @@ const TOOL_NAME_BY_PATH = {
   '/travel-japanese': 'travel-japanese',
   '/image-format-converter': 'image-format-converter',
   '/date-anniversary-calculator': 'date-anniversary-calculator',
-  '/team-splitter': 'team-splitter'
+  '/team-splitter': 'team-splitter',
+  '/lunar-solar-converter': 'lunar-solar-converter'
 };
 
 function AnalyticsTracker() {

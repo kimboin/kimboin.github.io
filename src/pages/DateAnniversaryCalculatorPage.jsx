@@ -8,7 +8,7 @@ const COPY = {
   ko: {
     kicker: 'DATE CALCULATOR',
     title: '기념일 날짜 계산기',
-    description: '기준 날짜를 입력하면 100일/200일 같은 일수 기념일과 1주년/2주년 같은 연차 기념일을 한 번에 계산합니다.',
+    description: '기준 날짜를 입력하면 100일/200일 같은 일수 기념일을 한 번에 계산합니다.',
     inputTitle: '기준 날짜 입력',
     inputLabel: '날짜',
     inputAria: '기념일 계산 기준 날짜',
@@ -22,7 +22,7 @@ const COPY = {
   en: {
     kicker: 'DATE CALCULATOR',
     title: 'Date Anniversary Calculator',
-    description: 'Pick a base date to calculate day milestones (100/200/300...) and yearly anniversaries (1st, 2nd...).',
+    description: 'Pick a base date to calculate day milestones (100/200/300...) in one go.',
     inputTitle: 'Base Date',
     inputLabel: 'Date',
     inputAria: 'Base date for anniversary calculator',

@@ -56,6 +56,11 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://kimboin.github.io/lunar-solar-converter</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://kimboin.github.io/team-splitter</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>

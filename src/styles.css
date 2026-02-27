@@ -356,6 +356,14 @@ textarea:focus-visible {
   justify-content: flex-start;
 }
 
+.checkbox-field {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+  color: var(--text);
+}
+
 .button {
   display: inline-flex;
   align-items: center;
@@ -842,6 +850,10 @@ textarea:focus-visible {
 
 .controls input {
   width: 96px;
+}
+
+.controls .date-input-wide {
+  width: min(100%, 240px);
 }
 
 .custom-controls {

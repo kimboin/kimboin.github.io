@@ -58,7 +58,12 @@ const META_BY_ROUTE = [
   {
     match: (path) => path === '/date-anniversary-calculator',
     title: '기념일 날짜 계산기 | Date Anniversary Calculator',
-    description: '기준 날짜를 입력하면 100일/200일/300일과 1주년/2주년 같은 기념일 날짜를 빠르게 계산하는 도구'
+    description: '기준 날짜를 입력하면 100일/200일/300일 같은 일수 기념일 날짜를 빠르게 계산하는 도구'
+  },
+  {
+    match: (path) => path === '/lunar-solar-converter',
+    title: '양력 음력 변환기 | Lunar Solar Converter',
+    description: '양력에서 음력, 음력에서 양력으로 날짜를 빠르게 변환하는 도구'
   },
   {
     match: (path) => path === '/sites' || path === '/products',
