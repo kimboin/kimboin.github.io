@@ -59,8 +59,8 @@ function SiteLayoutBody({ children }) {
             <NavLink to="/">{copy.home}</NavLink>
             <NavLink to="/tools">{copy.tools}</NavLink>
             <NavLink to="/sites">{copy.products}</NavLink>
-            <NavLink to="/now">{copy.now}</NavLink>
             <NavLink to="/blog">{copy.blog}</NavLink>
+            <NavLink to="/now">{copy.now}</NavLink>
           </nav>
           <div className="header-actions">
             <button
@@ -96,11 +96,11 @@ function SiteLayoutBody({ children }) {
             <NavLink to="/sites" onClick={() => setMenuOpen(false)}>
               {copy.products}
             </NavLink>
-            <NavLink to="/now" onClick={() => setMenuOpen(false)}>
-              {copy.now}
-            </NavLink>
             <NavLink to="/blog" onClick={() => setMenuOpen(false)}>
               {copy.blog}
+            </NavLink>
+            <NavLink to="/now" onClick={() => setMenuOpen(false)}>
+              {copy.now}
             </NavLink>
           </div>
         </nav>
