@@ -16,6 +16,18 @@ export const tools = [
     openUrl: '/team-splitter/'
   },
   {
+    slug: 'travel-country-random',
+    name: 'Travel Country Random',
+    nameKo: '랜덤 여행 나라 추천기',
+    oneLiner: '여행 가고 싶은 나라를 랜덤으로 뽑아주는 도구',
+    oneLinerEn: 'Randomly pick your next travel country idea with one click.',
+    why: '여행 계획을 세울 때 가장 먼저 막히는 건 목적지 선택이었습니다. 고민 시간을 줄이고 빠르게 후보를 정하려고 만들었습니다.',
+    whyEn: 'I built this to quickly narrow destination options when travel planning feels stuck.',
+    how: ['랜덤 추천 버튼을 누릅니다.', '국가 1개를 즉시 추천받습니다.', '원하면 다시 눌러 다음 후보를 확인합니다.'],
+    learned: '결정형 도구는 빠른 결과 확인과 재시도 흐름이 핵심입니다.',
+    openUrl: '/travel-country-random/'
+  },
+  {
     slug: 'travel-japanese',
     name: 'Travel Japanese',
     nameKo: '여행 일본어',

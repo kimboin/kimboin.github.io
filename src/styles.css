@@ -585,6 +585,61 @@ textarea:focus-visible {
   font-size: 1.1rem;
 }
 
+.travel-country-hint {
+  margin: 12px 0 0;
+  color: var(--muted);
+}
+
+.travel-country-empty {
+  margin: 8px 0 0;
+  color: #9a3d2d;
+  font-weight: 700;
+}
+
+.travel-country-name {
+  margin: 0;
+  font-size: clamp(1.35rem, 4vw, 2rem);
+  font-weight: 800;
+}
+
+.continent-grid {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.continent-card {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 12px;
+  background: #f7fafc;
+}
+
+.continent-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.continent-head h3 {
+  margin: 0;
+}
+
+.continent-head span {
+  color: var(--muted);
+  font-weight: 700;
+  font-size: 0.88rem;
+}
+
+.continent-country-list {
+  margin: 0;
+  padding-left: 18px;
+  display: grid;
+  gap: 6px;
+}
+
 .result-title-row {
   display: flex;
   align-items: center;
@@ -978,6 +1033,10 @@ textarea:focus-visible {
   }
 
   .converter-controls {
+    grid-template-columns: 1fr;
+  }
+
+  .continent-grid {
     grid-template-columns: 1fr;
   }
 

@@ -46,6 +46,11 @@ const META_BY_ROUTE = [
     description: '일본 여행에서 자주 쓰는 회화를 카테고리별로 빠르게 확인하는 페이지'
   },
   {
+    match: (path) => path === '/travel-country-random',
+    title: '어느 나라 여행 가지? | 랜덤 여행 나라 추천기',
+    description: '여행 후보 국가를 버튼 한 번으로 랜덤 추천받는 도구'
+  },
+  {
     match: (path) => path === '/team-splitter',
     title: '랜덤 팀 나누기 | Team Splitter',
     description: '명단을 직접 입력하거나 CSV로 업로드해 원하는 팀 수로 랜덤 배정하는 도구'
