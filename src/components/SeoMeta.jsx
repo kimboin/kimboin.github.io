@@ -73,12 +73,7 @@ const META_BY_ROUTE = [
   {
     match: (path) => path === '/blog',
     title: 'Blog | kimboin.github.io',
-    description: '도구를 만들고 운영하며 남긴 개발 노트와 업데이트 기록'
-  },
-  {
-    match: (path) => path.startsWith('/blog/'),
-    title: 'Blog Post | kimboin.github.io',
-    description: '개별 블로그 글 상세 페이지'
+    description: 'OTT, 유튜브, 방송에서 본 콘텐츠를 기록해두는 페이지'
   }
 ];
 

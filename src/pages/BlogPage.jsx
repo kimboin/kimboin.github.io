@@ -2,6 +2,23 @@ import { Link, useSearchParams } from 'react-router-dom';
 import { blogPosts } from '../data/blog';
 import { useLanguage } from '../lib/language';
 
+function getYoutubeThumbnail(url) {
+  try {
+    const parsed = new URL(url);
+    if (parsed.hostname.includes('youtu.be')) {
+      const id = parsed.pathname.replace('/', '');
+      return id ? `https://i.ytimg.com/vi/${id}/hqdefault.jpg` : '';
+    }
+    if (parsed.hostname.includes('youtube.com')) {
+      const id = parsed.searchParams.get('v');
+      return id ? `https://i.ytimg.com/vi/${id}/hqdefault.jpg` : '';
+    }
+    return '';
+  } catch (_error) {
+    return '';
+  }
+}
+
 function formatDate(dateText) {
   const parsed = new Date(`${dateText}T00:00:00`);
   if (Number.isNaN(parsed.getTime())) {
@@ -13,36 +30,36 @@ function formatDate(dateText) {
 function BlogPage() {
   const { language } = useLanguage();
   const [searchParams] = useSearchParams();
-  const activeCategory = searchParams.get('category') || 'all';
+  const activePlatform = searchParams.get('platform') || 'all';
   const copy =
     language === 'ko'
       ? {
           kicker: '블로그',
-          title: '개발 노트와 기록',
-          description: '도구를 만들고 운영하면서 남긴 짧은 기록입니다.',
-          open: '읽기',
+          title: '시청 기록',
+          description: 'OTT, 유튜브, 방송에서 재밌게 보거나 인상 깊었던 콘텐츠를 기록해두는 공간입니다.',
           pendingTitle: '업데이트 예정',
-          pendingDescription: '곧 개발/영화 카테고리 글을 순차적으로 올릴 예정입니다.',
+          pendingDescription: '곧 새로운 시청 기록을 순차적으로 올릴 예정입니다.',
+          submenu: '플랫폼',
           all: '전체',
-          dev: '개발',
-          movie: '영화'
+          netflix: '넷플릭스',
+          disney: '디즈니',
+          youtube: '유튜브'
         }
       : {
           kicker: 'Blog',
-          title: 'Build Notes and Logs',
-          description: 'Short notes from building and running tools.',
-          open: 'Read',
+          title: 'Watch Log',
+          description: 'A place to log OTT, YouTube, and TV content that felt especially fun or memorable.',
           pendingTitle: 'Updates Coming Soon',
-          pendingDescription: 'Posts for Development and Movie categories will be added soon.',
+          pendingDescription: 'New watch logs will be added soon.',
+          submenu: 'Platform',
           all: 'All',
-          dev: 'Development',
-          movie: 'Movie'
+          netflix: 'Netflix',
+          disney: 'Disney+',
+          youtube: 'YouTube'
         };
 
   const filteredPosts =
-    activeCategory === 'all'
-      ? blogPosts
-      : blogPosts.filter((post) => post.category === activeCategory);
+    activePlatform === 'all' ? blogPosts : blogPosts.filter((post) => post.platform === activePlatform);
 
   return (
     <>
@@ -55,23 +72,29 @@ function BlogPage() {
       </section>
       <section className="section">
         <div className="container">
-          <div className="blog-submenu">
-            <Link className={`button ghost ${activeCategory === 'all' ? 'is-active' : ''}`} to="/blog">
+          <nav className="blog-submenu" aria-label={copy.submenu}>
+            <Link className={`blog-submenu-link ${activePlatform === 'all' ? 'is-active' : ''}`} to="/blog">
               {copy.all}
             </Link>
             <Link
-              className={`button ghost ${activeCategory === 'dev' ? 'is-active' : ''}`}
-              to="/blog?category=dev"
+              className={`blog-submenu-link ${activePlatform === 'netflix' ? 'is-active' : ''}`}
+              to="/blog?platform=netflix"
             >
-              {copy.dev}
+              {copy.netflix}
             </Link>
             <Link
-              className={`button ghost ${activeCategory === 'movie' ? 'is-active' : ''}`}
-              to="/blog?category=movie"
+              className={`blog-submenu-link ${activePlatform === 'disney' ? 'is-active' : ''}`}
+              to="/blog?platform=disney"
             >
-              {copy.movie}
+              {copy.disney}
             </Link>
-          </div>
+            <Link
+              className={`blog-submenu-link ${activePlatform === 'youtube' ? 'is-active' : ''}`}
+              to="/blog?platform=youtube"
+            >
+              {copy.youtube}
+            </Link>
+          </nav>
           <div className="grid two">
             {filteredPosts.length === 0 ? (
               <article className="card blog-card">
@@ -84,11 +107,18 @@ function BlogPage() {
                   <p className="blog-date">{formatDate(post.date)}</p>
                   <h2>{language === 'ko' ? post.titleKo : post.titleEn}</h2>
                   <p>{language === 'ko' ? post.excerptKo : post.excerptEn}</p>
-                  <div className="actions">
-                    <Link className="button primary" to={`/blog/${post.slug}`}>
-                      {copy.open}
-                    </Link>
-                  </div>
+                  {post.youtubeUrl ? (
+                    <a className="blog-video-link" href={post.youtubeUrl} target="_blank" rel="noreferrer">
+                      {getYoutubeThumbnail(post.youtubeUrl) ? (
+                        <img
+                          className="blog-video-thumb"
+                          src={getYoutubeThumbnail(post.youtubeUrl)}
+                          alt={`${language === 'ko' ? post.titleKo : post.titleEn} thumbnail`}
+                          loading="lazy"
+                        />
+                      ) : null}
+                    </a>
+                  ) : null}
                 </article>
               ))
             )}
