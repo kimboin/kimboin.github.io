@@ -13,6 +13,8 @@ import KanaTracePage from './pages/KanaTracePage';
 import TravelJapanesePage from './pages/TravelJapanesePage';
 import ImageFormatConverterPage from './pages/ImageFormatConverterPage';
 import DateAnniversaryCalculatorPage from './pages/DateAnniversaryCalculatorPage';
+import TeamSplitterPage from './pages/TeamSplitterPage';
+import TravelCountryRandomPage from './pages/TravelCountryRandomPage';
 
 function App() {
   return (
@@ -30,8 +32,10 @@ function App() {
         <Route path="/text-counter" element={<TextCounterPage />} />
         <Route path="/kana-trace" element={<KanaTracePage />} />
         <Route path="/travel-japanese" element={<TravelJapanesePage />} />
+        <Route path="/travel-country-random" element={<TravelCountryRandomPage />} />
         <Route path="/image-format-converter" element={<ImageFormatConverterPage />} />
         <Route path="/date-anniversary-calculator" element={<DateAnniversaryCalculatorPage />} />
+        <Route path="/team-splitter" element={<TeamSplitterPage />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </SiteLayout>

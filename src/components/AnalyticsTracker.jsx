@@ -9,7 +9,8 @@ const TOOL_NAME_BY_PATH = {
   '/kana-trace': 'kana-trace',
   '/travel-japanese': 'travel-japanese',
   '/image-format-converter': 'image-format-converter',
-  '/date-anniversary-calculator': 'date-anniversary-calculator'
+  '/date-anniversary-calculator': 'date-anniversary-calculator',
+  '/team-splitter': 'team-splitter'
 };
 
 function AnalyticsTracker() {

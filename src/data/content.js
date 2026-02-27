@@ -1,5 +1,33 @@
 export const tools = [
   {
+    slug: 'team-splitter',
+    name: 'Team Splitter',
+    nameKo: '랜덤 팀 나누기',
+    oneLiner: '명단을 입력하거나 엑셀 파일로 업로드해 랜덤으로 팀을 나누는 도구',
+    oneLinerEn: 'Split members into random teams from direct input or Excel-compatible CSV uploads.',
+    why: '행사나 스터디에서 팀을 나눌 때 직접 섞고 배분하는 시간이 계속 아까웠습니다. 명단과 팀 수만 넣으면 바로 랜덤으로 나눌 수 있게 만들었습니다.',
+    whyEn: 'I needed a quick way to split groups fairly without manual shuffling each time.',
+    how: [
+      '이름 명단을 직접 붙여넣거나 CSV 파일로 업로드합니다.',
+      '나누고 싶은 팀 수를 입력합니다.',
+      '팀 나누기 버튼으로 랜덤 배정 결과를 확인합니다.'
+    ],
+    learned: '입력 방식이 다양한 도구는 텍스트 입력과 파일 업로드를 함께 제공할 때 실제 사용성이 크게 좋아졌습니다.',
+    openUrl: '/team-splitter/'
+  },
+  {
+    slug: 'travel-country-random',
+    name: 'Travel Country Random',
+    nameKo: '랜덤 여행 나라 추천기',
+    oneLiner: '여행 가고 싶은 나라를 랜덤으로 뽑아주는 도구',
+    oneLinerEn: 'Randomly pick your next travel country idea with one click.',
+    why: '여행 계획을 세울 때 가장 먼저 막히는 건 목적지 선택이었습니다. 고민 시간을 줄이고 빠르게 후보를 정하려고 만들었습니다.',
+    whyEn: 'I built this to quickly narrow destination options when travel planning feels stuck.',
+    how: ['랜덤 추천 버튼을 누릅니다.', '국가 1개를 즉시 추천받습니다.', '원하면 다시 눌러 다음 후보를 확인합니다.'],
+    learned: '결정형 도구는 빠른 결과 확인과 재시도 흐름이 핵심입니다.',
+    openUrl: '/travel-country-random/'
+  },
+  {
     slug: 'travel-japanese',
     name: 'Travel Japanese',
     nameKo: '여행 일본어',
