@@ -488,13 +488,19 @@ textarea:focus-visible {
 
 .blog-video-link {
   display: block;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: #000;
 }
 
 .blog-video-thumb {
   width: 100%;
-  border-radius: 12px;
-  border: 1px solid var(--border);
-  background: #f7fafc;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  background: #000;
 }
 
 .blog-date {
