@@ -27,6 +27,19 @@ function formatDate(dateText) {
   return parsed.toISOString().slice(0, 10);
 }
 
+function parseKoreanYearMonth(dateText) {
+  const match = dateText.match(/^(\d{4})년\s*(\d{1,2})월$/);
+  if (!match) {
+    return Number.NEGATIVE_INFINITY;
+  }
+  const year = Number(match[1]);
+  const month = Number(match[2]);
+  if (Number.isNaN(year) || Number.isNaN(month)) {
+    return Number.NEGATIVE_INFINITY;
+  }
+  return year * 100 + month;
+}
+
 function BlogPage() {
   const { language } = useLanguage();
   const [searchParams] = useSearchParams();
@@ -36,30 +49,43 @@ function BlogPage() {
       ? {
           kicker: '블로그',
           title: '시청 기록',
-          description: 'OTT, 유튜브, 방송에서 재밌게 보거나 인상 깊었던 콘텐츠를 기록해두는 공간입니다.',
+          description: 'OTT, 유튜브, 방송, 노래 중에서 재밌거나 인상 깊었던 콘텐츠를 기록해두는 공간입니다.',
           pendingTitle: '업데이트 예정',
           pendingDescription: '곧 새로운 시청 기록을 순차적으로 올릴 예정입니다.',
           submenu: '플랫폼',
           all: '전체',
           netflix: '넷플릭스',
           disney: '디즈니',
-          youtube: '유튜브'
+          youtube: '유튜브',
+          music: '노래'
         }
       : {
           kicker: 'Blog',
           title: 'Watch Log',
-          description: 'A place to log OTT, YouTube, and TV content that felt especially fun or memorable.',
+          description: 'A place to log OTT, YouTube, TV, and music content that felt especially fun or memorable.',
           pendingTitle: 'Updates Coming Soon',
           pendingDescription: 'New watch logs will be added soon.',
           submenu: 'Platform',
           all: 'All',
           netflix: 'Netflix',
           disney: 'Disney+',
-          youtube: 'YouTube'
+          youtube: 'YouTube',
+          music: 'Music'
         };
 
-  const filteredPosts =
-    activePlatform === 'all' ? blogPosts : blogPosts.filter((post) => post.platform === activePlatform);
+  const filteredPosts = (activePlatform === 'all'
+    ? blogPosts
+    : blogPosts.filter((post) => post.platform === activePlatform)
+  )
+    .map((post, index) => ({ post, index }))
+    .sort((a, b) => {
+      const dateDiff = parseKoreanYearMonth(b.post.date) - parseKoreanYearMonth(a.post.date);
+      if (dateDiff !== 0) {
+        return dateDiff;
+      }
+      return a.index - b.index;
+    })
+    .map(({ post }) => post);
 
   return (
     <>
@@ -93,6 +119,12 @@ function BlogPage() {
               to="/blog?platform=youtube"
             >
               {copy.youtube}
+            </Link>
+            <Link
+              className={`blog-submenu-link ${activePlatform === 'music' ? 'is-active' : ''}`}
+              to="/blog?platform=music"
+            >
+              {copy.music}
             </Link>
           </nav>
           <div className="grid two">
