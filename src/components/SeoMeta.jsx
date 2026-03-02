@@ -51,6 +51,11 @@ const META_BY_ROUTE = [
     description: '명단을 직접 입력하거나 CSV로 업로드해 원하는 팀 수로 랜덤 배정하는 도구'
   },
   {
+    match: (path) => path === '/winner-picker',
+    title: '당첨자 뽑기 | Winner Picker',
+    description: '명단을 입력하거나 CSV로 업로드한 뒤 원하는 인원 수만큼 랜덤 당첨자를 뽑는 도구'
+  },
+  {
     match: (path) => path === '/date-anniversary-calculator',
     title: '기념일 날짜 계산기 | Date Anniversary Calculator',
     description: '기준 날짜를 입력하면 100일/200일/300일 같은 일수 기념일 날짜를 빠르게 계산하는 도구'
@@ -59,6 +64,11 @@ const META_BY_ROUTE = [
     match: (path) => path === '/lunar-solar-converter',
     title: '양력 음력 변환기 | Lunar Solar Converter',
     description: '양력에서 음력, 음력에서 양력으로 날짜를 빠르게 변환하는 도구'
+  },
+  {
+    match: (path) => path === '/ip-checker',
+    title: '내 IP 확인 | IP Checker',
+    description: '현재 인터넷에서 보이는 공인 IP 주소를 빠르게 확인하는 도구'
   },
   {
     match: (path) => path === '/sites' || path === '/products',

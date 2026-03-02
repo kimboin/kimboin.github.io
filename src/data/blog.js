@@ -272,7 +272,7 @@ export const blogPosts = [
   },
   {
     slug: 'lady-dua-korean-series-2026-02',
-    category: 'movie',
+    category: 'show',
     platform: 'netflix',
     date: '2026년 02월',
     titleKo: '레이디 두아 (넷플릭스/시리즈)',
@@ -290,5 +290,25 @@ export const blogPosts = [
       'You can check the related video through the YouTube link below.'
     ],
     youtubeUrl: 'https://youtu.be/aPNZNcBIWNw?si=tMNZNqVDxl6-wuDq'
+  },
+  {
+    slug: 'the-man-living-with-king-official-trailer-2026-03',
+    category: 'movie',
+    platform: 'movie',
+    date: '2026년 03월',
+    titleKo: '왕과 사는 남자 (영화/공식 예고편)',
+    titleEn: 'The Man Living with the King (Film/Official Trailer)',
+    excerptKo:
+      '영화 왕과 사는 남자 공식 예고편 유튜브 링크를 기록합니다. 유해진, 박지훈, 유지태, 전미도 출연. 유해진의 연기로 멱살 잡고 끌고 가는 스토리였고, 다른 배우들의 연기도 물론 좋았다. 다만 스토리가 생각보다 단조로운 느낌이라 아쉬웠다.',
+    excerptEn: 'A log entry for the official YouTube trailer of The Man Living with the King.',
+    contentKo: [
+      '시청 기록: 2026년 03월',
+      '영화 왕과 사는 남자 공식 예고편을 유튜브 링크와 함께 기록합니다.'
+    ],
+    contentEn: [
+      'Watch log: March 2026.',
+      'A short note for the official trailer on YouTube.'
+    ],
+    youtubeUrl: 'https://www.youtube.com/watch?v=9sxEZuJskvM'
   }
 ];

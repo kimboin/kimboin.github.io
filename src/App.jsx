@@ -15,6 +15,8 @@ import DateAnniversaryCalculatorPage from './pages/DateAnniversaryCalculatorPage
 import TeamSplitterPage from './pages/TeamSplitterPage';
 import TravelCountryRandomPage from './pages/TravelCountryRandomPage';
 import LunarSolarConverterPage from './pages/LunarSolarConverterPage';
+import IpCheckerPage from './pages/IpCheckerPage';
+import WinnerPickerPage from './pages/WinnerPickerPage';
 
 function App() {
   return (
@@ -36,6 +38,8 @@ function App() {
         <Route path="/date-anniversary-calculator" element={<DateAnniversaryCalculatorPage />} />
         <Route path="/team-splitter" element={<TeamSplitterPage />} />
         <Route path="/lunar-solar-converter" element={<LunarSolarConverterPage />} />
+        <Route path="/ip-checker" element={<IpCheckerPage />} />
+        <Route path="/winner-picker" element={<WinnerPickerPage />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </SiteLayout>

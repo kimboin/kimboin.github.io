@@ -11,7 +11,9 @@ const TOOL_NAME_BY_PATH = {
   '/image-format-converter': 'image-format-converter',
   '/date-anniversary-calculator': 'date-anniversary-calculator',
   '/team-splitter': 'team-splitter',
-  '/lunar-solar-converter': 'lunar-solar-converter'
+  '/winner-picker': 'winner-picker',
+  '/lunar-solar-converter': 'lunar-solar-converter',
+  '/ip-checker': 'ip-checker'
 };
 
 function AnalyticsTracker() {

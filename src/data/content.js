@@ -16,6 +16,18 @@ export const tools = [
     openUrl: '/team-splitter/'
   },
   {
+    slug: 'winner-picker',
+    name: 'Winner Picker',
+    nameKo: '당첨자 뽑기',
+    oneLiner: '명단에서 원하는 인원 수만큼 랜덤으로 당첨자를 뽑는 도구',
+    oneLinerEn: 'Randomly draw winners from a name list with your desired winner count.',
+    why: '이벤트나 모임에서 공정하게 당첨자를 빠르게 뽑아야 할 때 바로 쓸 수 있도록 만들었습니다.',
+    whyEn: 'I built this to quickly draw winners fairly for events and small campaigns.',
+    how: ['명단을 직접 입력하거나 CSV로 업로드합니다.', '당첨 인원 수를 입력합니다.', '당첨자 뽑기 버튼으로 결과를 확인합니다.'],
+    learned: '추첨 도구는 입력-설정-결과 흐름이 단순할수록 즉시 사용성이 높아졌습니다.',
+    openUrl: '/winner-picker/'
+  },
+  {
     slug: 'travel-country-random',
     name: 'Travel Country Random',
     nameKo: '여행 나라 추천기',
@@ -106,6 +118,18 @@ export const tools = [
     ],
     learned: '규칙 데이터를 화면 로직에서 분리하면 신규 로또 추가가 쉬워졌습니다.',
     openUrl: '/lotto-random-generator/'
+  },
+  {
+    slug: 'ip-checker',
+    name: 'IP Checker',
+    nameKo: '내 IP 확인',
+    oneLiner: '현재 공인 IP 주소를 빠르게 확인하는 도구',
+    oneLinerEn: 'Quickly check your current public IP address.',
+    why: '네트워크 점검이나 접속 허용 목록(IP 화이트리스트) 등록 전에 내 공인 IP를 바로 확인하려고 만들었습니다.',
+    whyEn: 'I built this to quickly check my public IP before network checks or allowlist registration.',
+    how: ['IP 조회 버튼을 누릅니다.', '현재 공인 IP 주소를 확인합니다.', '복사 버튼으로 바로 복사합니다.'],
+    learned: '간단한 유틸리티도 복사/재조회 동선이 있으면 실사용성이 크게 올라갑니다.',
+    openUrl: '/ip-checker/'
   },
   {
     slug: 'date-anniversary-calculator',

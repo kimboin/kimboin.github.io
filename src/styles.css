@@ -1023,6 +1023,33 @@ textarea:focus-visible {
   font-weight: 600;
 }
 
+.ip-checker-card {
+  display: grid;
+  gap: 12px;
+}
+
+.ip-checker-label {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.ip-checker-value {
+  margin: 0;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+  font-size: clamp(1.2rem, 3vw, 1.8rem);
+  font-weight: 800;
+  color: var(--text);
+  word-break: break-all;
+}
+
+.ip-checker-note {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
 .anniversary-input-card {
   display: grid;
   gap: 12px;
@@ -1104,6 +1131,38 @@ textarea:focus-visible {
   gap: 6px;
   color: var(--text);
 }
+
+.winner-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.winner-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 12px;
+  background: #f7fafc;
+}
+
+.winner-rank {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 52px;
+  padding: 4px 8px;
+  border-radius: 999px;
+  background: #e6f1ef;
+  color: var(--primary-strong);
+  font-weight: 800;
+  font-size: 0.84rem;
+}
 @media (max-width: 980px) {
   .grid.three {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1133,6 +1192,10 @@ textarea:focus-visible {
   }
 
   .team-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .winner-list {
     grid-template-columns: 1fr;
   }
 }
