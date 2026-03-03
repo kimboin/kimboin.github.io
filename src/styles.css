@@ -1048,6 +1048,51 @@ textarea:focus-visible {
   gap: 12px;
 }
 
+.converter-zone {
+  display: grid;
+  gap: 10px;
+}
+
+.converter-zone-head {
+  display: grid;
+  gap: 6px;
+}
+
+.converter-zone-head h2 {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.converter-zone-head p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.94rem;
+}
+
+.converter-zone-action .converter-zone-head {
+  border-left: 4px solid #2f855a;
+  padding-left: 10px;
+}
+
+.converter-zone-info .converter-zone-head {
+  border-left: 4px solid #2b6cb0;
+  padding-left: 10px;
+}
+
+.converter-divider {
+  border-top: 1px solid var(--border);
+  margin: 2px 0;
+}
+
+.converter-result-box {
+  display: grid;
+  gap: 10px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 12px;
+  background: #f7fafc;
+}
+
 .converter-file-input {
   border: 1px solid var(--border);
   border-radius: 10px;
@@ -1093,6 +1138,50 @@ textarea:focus-visible {
   margin: 0;
   color: #a92b2b;
   font-weight: 600;
+}
+
+.converter-guide-card {
+  display: grid;
+  gap: 12px;
+  background: #fbfdff;
+}
+
+.converter-guide-card h3 {
+  margin: 0;
+}
+
+.converter-guide-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 10px;
+}
+
+.converter-guide-list li {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 10px 12px;
+  background: #f7fafc;
+}
+
+.converter-guide-list li p {
+  margin: 6px 0 0;
+}
+
+.converter-guide-list li span {
+  font-weight: 700;
+}
+
+.converter-guide-list.bullet {
+  list-style: disc;
+  padding-left: 20px;
+}
+
+.converter-guide-list.bullet li {
+  border: 0;
+  background: transparent;
+  padding: 0;
 }
 
 .ip-checker-card {
