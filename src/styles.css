@@ -1313,6 +1313,14 @@ textarea:focus-visible {
   margin: 0;
 }
 
+.kana-board-romaji {
+  margin: 0;
+  font-size: 0.95rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
 .toggle {
   display: inline-flex;
   align-items: center;
@@ -1323,7 +1331,48 @@ textarea:focus-visible {
 
 .canvas-wrap {
   display: flex;
+  flex-direction: column;
+  gap: 8px;
   justify-content: center;
+}
+
+.canvas-topbar {
+  width: min(300px, 100%);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.icon-button {
+  width: 36px;
+  height: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: #fff;
+  color: var(--muted);
+  cursor: pointer;
+  transition: border-color 160ms ease, color 160ms ease, background-color 160ms ease;
+}
+
+.icon-button:hover {
+  border-color: var(--primary);
+  color: var(--primary-strong);
+  background: #f5f8fb;
+}
+
+.icon-button:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+.icon-button svg {
+  width: 18px;
+  height: 18px;
+  fill: currentColor;
 }
 
 .kana-canvas {
@@ -1340,10 +1389,6 @@ textarea:focus-visible {
   background-size: 40px 40px, 40px 40px, 80px 80px, 80px 80px;
   background-position: center;
   touch-action: none;
-}
-
-.kana-canvas.erasing {
-  cursor: crosshair;
 }
 
 .kana-score {
