@@ -1,5 +1,17 @@
 export const tools = [
   {
+    slug: 'birthday-gift-picker',
+    name: 'Birthday Gift Picker',
+    nameKo: '생일선물 추천기',
+    oneLiner: '생일선물 목록에서 랜덤으로 1개를 추천하는 도구',
+    oneLinerEn: 'Pick one random birthday gift from a prepared or custom list.',
+    why: '선물 고를 때마다 후보가 많아 결정이 늦어져서, 빠르게 하나를 추천해주는 도구를 만들었습니다.',
+    whyEn: 'I built this to quickly decide on a gift when too many options slow me down.',
+    how: ['기본 선물 목록을 확인합니다.', '원하면 선물을 직접 추가합니다.', '랜덤 추천 버튼으로 1개를 바로 선택합니다.'],
+    learned: '결정형 도구는 입력 단계와 결과 확인 단계를 한 화면에 둘 때 사용성이 좋아졌습니다.',
+    openUrl: '/birthday-gift-picker/'
+  },
+  {
     slug: 'team-splitter',
     name: 'Team Splitter',
     nameKo: '랜덤 팀 나누기',
@@ -38,22 +50,6 @@ export const tools = [
     how: ['랜덤 추천 버튼을 누릅니다.', '국가 1개를 즉시 추천받습니다.', '원하면 다시 눌러 다음 후보를 확인합니다.'],
     learned: '결정형 도구는 빠른 결과 확인과 재시도 흐름이 핵심입니다.',
     openUrl: '/travel-country-random/'
-  },
-  {
-    slug: 'travel-japanese',
-    name: 'Travel Japanese',
-    nameKo: '여행 일본어',
-    oneLiner: '여행 상황에서 바로 쓰는 일본어 표현을 빠르게 익히는 도구',
-    oneLinerEn: 'A practical tool for quickly learning essential Japanese travel phrases.',
-    why: '일본 여행을 갈 때마다 “이번엔 일본어 써먹어야지” 했지만 캡처해둔 회화 문구만 쌓이고 제대로 써본 적은 거의 없었습니다. 중복되는 표현도 많고 정리도 안 되어 있어서, 자주 쓰는 문장만 모아 두고두고 쓸 수 있게 만들었습니다. (계속 업데이트 예정)',
-    whyEn: 'I needed a practical conversation tool focused on high-frequency travel phrases and fast repetition.',
-    how: [
-      '상황별 카드를 선택합니다.',
-      '일본어 문장, 발음, 뜻을 함께 확인합니다.',
-      '오늘 암기/소리 내어 읽기 흐름으로 반복합니다.'
-    ],
-    learned: '회화 도구는 문장 양보다 상황 맥락과 반복 동선이 학습 효율에 더 큰 영향을 줍니다.',
-    openUrl: '/travel-japanese/'
   },
   {
     slug: 'image-format-converter',
@@ -162,22 +158,29 @@ export const tools = [
     ],
     learned: '달력 변환 도구는 윤달 여부와 브라우저별 지원 여부를 함께 안내해야 혼동을 줄일 수 있었습니다.',
     openUrl: '/lunar-solar-converter/'
-  },
+  }
+];
+
+export const learningContents = [
   {
     slug: 'kana-trace',
     name: 'Kana Trace',
     nameKo: '히라가나 가타카나 연습',
-    oneLiner: '히라가나/가타카나를 직접 써보고 정확도를 채점하는 도구',
+    oneLiner: '히라가나/가타카나를 직접 써보고 정확도를 채점하는 학습 콘텐츠',
     oneLinerEn: 'Practice writing Hiragana/Katakana and get an accuracy score.',
     why: '히라가나, 가타카나는 외워지지 않고 괜찮은 앱은 대부분 유료였습니다. 그렇다면 직접 만들어서 써보자는 생각으로 시작했습니다.',
     whyEn: 'I needed an environment for fast repetition through direct handwriting practice.',
-    how: [
-      '히라가나 또는 가타카나, 학습 모드를 선택합니다.',
-      '캔버스에 글자를 직접 써봅니다.',
-      '채점 결과를 보고 다음 글자로 이동합니다.'
-    ],
-    learned: '간단한 패턴 인식이라도 사용자 피드백이 학습 지속에 큰 영향을 줍니다.',
     openUrl: '/kana-trace/'
+  },
+  {
+    slug: 'travel-japanese',
+    name: 'Travel Japanese',
+    nameKo: '여행 일본어',
+    oneLiner: '여행 상황에서 바로 쓰는 일본어 표현을 빠르게 익히는 학습 콘텐츠',
+    oneLinerEn: 'A practical learning page for essential Japanese travel phrases.',
+    why: '일본 여행을 갈 때마다 “이번엔 일본어 써먹어야지” 했지만 캡처해둔 회화 문구만 쌓이고 제대로 써본 적은 거의 없었습니다. 중복되는 표현도 많고 정리도 안 되어 있어서, 자주 쓰는 문장만 모아 두고두고 쓸 수 있게 만들었습니다. (계속 업데이트 예정)',
+    whyEn: 'I needed a practical conversation guide focused on high-frequency travel phrases and fast repetition.',
+    openUrl: '/travel-japanese/'
   }
 ];
 

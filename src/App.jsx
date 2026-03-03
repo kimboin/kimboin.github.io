@@ -2,6 +2,7 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 import SiteLayout from './components/SiteLayout';
 import HomePage from './pages/HomePage';
 import ToolsPage from './pages/ToolsPage';
+import LearnPage from './pages/LearnPage';
 import ProductsPage from './pages/ProductsPage';
 import NowPage from './pages/NowPage';
 import BlogPage from './pages/BlogPage';
@@ -17,6 +18,7 @@ import TravelCountryRandomPage from './pages/TravelCountryRandomPage';
 import LunarSolarConverterPage from './pages/LunarSolarConverterPage';
 import IpCheckerPage from './pages/IpCheckerPage';
 import WinnerPickerPage from './pages/WinnerPickerPage';
+import BirthdayGiftPickerPage from './pages/BirthdayGiftPickerPage';
 
 function App() {
   return (
@@ -24,6 +26,8 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/tools" element={<ToolsPage />} />
+        <Route path="/learn" element={<LearnPage />} />
+        <Route path="/contents" element={<Navigate to="/learn" replace />} />
         <Route path="/sites" element={<ProductsPage />} />
         <Route path="/products" element={<Navigate to="/sites" replace />} />
         <Route path="/now" element={<NowPage />} />
@@ -40,6 +44,7 @@ function App() {
         <Route path="/lunar-solar-converter" element={<LunarSolarConverterPage />} />
         <Route path="/ip-checker" element={<IpCheckerPage />} />
         <Route path="/winner-picker" element={<WinnerPickerPage />} />
+        <Route path="/birthday-gift-picker" element={<BirthdayGiftPickerPage />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </SiteLayout>

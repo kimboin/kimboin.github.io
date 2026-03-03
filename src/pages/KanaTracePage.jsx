@@ -5,9 +5,9 @@ import { trackEvent } from '../lib/analytics';
 const CANVAS_SIZE = 300;
 const PASS_SCORE = 60;
 const AUTO_NEXT_DELAY_MS = 650;
-const PEN_WIDTH = 18;
-const ERASER_WIDTH = 32;
+const PEN_WIDTH = 17;
 const STROKE_ANIM_MS = 1100;
+const LATEST_UPDATE_DATE = '2026-03-03';
 const ANIMCJK_BASES = [
   'https://cdn.jsdelivr.net/gh/parsimonhi/animCJK@master',
   'https://raw.githubusercontent.com/parsimonhi/animCJK/master'
@@ -36,8 +36,7 @@ function KanaTracePage() {
   const [score, setScore] = useState(null);
   const [passed, setPassed] = useState(null);
   const [autoNextPending, setAutoNextPending] = useState(false);
-  const [isErasing, setIsErasing] = useState(false);
-  const [guideOn, setGuideOn] = useState(true);
+  const [guideOn, setGuideOn] = useState(false);
   const [strokeGuideOn, setStrokeGuideOn] = useState(false);
   const [strokePlayId, setStrokePlayId] = useState(0);
 
@@ -145,17 +144,15 @@ function KanaTracePage() {
     const point = getCanvasPoint(event);
     lastPointRef.current = point;
 
-    ctx.globalCompositeOperation = isErasing ? 'destination-out' : 'source-over';
-    ctx.lineWidth = isErasing ? ERASER_WIDTH : PEN_WIDTH;
+    ctx.globalCompositeOperation = 'source-over';
+    ctx.lineWidth = PEN_WIDTH;
 
     ctx.beginPath();
     ctx.moveTo(point.x, point.y);
     ctx.lineTo(point.x, point.y);
     ctx.stroke();
 
-    if (!isErasing) {
-      currentStrokeRef.current = { points: [point] };
-    }
+    currentStrokeRef.current = { points: [point] };
   }
 
   function draw(event) {
@@ -173,7 +170,7 @@ function KanaTracePage() {
 
     lastPointRef.current = point;
 
-    if (!isErasing && currentStrokeRef.current) {
+    if (currentStrokeRef.current) {
       currentStrokeRef.current.points.push(point);
     }
   }
@@ -185,16 +182,12 @@ function KanaTracePage() {
     }
     isDrawingRef.current = false;
 
-    if (!isErasing && currentStrokeRef.current) {
+    if (currentStrokeRef.current) {
       if (currentStrokeRef.current.points.length > 1) {
         strokesRef.current.push(currentStrokeRef.current);
       }
       currentStrokeRef.current = null;
     }
-  }
-
-  function toggleEraser() {
-    setIsErasing((prev) => !prev);
   }
 
   function setModeSafe(nextMode) {
@@ -376,10 +369,24 @@ function KanaTracePage() {
               </div>
             </div>
             <div className="canvas-wrap">
+              <div className="canvas-topbar">
+                <p className="kana-board-romaji">발음: {currentKana?.romaji}</p>
+                <button
+                  type="button"
+                  className="icon-button"
+                  onClick={clearCanvas}
+                  aria-label="전체 지우기"
+                  title="전체 지우기"
+                >
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M12 5a7 7 0 1 1-6.32 10H3l3.4-3.4L9.8 15H7.63A5 5 0 1 0 12 7c-1.2 0-2.3.43-3.15 1.15L7.43 6.73A6.96 6.96 0 0 1 12 5Z" />
+                  </svg>
+                </button>
+              </div>
               <div className="canvas-stage">
                 <canvas
                   ref={canvasRef}
-                  className={`kana-canvas ${isErasing ? 'erasing' : ''}`}
+                  className="kana-canvas"
                   onPointerDown={startDrawing}
                   onPointerMove={draw}
                   onPointerUp={endDrawing}
@@ -401,12 +408,6 @@ function KanaTracePage() {
               </div>
             </div>
             <div className="actions">
-              <button type="button" className="button" onClick={toggleEraser}>
-                {isErasing ? '펜으로 쓰기' : '지우개'}
-              </button>
-              <button type="button" className="button ghost" onClick={clearCanvas}>
-                전체 지우기
-              </button>
               <button type="button" className="button primary" onClick={onScore}>
                 채점하기
               </button>
@@ -432,13 +433,11 @@ function KanaTracePage() {
           </div>
         </section>
 
-        <section className="card kana-tips" aria-label="학습 팁">
-          <h2>팁</h2>
+        <section className="card kana-updates" aria-label="업데이트 사항">
+          <h2>업데이트 사항</h2>
           <ul>
-            <li>가이드가 보이면 위에 맞춰 천천히 따라 써보세요.</li>
-            <li>획순 가이드는 AnimCJK 데이터 기반으로 표시됩니다.</li>
-            <li>획수가 많을수록 점수가 낮아질 수 있어요. 불필요한 선은 지우개로 정리하세요.</li>
-            <li>랜덤 모드로 반복하면 약한 글자를 빠르게 복습할 수 있습니다.</li>
+            <li>{LATEST_UPDATE_DATE}: 모바일에서 채점 시 0점으로 나오는 좌표 스케일 오류를 수정했습니다.</li>
+            <li>{LATEST_UPDATE_DATE}: 입력칸 위에 발음과 전체 지우기 아이콘을 배치해 모바일 사용성을 개선했습니다.</li>
           </ul>
         </section>
       </div>
@@ -740,13 +739,15 @@ function loadSvgImage(svgText) {
 }
 
 function calculateScore(userCanvas, templateCanvas, templateStrokes, userStrokes) {
-  const width = userCanvas.width;
-  const height = userCanvas.height;
+  const width = CANVAS_SIZE;
+  const height = CANVAS_SIZE;
 
-  const userCtx = userCanvas.getContext('2d');
+  const normalizedUserCanvas = normalizeCanvasSize(userCanvas, width, height);
+  const userCtx = normalizedUserCanvas.getContext('2d');
   const userData = userCtx.getImageData(0, 0, width, height).data;
 
-  const templateCtx = templateCanvas.getContext('2d');
+  const normalizedTemplateCanvas = normalizeCanvasSize(templateCanvas, width, height);
+  const templateCtx = normalizedTemplateCanvas.getContext('2d');
   const templateData = templateCtx.getImageData(0, 0, width, height).data;
 
   const { overlapRatio, overflow } = calculateOverlapMetrics(userData, templateData, width, height, 6, 3);
@@ -921,6 +922,19 @@ function renderUserStrokeToCanvas(points, width, height) {
     }
   });
   ctx.stroke();
+  return canvas;
+}
+
+function normalizeCanvasSize(sourceCanvas, width, height) {
+  if (sourceCanvas.width === width && sourceCanvas.height === height) {
+    return sourceCanvas;
+  }
+
+  const canvas = document.createElement('canvas');
+  canvas.width = width;
+  canvas.height = height;
+  const ctx = canvas.getContext('2d');
+  ctx.drawImage(sourceCanvas, 0, 0, width, height);
   return canvas;
 }
 
