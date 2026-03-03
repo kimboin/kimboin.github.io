@@ -58,6 +58,10 @@ function SiteLayoutBody({ children }) {
     return () => document.removeEventListener('keydown', onKeyDown);
   }, []);
 
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+  }, [location.pathname]);
+
   return (
     <div className="site-shell">
       <AnalyticsTracker />

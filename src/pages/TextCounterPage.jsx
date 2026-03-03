@@ -18,7 +18,21 @@ function TextCounterPage() {
           bytes: '바이트 (UTF-8)',
           noSpaces: '공백 제외',
           words: '단어 수',
-          lines: '줄 수'
+          lines: '줄 수',
+          guideTitle: '항목 설명',
+          guideItems: [
+            '글자수: 공백/줄바꿈 포함 전체 문자 수',
+            '바이트(UTF-8): 실제 저장/전송 기준 용량',
+            '공백 제외: 공백/줄바꿈을 제외한 문자 수',
+            '단어 수: 공백 기준으로 분리한 단어 개수',
+            '줄 수: 줄바꿈 기준 라인 개수'
+          ],
+          useTitle: '이럴 때 유용합니다',
+          useItems: [
+            '자소서/제출문서 글자 수 제한 확인',
+            'SNS/메타 설명문 길이 점검',
+            'DB 컬럼 또는 API payload 바이트 제한 확인'
+          ]
         }
       : {
           title: 'Text Counter',
@@ -32,7 +46,21 @@ function TextCounterPage() {
           bytes: 'Bytes (UTF-8)',
           noSpaces: 'No Spaces',
           words: 'Words',
-          lines: 'Lines'
+          lines: 'Lines',
+          guideTitle: 'Metric Guide',
+          guideItems: [
+            'Characters: total characters including spaces and line breaks',
+            'Bytes (UTF-8): storage/transfer size in bytes',
+            'No Spaces: characters excluding spaces and line breaks',
+            'Words: tokens split by whitespace',
+            'Lines: number of lines by line break'
+          ],
+          useTitle: 'Useful when',
+          useItems: [
+            'Checking text limits for forms and submissions',
+            'Validating copy length for social and metadata',
+            'Estimating byte limits for DB fields or APIs'
+          ]
         };
 
   const [text, setText] = useState('');
@@ -104,6 +132,21 @@ function TextCounterPage() {
               <strong>{stats.lines.toLocaleString()}</strong>
             </article>
           </div>
+        </section>
+
+        <section className="card">
+          <h2>{copy.guideTitle}</h2>
+          <ul className="list">
+            {copy.guideItems.map((item) => (
+              <li key={item}>{item}</li>
+            ))}
+          </ul>
+          <h3>{copy.useTitle}</h3>
+          <ul className="list">
+            {copy.useItems.map((item) => (
+              <li key={item}>{item}</li>
+            ))}
+          </ul>
         </section>
       </div>
     </section>
