@@ -575,6 +575,22 @@ textarea:focus-visible {
   padding-bottom: 10px;
 }
 
+.section-note {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 12px;
+  background: #f7fafc;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.section-note p {
+  margin: 0;
+  color: var(--muted);
+}
+
 .tabs {
   display: flex;
   gap: 8px;

@@ -6,8 +6,6 @@ const TOOL_NAME_BY_PATH = {
   '/food-menu-picker': 'food-menu-picker',
   '/lotto-random-generator': 'lotto-random-generator',
   '/text-counter': 'text-counter',
-  '/kana-trace': 'kana-trace',
-  '/travel-japanese': 'travel-japanese',
   '/image-format-converter': 'image-format-converter',
   '/date-anniversary-calculator': 'date-anniversary-calculator',
   '/team-splitter': 'team-splitter',
@@ -16,14 +14,23 @@ const TOOL_NAME_BY_PATH = {
   '/ip-checker': 'ip-checker'
 };
 
+const CONTENT_NAME_BY_PATH = {
+  '/kana-trace': 'kana-trace',
+  '/travel-japanese': 'travel-japanese'
+};
+
 function AnalyticsTracker() {
   const location = useLocation();
 
   useEffect(() => {
     trackPageView(location.pathname, location.search);
     const toolName = TOOL_NAME_BY_PATH[location.pathname];
+    const contentName = CONTENT_NAME_BY_PATH[location.pathname];
     if (toolName) {
       trackEvent('tool_open', { tool_name: toolName });
+    }
+    if (contentName) {
+      trackEvent('content_open', { content_name: contentName });
     }
   }, [location.pathname, location.search]);
 

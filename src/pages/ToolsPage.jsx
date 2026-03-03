@@ -11,6 +11,7 @@ function ToolsPage() {
           title: '내가 쓰려고 만든 도구',
           description:
             '내가 직접 쓰려고 만들었지만, 누구나 써보면 편리할 작은 도구들을 모았습니다. 필요할 때 자유롭게 사용하세요.',
+          notice: '이 페이지는 계산/생성/변환처럼 즉시 결과를 만드는 도구만 모아둡니다.',
           open: '열기',
           why: '만들게 된 계기'
         }
@@ -18,6 +19,7 @@ function ToolsPage() {
           kicker: 'Tools',
           title: 'Small tools that make decisions lighter.',
           description: 'A collection of tools you can use right away.',
+          notice: 'This page only includes utility tools for instant results like generate, convert, and calculate.',
           open: 'Open',
           why: 'Why I built this'
         };
@@ -29,6 +31,13 @@ function ToolsPage() {
           <p className="kicker">{copy.kicker}</p>
           <h1>{copy.title}</h1>
           <p>{copy.description}</p>
+        </div>
+      </section>
+      <section className="section">
+        <div className="container">
+          <div className="section-note">
+            <p>{copy.notice}</p>
+          </div>
         </div>
       </section>
       <section className="section">

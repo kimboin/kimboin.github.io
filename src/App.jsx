@@ -2,6 +2,7 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 import SiteLayout from './components/SiteLayout';
 import HomePage from './pages/HomePage';
 import ToolsPage from './pages/ToolsPage';
+import LearnPage from './pages/LearnPage';
 import ProductsPage from './pages/ProductsPage';
 import NowPage from './pages/NowPage';
 import BlogPage from './pages/BlogPage';
@@ -24,6 +25,8 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/tools" element={<ToolsPage />} />
+        <Route path="/learn" element={<LearnPage />} />
+        <Route path="/contents" element={<Navigate to="/learn" replace />} />
         <Route path="/sites" element={<ProductsPage />} />
         <Route path="/products" element={<Navigate to="/sites" replace />} />
         <Route path="/now" element={<NowPage />} />

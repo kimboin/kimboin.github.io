@@ -14,6 +14,7 @@ function SiteLayoutBody({ children }) {
           mainNav: '주요 메뉴',
           home: '홈',
           tools: '도구',
+          learn: '콘텐츠/학습',
           products: '사이트',
           now: '현재',
           blog: '블로그',
@@ -26,6 +27,7 @@ function SiteLayoutBody({ children }) {
           mainNav: 'Main navigation',
           home: 'Home',
           tools: 'Tools',
+          learn: 'Learn',
           products: 'Sites',
           now: 'Now',
           blog: 'Blog',
@@ -58,6 +60,7 @@ function SiteLayoutBody({ children }) {
           <nav className="desktop-nav" aria-label={copy.mainNav}>
             <NavLink to="/">{copy.home}</NavLink>
             <NavLink to="/tools">{copy.tools}</NavLink>
+            <NavLink to="/learn">{copy.learn}</NavLink>
             <NavLink to="/sites">{copy.products}</NavLink>
             <NavLink to="/blog">{copy.blog}</NavLink>
             <NavLink to="/now">{copy.now}</NavLink>
@@ -93,6 +96,9 @@ function SiteLayoutBody({ children }) {
             <NavLink to="/tools" onClick={() => setMenuOpen(false)}>
               {copy.tools}
             </NavLink>
+            <NavLink to="/learn" onClick={() => setMenuOpen(false)}>
+              {copy.learn}
+            </NavLink>
             <NavLink to="/sites" onClick={() => setMenuOpen(false)}>
               {copy.products}
             </NavLink>
@@ -125,6 +131,9 @@ function resolvePageTheme(pathname) {
     return 'home';
   }
   if (pathname.startsWith('/tools')) {
+    return 'tools';
+  }
+  if (pathname.startsWith('/learn') || pathname.startsWith('/contents')) {
     return 'tools';
   }
   if (pathname.startsWith('/sites') || pathname.startsWith('/products')) {

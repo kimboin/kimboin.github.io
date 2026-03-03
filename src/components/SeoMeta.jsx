@@ -16,6 +16,11 @@ const META_BY_ROUTE = [
     description: '일상에서 바로 사용할 수 있는 작은 도구들을 모아둔 페이지'
   },
   {
+    match: (path) => path === '/learn' || path === '/contents',
+    title: '콘텐츠/학습 | kimboin.github.io',
+    description: '반복 학습과 빠른 참고를 위한 콘텐츠를 모아둔 페이지'
+  },
+  {
     match: (path) => path === '/food-menu-picker',
     title: '오늘 뭐먹지? | Food Menu Picker',
     description: '기본 메뉴와 커스텀 메뉴에서 오늘의 메뉴를 랜덤으로 고르는 도구'
@@ -33,12 +38,12 @@ const META_BY_ROUTE = [
   {
     match: (path) => path === '/kana-trace',
     title: 'Kana Trace | 히라가나 가타카나 따라쓰기',
-    description: '마우스와 터치로 직접 쓰고 정확도를 채점하는 히라가나/가타카나 학습 도구'
+    description: '마우스와 터치로 직접 쓰고 정확도를 채점하는 히라가나/가타카나 학습 콘텐츠'
   },
   {
     match: (path) => path === '/travel-japanese',
     title: 'Travel Japanese | 여행 일본어',
-    description: '일본 여행에서 자주 쓰는 회화를 카테고리별로 빠르게 확인하는 페이지'
+    description: '일본 여행에서 자주 쓰는 회화를 상황별로 반복 학습하는 콘텐츠'
   },
   {
     match: (path) => path === '/travel-country-random',
