@@ -1189,6 +1189,37 @@ textarea:focus-visible {
   gap: 12px;
 }
 
+.ip-zone {
+  display: grid;
+  gap: 10px;
+}
+
+.ip-zone-head {
+  display: grid;
+  gap: 6px;
+}
+
+.ip-zone-head h2 {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.ip-zone-head p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.94rem;
+}
+
+.ip-zone-action .ip-zone-head {
+  border-left: 4px solid #2f855a;
+  padding-left: 10px;
+}
+
+.ip-zone-info .ip-zone-head {
+  border-left: 4px solid #2b6cb0;
+  padding-left: 10px;
+}
+
 .ip-checker-label {
   margin: 0;
   color: var(--muted);
@@ -1214,6 +1245,7 @@ textarea:focus-visible {
 .ip-guide-card {
   display: grid;
   gap: 10px;
+  background: #fbfdff;
 }
 
 .ip-guide-card h2,

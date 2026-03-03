@@ -9,6 +9,10 @@ const COPY = {
     kicker: 'IP CHECKER',
     title: '내 IP 확인',
     description: '현재 인터넷에서 보이는 공인 IP 주소를 빠르게 확인할 수 있습니다.',
+    actionZoneTitle: 'IP 조회 작업',
+    actionZoneDescription: '아래에서 IP를 조회하고 복사할 수 있습니다.',
+    infoZoneTitle: '설명 가이드',
+    infoZoneDescription: 'IP 주소 개념과 조회가 필요한 상황을 확인할 수 있습니다.',
     ipTitle: '공인 IP 주소',
     loading: '조회 중...',
     fetch: 'IP 조회',
@@ -36,6 +40,10 @@ const COPY = {
     kicker: 'IP CHECKER',
     title: 'IP Checker',
     description: 'Quickly check your current public IP address.',
+    actionZoneTitle: 'IP Action Area',
+    actionZoneDescription: 'Check and copy your IP from this section.',
+    infoZoneTitle: 'IP Guide',
+    infoZoneDescription: 'Read what an IP address is and when to check it.',
     ipTitle: 'Public IP Address',
     loading: 'Loading...',
     fetch: 'Check IP',
@@ -130,33 +138,45 @@ function IpCheckerPage() {
           <p>{copy.description}</p>
         </header>
 
-        <section className="card ip-checker-card" aria-live="polite">
-          <p className="ip-checker-label">{copy.ipTitle}</p>
-          <p className="ip-checker-value">{isLoading ? copy.loading : ip || '-'}</p>
-          {errorText ? <p className="converter-error">{errorText}</p> : null}
-          <p className="ip-checker-note">{copy.note}</p>
-          <div className="actions">
-            <button type="button" className="button primary" onClick={() => loadIp(false)} disabled={isLoading}>
-              {ip ? copy.refetch : copy.fetch}
-            </button>
-            <button type="button" className="button ghost" onClick={onCopy} disabled={!ip || isLoading}>
-              {copied ? copy.copied : copy.copy}
-            </button>
-          </div>
+        <section className="ip-zone ip-zone-action">
+          <header className="ip-zone-head">
+            <h2>{copy.actionZoneTitle}</h2>
+            <p>{copy.actionZoneDescription}</p>
+          </header>
+          <section className="card ip-checker-card" aria-live="polite">
+            <p className="ip-checker-label">{copy.ipTitle}</p>
+            <p className="ip-checker-value">{isLoading ? copy.loading : ip || '-'}</p>
+            {errorText ? <p className="converter-error">{errorText}</p> : null}
+            <p className="ip-checker-note">{copy.note}</p>
+            <div className="actions">
+              <button type="button" className="button primary" onClick={() => loadIp(false)} disabled={isLoading}>
+                {ip ? copy.refetch : copy.fetch}
+              </button>
+              <button type="button" className="button ghost" onClick={onCopy} disabled={!ip || isLoading}>
+                {copied ? copy.copied : copy.copy}
+              </button>
+            </div>
+          </section>
         </section>
 
-        <section className="card ip-guide-card">
-          <h2>{copy.guideTitle}</h2>
-          <h3>{copy.whatIsIpTitle}</h3>
-          <p>{copy.whatIsIpBody}</p>
-          <h3>{copy.whenToUseTitle}</h3>
-          <ul className="list">
-            {copy.whenToUseItems.map((item) => (
-              <li key={item}>{item}</li>
-            ))}
-          </ul>
-          <h3>{copy.cautionTitle}</h3>
-          <p>{copy.cautionBody}</p>
+        <section className="ip-zone ip-zone-info">
+          <header className="ip-zone-head">
+            <h2>{copy.infoZoneTitle}</h2>
+            <p>{copy.infoZoneDescription}</p>
+          </header>
+          <section className="card ip-guide-card">
+            <h3>{copy.guideTitle}</h3>
+            <h3>{copy.whatIsIpTitle}</h3>
+            <p>{copy.whatIsIpBody}</p>
+            <h3>{copy.whenToUseTitle}</h3>
+            <ul className="list">
+              {copy.whenToUseItems.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
+            <h3>{copy.cautionTitle}</h3>
+            <p>{copy.cautionBody}</p>
+          </section>
         </section>
       </div>
     </section>
