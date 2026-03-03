@@ -7,6 +7,7 @@ const PASS_SCORE = 60;
 const AUTO_NEXT_DELAY_MS = 650;
 const PEN_WIDTH = 17;
 const STROKE_ANIM_MS = 1100;
+const LATEST_UPDATE_DATE = '2026-03-03';
 const ANIMCJK_BASES = [
   'https://cdn.jsdelivr.net/gh/parsimonhi/animCJK@master',
   'https://raw.githubusercontent.com/parsimonhi/animCJK/master'
@@ -432,13 +433,11 @@ function KanaTracePage() {
           </div>
         </section>
 
-        <section className="card kana-tips" aria-label="학습 팁">
-          <h2>팁</h2>
+        <section className="card kana-updates" aria-label="업데이트 사항">
+          <h2>업데이트 사항</h2>
           <ul>
-            <li>가이드가 보이면 위에 맞춰 천천히 따라 써보세요.</li>
-            <li>획순 가이드는 AnimCJK 데이터 기반으로 표시됩니다.</li>
-            <li>획수가 많을수록 점수가 낮아질 수 있어요. 불필요한 선은 지우개로 정리하세요.</li>
-            <li>랜덤 모드로 반복하면 약한 글자를 빠르게 복습할 수 있습니다.</li>
+            <li>{LATEST_UPDATE_DATE}: 모바일에서 채점 시 0점으로 나오는 좌표 스케일 오류를 수정했습니다.</li>
+            <li>{LATEST_UPDATE_DATE}: 입력칸 위에 발음과 전체 지우기 아이콘을 배치해 모바일 사용성을 개선했습니다.</li>
           </ul>
         </section>
       </div>

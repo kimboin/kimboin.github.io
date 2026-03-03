@@ -1434,7 +1434,7 @@ textarea:focus-visible {
   font-weight: 600;
 }
 
-.kana-tips ul {
+.kana-updates ul {
   margin: 0;
   padding-left: 18px;
   color: var(--muted);
