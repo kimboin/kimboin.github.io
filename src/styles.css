@@ -1109,6 +1109,183 @@ textarea:focus-visible {
   font-weight: 700;
 }
 
+.gift-picker-card {
+  display: grid;
+  gap: 12px;
+}
+
+.gift-add-card {
+  display: grid;
+  gap: 12px;
+}
+
+.gift-add-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.gift-add-head h2 {
+  margin: 0;
+}
+
+.gift-input-row {
+  display: flex;
+  gap: 8px;
+}
+
+.gift-input-row input {
+  flex: 1;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 12px;
+  font-size: 0.95rem;
+}
+
+.gift-picker-helper {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+.gift-filter-wrap {
+  display: grid;
+  gap: 8px;
+}
+
+.gift-filter-wrap p {
+  margin: 0;
+  font-weight: 700;
+}
+
+.gift-filter-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.gift-filter-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.gift-filter-all {
+  padding-right: 4px;
+  margin-right: 2px;
+  border-right: 1px solid var(--border);
+}
+
+.gift-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 8px;
+}
+
+.gift-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: #fff;
+  padding: 10px 12px;
+}
+
+.gift-item-main {
+  display: grid;
+  gap: 6px;
+}
+
+.gift-item-main strong {
+  font-size: 1.14rem;
+  font-weight: 700;
+  color: #111111;
+}
+
+.gift-tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.gift-tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 8px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  font-size: 0.72rem;
+  font-weight: 500;
+}
+
+.tag-birthday {
+  background: #ffe8ef;
+  border-color: #f6c6d6;
+  color: #9c2f56;
+}
+
+.tag-anniversary {
+  background: #efe9ff;
+  border-color: #d4c8ff;
+  color: #5630a7;
+}
+
+.tag-housewarming {
+  background: #e8f5ff;
+  border-color: #c5e4fb;
+  color: #245f95;
+}
+
+.tag-practical {
+  background: #edf8ea;
+  border-color: #cde6c4;
+  color: #2d6f30;
+}
+
+.tag-handmade {
+  background: #fff3e2;
+  border-color: #f0d7b2;
+  color: #8b5a19;
+}
+
+.tag-custom {
+  background: #eef1f5;
+  border-color: #d4dbe5;
+  color: #445569;
+}
+
+.gift-result-card {
+  display: grid;
+  gap: 8px;
+}
+
+.gift-result-card h2 {
+  margin: 0 0 8px;
+  font-size: 1.28rem;
+  font-weight: 800;
+  color: #111111;
+}
+
+.gift-result-card .gift-picked-value {
+  margin: 0 0 4px;
+  font-weight: 700;
+  font-size: 1.45rem;
+  color: #111111;
+}
+
+.gift-result-card .gift-tag-list {
+  margin: 0 0 10px;
+}
+
+.gift-result-card .actions.single {
+  margin-top: 6px;
+}
+
 .team-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1522,6 +1699,14 @@ textarea:focus-visible {
   .score-card {
     flex-direction: column;
     align-items: flex-start;
+  }
+
+  .gift-input-row {
+    flex-wrap: wrap;
+  }
+
+  .gift-input-row .button {
+    width: 100%;
   }
 }
 

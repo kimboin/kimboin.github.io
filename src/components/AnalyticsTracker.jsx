@@ -3,6 +3,7 @@ import { useLocation } from 'react-router-dom';
 import { trackEvent, trackPageView } from '../lib/analytics';
 
 const TOOL_NAME_BY_PATH = {
+  '/birthday-gift-picker': 'birthday-gift-picker',
   '/food-menu-picker': 'food-menu-picker',
   '/lotto-random-generator': 'lotto-random-generator',
   '/text-counter': 'text-counter',

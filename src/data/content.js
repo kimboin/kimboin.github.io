@@ -1,5 +1,17 @@
 export const tools = [
   {
+    slug: 'birthday-gift-picker',
+    name: 'Birthday Gift Picker',
+    nameKo: '생일선물 추천기',
+    oneLiner: '생일선물 목록에서 랜덤으로 1개를 추천하는 도구',
+    oneLinerEn: 'Pick one random birthday gift from a prepared or custom list.',
+    why: '선물 고를 때마다 후보가 많아 결정이 늦어져서, 빠르게 하나를 추천해주는 도구를 만들었습니다.',
+    whyEn: 'I built this to quickly decide on a gift when too many options slow me down.',
+    how: ['기본 선물 목록을 확인합니다.', '원하면 선물을 직접 추가합니다.', '랜덤 추천 버튼으로 1개를 바로 선택합니다.'],
+    learned: '결정형 도구는 입력 단계와 결과 확인 단계를 한 화면에 둘 때 사용성이 좋아졌습니다.',
+    openUrl: '/birthday-gift-picker/'
+  },
+  {
     slug: 'team-splitter',
     name: 'Team Splitter',
     nameKo: '랜덤 팀 나누기',

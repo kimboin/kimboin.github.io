@@ -18,6 +18,7 @@ import TravelCountryRandomPage from './pages/TravelCountryRandomPage';
 import LunarSolarConverterPage from './pages/LunarSolarConverterPage';
 import IpCheckerPage from './pages/IpCheckerPage';
 import WinnerPickerPage from './pages/WinnerPickerPage';
+import BirthdayGiftPickerPage from './pages/BirthdayGiftPickerPage';
 
 function App() {
   return (
@@ -43,6 +44,7 @@ function App() {
         <Route path="/lunar-solar-converter" element={<LunarSolarConverterPage />} />
         <Route path="/ip-checker" element={<IpCheckerPage />} />
         <Route path="/winner-picker" element={<WinnerPickerPage />} />
+        <Route path="/birthday-gift-picker" element={<BirthdayGiftPickerPage />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </SiteLayout>

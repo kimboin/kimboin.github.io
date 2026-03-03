@@ -27,7 +27,7 @@ Vite + React 기반의 GitHub Pages 사이트입니다.
 
 - GA4 측정 ID: `G-JFR7XD4BCV`
 - 페이지뷰: React 라우팅 변경 시 자동 전송
-- 도구 이벤트: `food-menu-picker`, `lotto-random-generator`, `team-splitter`, `travel-country-random`, `lunar-solar-converter`에서 주요 액션 전송
+- 도구 이벤트: `birthday-gift-picker`, `food-menu-picker`, `lotto-random-generator`, `team-splitter`, `travel-country-random`, `lunar-solar-converter`에서 주요 액션 전송
 - 콘텐츠 이벤트: `kana-trace`, `travel-japanese` 진입 시 `content_open` 이벤트 전송
 - 상세 이벤트 문서: `docs/analytics.md`
 

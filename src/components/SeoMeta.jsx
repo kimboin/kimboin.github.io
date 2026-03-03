@@ -21,6 +21,11 @@ const META_BY_ROUTE = [
     description: '반복 학습과 빠른 참고를 위한 콘텐츠를 모아둔 페이지'
   },
   {
+    match: (path) => path === '/birthday-gift-picker',
+    title: '생일선물 추천기 | Birthday Gift Picker',
+    description: '기본 목록과 직접 추가한 목록에서 생일선물을 랜덤으로 1개 추천하는 도구'
+  },
+  {
     match: (path) => path === '/food-menu-picker',
     title: '오늘 뭐먹지? | Food Menu Picker',
     description: '기본 메뉴와 커스텀 메뉴에서 오늘의 메뉴를 랜덤으로 고르는 도구'
