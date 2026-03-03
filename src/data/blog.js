@@ -299,7 +299,7 @@ export const blogPosts = [
     titleKo: '왕과 사는 남자 (영화/공식 예고편)',
     titleEn: 'The Man Living with the King (Film/Official Trailer)',
     excerptKo:
-      '영화 왕과 사는 남자 공식 예고편 유튜브 링크를 기록합니다. 유해진, 박지훈, 유지태, 전미도 출연. 유해진의 연기로 멱살 잡고 끌고 가는 스토리였고, 다른 배우들의 연기도 물론 좋았다. 다만 스토리가 생각보다 단조로운 느낌이라 아쉬웠다.',
+      '영화 왕과 사는 남자 공식 예고편 유튜브 링크를 기록합니다. 유해진, 박지훈, 유지태, 전미도 출연.',
     excerptEn: 'A log entry for the official YouTube trailer of The Man Living with the King.',
     contentKo: [
       '시청 기록: 2026년 03월',
