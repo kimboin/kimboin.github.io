@@ -518,6 +518,38 @@ textarea:focus-visible {
   font-size: 0.88rem;
 }
 
+.privacy-layout {
+  max-width: 900px;
+}
+
+.privacy-card {
+  display: grid;
+  gap: 22px;
+}
+
+.privacy-section {
+  display: grid;
+  gap: 8px;
+}
+
+.privacy-section h2 {
+  margin: 0;
+}
+
+.privacy-section .list {
+  margin: 0;
+}
+
+.privacy-date {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.contact-card h2 {
+  margin: 0 0 8px;
+}
+
 .badge {
   display: inline-flex;
   align-items: center;
@@ -568,6 +600,22 @@ textarea:focus-visible {
 
 .footer-inner a {
   color: #e9edf4;
+}
+
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 14px;
+}
+
+.footer-links a {
+  color: #e9edf4;
+}
+
+.footer-links a:hover {
+  color: #ffffff;
+  text-decoration: underline;
 }
 
 .tool-layout {
@@ -1072,6 +1120,20 @@ textarea:focus-visible {
   margin: 0;
   color: var(--muted);
   font-size: 0.9rem;
+}
+
+.ip-guide-card {
+  display: grid;
+  gap: 10px;
+}
+
+.ip-guide-card h2,
+.ip-guide-card h3 {
+  margin: 0;
+}
+
+.ip-guide-card p {
+  margin: 0;
 }
 
 .anniversary-input-card {

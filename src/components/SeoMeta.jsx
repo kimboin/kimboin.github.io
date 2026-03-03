@@ -94,6 +94,21 @@ const META_BY_ROUTE = [
     match: (path) => path === '/blog',
     title: 'Blog | kimboin.github.io',
     description: 'OTT, 유튜브, 방송에서 본 콘텐츠를 기록해두는 페이지'
+  },
+  {
+    match: (path) => path === '/about',
+    title: 'About | kimboin.github.io',
+    description: 'kimboin.github.io의 운영 목적과 소개를 확인할 수 있는 페이지'
+  },
+  {
+    match: (path) => path === '/privacy',
+    title: 'Privacy Policy | kimboin.github.io',
+    description: 'kimboin.github.io의 개인정보 처리 및 광고/분석 도구 사용 기준 안내'
+  },
+  {
+    match: (path) => path === '/contact',
+    title: 'Contact | kimboin.github.io',
+    description: 'kimboin.github.io 문의 및 협업 연락처 안내 페이지'
   }
 ];
 
