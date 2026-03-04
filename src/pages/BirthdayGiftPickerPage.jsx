@@ -56,8 +56,18 @@ const DEFAULT_BIRTHDAY_GIFTS = [
   { name: '수저 세트', tags: [GIFT_TAGS.housewarming, GIFT_TAGS.practical] },
   { name: '한우 선물 세트', tags: [GIFT_TAGS.housewarming, GIFT_TAGS.anniversary] },
   { name: '과일 바구니', tags: [GIFT_TAGS.housewarming, GIFT_TAGS.anniversary] },
+  { name: '프리미엄 차 세트', tags: [GIFT_TAGS.birthday, GIFT_TAGS.anniversary] },
+  { name: '드립백 커피 세트', tags: [GIFT_TAGS.birthday, GIFT_TAGS.housewarming] },
   { name: '니트/맨투맨', tags: [GIFT_TAGS.birthday, GIFT_TAGS.practical] },
-  { name: '운동화', tags: [GIFT_TAGS.birthday, GIFT_TAGS.practical] }
+  { name: '운동화', tags: [GIFT_TAGS.birthday, GIFT_TAGS.practical] },
+  { name: '쿠키 선물 박스', tags: [GIFT_TAGS.birthday, GIFT_TAGS.anniversary] },
+  { name: '아이스크림 케이크', tags: [GIFT_TAGS.birthday, GIFT_TAGS.anniversary] },
+  { name: '수제 과자 세트', tags: [GIFT_TAGS.birthday, GIFT_TAGS.housewarming] },
+  { name: '수제 초콜릿 박스', tags: [GIFT_TAGS.birthday, GIFT_TAGS.anniversary] },
+  { name: '베이커리 빵 세트', tags: [GIFT_TAGS.birthday, GIFT_TAGS.housewarming] },
+  { name: '마카롱 세트', tags: [GIFT_TAGS.birthday, GIFT_TAGS.anniversary] },
+  { name: '종합 영양제 세트', tags: [GIFT_TAGS.birthday, GIFT_TAGS.practical] },
+  { name: '비타민 구미 세트', tags: [GIFT_TAGS.birthday, GIFT_TAGS.practical] }
 ];
 const TAG_ORDER = [
   GIFT_TAGS.birthday,
