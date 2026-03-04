@@ -5,6 +5,8 @@ import { trackEvent } from '../lib/analytics';
 const CANVAS_SIZE = 300;
 const PASS_SCORE = 60;
 const AUTO_NEXT_DELAY_MS = 650;
+const SCORE_TOAST_MS = 2200;
+const SHARE_FEEDBACK_MS = 2200;
 const PEN_WIDTH = 17;
 const STROKE_ANIM_MS = 1100;
 const LATEST_UPDATE_DATE = '2026-03-03';
@@ -32,9 +34,12 @@ function KanaTracePage() {
   const [script, setScript] = useState('hiragana');
   const [includeExtended, setIncludeExtended] = useState(true);
   const [index, setIndex] = useState(0);
-  const [randomIndex, setRandomIndex] = useState(0);
+  const [randomHistory, setRandomHistory] = useState([0]);
+  const [randomHistoryCursor, setRandomHistoryCursor] = useState(0);
   const [score, setScore] = useState(null);
   const [passed, setPassed] = useState(null);
+  const [scoreToast, setScoreToast] = useState(null);
+  const [shareFeedback, setShareFeedback] = useState('');
   const [autoNextPending, setAutoNextPending] = useState(false);
   const [guideOn, setGuideOn] = useState(false);
   const [strokeGuideOn, setStrokeGuideOn] = useState(false);
@@ -48,27 +53,26 @@ function KanaTracePage() {
   const templateCacheRef = useRef(new Map());
   const templateStrokeCacheRef = useRef(new Map());
   const autoNextTimeoutRef = useRef(null);
+  const scoreToastTimeoutRef = useRef(null);
+  const shareFeedbackTimeoutRef = useRef(null);
   const strokesRef = useRef([]);
   const currentStrokeRef = useRef(null);
 
   const kanaList = useMemo(() => getKanaList(script, includeExtended), [script, includeExtended]);
-  const currentIndex = mode === 'random' ? randomIndex : index;
+  const randomCurrentIndex = randomHistory[randomHistoryCursor] ?? 0;
+  const currentIndex = mode === 'random' ? randomCurrentIndex : index;
   const currentKana = kanaList[currentIndex];
   const progressText = `${currentIndex + 1} / ${kanaList.length}`;
 
   useEffect(() => {
+    const initialRandomIndex = getRandomIndex(kanaList.length, -1);
     setIndex(0);
-    setRandomIndex(0);
+    setRandomHistory([initialRandomIndex]);
+    setRandomHistoryCursor(0);
     setScore(null);
     setPassed(null);
     clearCanvas();
-  }, [script, mode, includeExtended]);
-
-  useEffect(() => {
-    if (mode === 'random') {
-      setRandomIndex((prev) => getRandomIndex(kanaList.length, prev));
-    }
-  }, [mode, kanaList.length]);
+  }, [script, mode, includeExtended, kanaList.length]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -105,9 +109,25 @@ function KanaTracePage() {
       if (autoNextTimeoutRef.current) {
         clearTimeout(autoNextTimeoutRef.current);
       }
+      if (scoreToastTimeoutRef.current) {
+        clearTimeout(scoreToastTimeoutRef.current);
+      }
+      if (shareFeedbackTimeoutRef.current) {
+        clearTimeout(shareFeedbackTimeoutRef.current);
+      }
     },
     []
   );
+
+  function showShareFeedback(message) {
+    if (shareFeedbackTimeoutRef.current) {
+      clearTimeout(shareFeedbackTimeoutRef.current);
+    }
+    setShareFeedback(message);
+    shareFeedbackTimeoutRef.current = window.setTimeout(() => {
+      setShareFeedback('');
+    }, SHARE_FEEDBACK_MS);
+  }
 
   function clearCanvas() {
     const canvas = canvasRef.current;
@@ -205,14 +225,42 @@ function KanaTracePage() {
     setScript(nextScript);
   }
 
-  function nextCharacter() {
+  function resetRound() {
+    if (autoNextTimeoutRef.current) {
+      clearTimeout(autoNextTimeoutRef.current);
+    }
+    if (scoreToastTimeoutRef.current) {
+      clearTimeout(scoreToastTimeoutRef.current);
+    }
     setScore(null);
     setPassed(null);
+    setScoreToast(null);
     setAutoNextPending(false);
     clearCanvas();
+  }
+
+  function previousCharacter() {
+    resetRound();
 
     if (mode === 'random') {
-      setRandomIndex((prev) => getRandomIndex(kanaList.length, prev));
+      if (randomHistoryCursor === 0) {
+        return;
+      }
+      setRandomHistoryCursor((prev) => prev - 1);
+      return;
+    }
+
+    setIndex((prev) => (prev - 1 + kanaList.length) % kanaList.length);
+  }
+
+  function nextCharacter() {
+    resetRound();
+
+    if (mode === 'random') {
+      const currentRandom = randomHistory[randomHistoryCursor] ?? 0;
+      const nextRandom = getRandomIndex(kanaList.length, currentRandom);
+      setRandomHistory((prev) => [...prev.slice(0, randomHistoryCursor + 1), nextRandom]);
+      setRandomHistoryCursor((prev) => prev + 1);
       return;
     }
 
@@ -247,6 +295,20 @@ function KanaTracePage() {
     const didPass = scoreValue >= PASS_SCORE;
     setPassed(didPass);
     setAutoNextPending(didPass);
+    setScoreToast({
+      score: scoreValue,
+      passed: didPass,
+      char: currentKana.char,
+      romaji: currentKana.romaji,
+      autoNextPending: didPass
+    });
+
+    if (scoreToastTimeoutRef.current) {
+      clearTimeout(scoreToastTimeoutRef.current);
+    }
+    scoreToastTimeoutRef.current = window.setTimeout(() => {
+      setScoreToast(null);
+    }, SCORE_TOAST_MS);
 
     trackEvent('tool_generate', {
       tool_name: 'kana-trace',
@@ -273,11 +335,64 @@ function KanaTracePage() {
     setStrokePlayId((prev) => prev + 1);
   }
 
+  async function onCopyLink() {
+    if (!navigator?.clipboard?.writeText) {
+      showShareFeedback('복사를 지원하지 않는 환경입니다.');
+      return;
+    }
+    try {
+      await navigator.clipboard.writeText(window.location.href);
+      showShareFeedback('링크를 복사했어요.');
+      trackEvent('tool_copy', { tool_name: 'kana-trace', target: 'page_url' });
+    } catch (error) {
+      showShareFeedback('복사에 실패했어요. 주소창에서 직접 복사해주세요.');
+    }
+  }
+
+  async function onShareLink() {
+    const shareData = {
+      title: '히라가나 가타카나 따라쓰기',
+      text: '히라가나/가타카나를 직접 쓰고 정확도를 채점해보세요.',
+      url: window.location.href
+    };
+
+    if (navigator?.share) {
+      try {
+        await navigator.share(shareData);
+        showShareFeedback('공유 창을 열었어요.');
+        trackEvent('tool_share', { tool_name: 'kana-trace' });
+      } catch (error) {
+        if (error?.name !== 'AbortError') {
+          showShareFeedback('공유에 실패했어요. 링크 복사를 사용해보세요.');
+        }
+      }
+      return;
+    }
+
+    await onCopyLink();
+  }
+
   const guideStyle = guideOn
     ? {
         backgroundImage: `url("${buildGuideBackground(currentKana?.char || '', CANVAS_SIZE)}")`
       }
     : undefined;
+  const scoreToastMarkup = scoreToast ? (
+    <div className={`score-toast ${scoreToast.passed ? 'pass' : 'fail'}`}>
+      <p className="score-value">{scoreToast.score}점</p>
+      <p className="score-meta">
+        {scoreToast.passed
+          ? `합격 (기준 ${PASS_SCORE}점)`
+          : '조금 더 연습해볼까요?'}
+      </p>
+      <p className="score-answer">
+        정답: {scoreToast.char} ({scoreToast.romaji})
+      </p>
+      {scoreToast.autoNextPending ? (
+        <p className="score-next">다음 글자로 이동 중...</p>
+      ) : null}
+    </div>
+  ) : null;
 
   return (
     <section className="section">
@@ -286,6 +401,15 @@ function KanaTracePage() {
           <p className="kicker">KANA TRACE</p>
           <h1>히라가나 &amp; 가타카나 따라쓰기</h1>
           <p>마우스/터치로 직접 쓰고, 실제 획순 SVG 템플릿과 비교해 정확도를 채점합니다.</p>
+          <div className="kana-share-actions">
+            <button type="button" className="button ghost" onClick={onCopyLink}>
+              링크 복사
+            </button>
+            <button type="button" className="button ghost" onClick={onShareLink}>
+              공유하기
+            </button>
+          </div>
+          {shareFeedback ? <p className="kana-share-feedback">{shareFeedback}</p> : null}
         </header>
 
         <section className="card kana-controls" aria-label="학습 설정">
@@ -331,6 +455,21 @@ function KanaTracePage() {
             />
             확장(탁음/반탁음/요음) 포함
           </label>
+        </section>
+
+        <section className="card kana-info" aria-label="가나 설명">
+          <h2>히라가나와 가타카나가 뭐예요?</h2>
+          <p>
+            히라가나는 일본어의 기본 음절 문자로 조사, 어미, 일본 고유어 표기에 널리 쓰입니다. 가타카나는
+            외래어, 의성어/의태어, 강조 표현, 브랜드명 표기에 자주 사용됩니다.
+          </p>
+          <h3>어떤 경우에 필요할까요?</h3>
+          <ul>
+            <li>일본어 입문 단계에서 읽기/쓰기 기초를 빠르게 잡을 때</li>
+            <li>일본 여행 시 메뉴판, 표지판, 역명 등을 읽어야 할 때</li>
+            <li>애니메이션/게임/노래 가사를 원문으로 이해하고 싶을 때</li>
+            <li>JLPT 같은 일본어 시험 준비에서 기초 문해력을 강화할 때</li>
+          </ul>
         </section>
 
         <section className="kana-stage">
@@ -405,30 +544,31 @@ function KanaTracePage() {
                     playId={strokePlayId}
                   />
                 ) : null}
+                <div className="kana-score kana-score-mobile" aria-live="polite">
+                  {scoreToastMarkup}
+                </div>
               </div>
             </div>
-            <div className="actions">
-              <button type="button" className="button primary" onClick={onScore}>
+            <div className="actions kana-actions">
+              <button type="button" className="button primary kana-score-button" onClick={onScore}>
                 채점하기
               </button>
-              <button type="button" className="button" onClick={nextCharacter}>
-                다음 글자
-              </button>
+              <div className="kana-nav-actions">
+                <button
+                  type="button"
+                  className="button"
+                  onClick={previousCharacter}
+                  disabled={mode === 'random' && randomHistoryCursor === 0}
+                >
+                  이전 글자
+                </button>
+                <button type="button" className="button" onClick={nextCharacter}>
+                  다음 글자
+                </button>
+              </div>
             </div>
-            <div className="kana-score" aria-live="polite">
-              {score === null ? (
-                <p>채점하면 정확도 점수를 확인할 수 있습니다.</p>
-              ) : (
-                <div className={`score-card ${passed ? 'pass' : 'fail'}`}>
-                  <p className="score-value">{score}점</p>
-                  <p className="score-meta">
-                    {passed
-                      ? `합격 (기준 ${PASS_SCORE}점)`
-                      : '조금 더 연습해볼까요?'}
-                  </p>
-                  {autoNextPending ? <p className="score-next">다음 글자로 이동 중...</p> : null}
-                </div>
-              )}
+            <div className="kana-score kana-score-desktop" aria-live="polite">
+              {scoreToastMarkup}
             </div>
           </div>
         </section>
