@@ -18,6 +18,14 @@ const COPY = {
     empty: '날짜를 선택하면 결과가 표시됩니다.',
     basePrefix: '기준일',
     dayLabel: (value) => `${value}일`,
+    guideTitle: '계산 방식 안내',
+    guideBody: '이 도구는 기준일에 선택한 일수를 더한 날짜를 계산합니다. (예: 기준일 + 100일)',
+    tipTitle: '사용 팁',
+    tips: [
+      '기념일 알림 등록 전, 계산 결과를 캘린더와 함께 한 번 더 확인하세요.',
+      '여러 기준일을 비교할 때는 오늘 버튼으로 빠르게 현재 날짜를 입력할 수 있습니다.',
+      '시차 영향을 줄이기 위해 계산은 UTC 기준으로 처리됩니다.'
+    ]
   },
   en: {
     kicker: 'DATE CALCULATOR',
@@ -32,6 +40,14 @@ const COPY = {
     empty: 'Select a date to see anniversary milestones.',
     basePrefix: 'Base date',
     dayLabel: (value) => `Day ${value}`,
+    guideTitle: 'How calculation works',
+    guideBody: 'This tool adds selected day milestones to the base date. (Example: base date + 100 days)',
+    tipTitle: 'Tips',
+    tips: [
+      'Before setting reminders, verify results with your calendar once.',
+      'Use the Today button for quick baseline comparisons.',
+      'Calculations are handled in UTC to reduce timezone inconsistencies.'
+    ]
   }
 };
 
@@ -96,7 +112,7 @@ function formatDisplayDate(date, language) {
 function DateAnniversaryCalculatorPage() {
   const { language } = useLanguage();
   const copy = COPY[language] || COPY.ko;
-  const [dateInput, setDateInput] = useState('');
+  const [dateInput, setDateInput] = useState(() => formatDateInput(new Date()));
 
   const baseDate = useMemo(() => parseDateInput(dateInput), [dateInput]);
 
@@ -186,6 +202,17 @@ function DateAnniversaryCalculatorPage() {
           ) : (
             <p>{copy.empty}</p>
           )}
+        </section>
+
+        <section className="card">
+          <h2>{copy.guideTitle}</h2>
+          <p>{copy.guideBody}</p>
+          <h3>{copy.tipTitle}</h3>
+          <ul className="list">
+            {copy.tips.map((item) => (
+              <li key={item}>{item}</li>
+            ))}
+          </ul>
         </section>
       </div>
     </section>

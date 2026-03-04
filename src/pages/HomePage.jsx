@@ -59,19 +59,10 @@ function HomePage() {
           <p className="kicker">{copy.toolsKicker}</p>
           <div className="grid two">
             {tools.map((tool) => (
-              <article className="card home-tool-card" key={tool.slug}>
-                <div className="home-tool-head">
-                  <h3>{language === 'ko' ? tool.nameKo || tool.name : tool.name}</h3>
-                  <Link
-                    className="button primary home-tool-open-btn"
-                    to={tool.openUrl}
-                    aria-label={`${language === 'ko' ? tool.nameKo || tool.name : tool.name} ${copy.openAria}`}
-                  >
-                    {copy.openLabel}
-                  </Link>
-                </div>
+              <Link className="card home-tool-card home-tool-link" key={tool.slug} to={tool.openUrl}>
+                <h3>{language === 'ko' ? tool.nameKo || tool.name : tool.name}</h3>
                 <p>{language === 'ko' ? tool.oneLiner : tool.oneLinerEn || tool.oneLiner}</p>
-              </article>
+              </Link>
             ))}
           </div>
         </div>

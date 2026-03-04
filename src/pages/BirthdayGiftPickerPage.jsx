@@ -156,7 +156,7 @@ function BirthdayGiftPickerPage() {
   const [pickedGift, setPickedGift] = useState(null);
   const [errorText, setErrorText] = useState('');
   const [isPicking, setIsPicking] = useState(false);
-  const [isAddBoxOpen, setIsAddBoxOpen] = useState(true);
+  const [isAddBoxOpen, setIsAddBoxOpen] = useState(false);
   const [selectedTags, setSelectedTags] = useState(() => ({
     [GIFT_TAGS.birthday]: true,
     [GIFT_TAGS.anniversary]: true,
@@ -323,7 +323,6 @@ function BirthdayGiftPickerPage() {
 
         <section className="card gift-add-card">
           <div className="gift-add-head">
-            <h2>{copy.addBoxTitle}</h2>
             <button
               type="button"
               className="button ghost"

@@ -35,6 +35,10 @@ Vite + React 기반의 GitHub Pages 사이트입니다.
 
 - `index.html`에 기본 SEO/OG/Twitter 메타 태그를 설정했습니다.
 - 라우트별 메타(title/description/canonical/og:url)는 `src/components/SeoMeta.jsx`에서 동적으로 갱신됩니다.
+- AdSense 및 사용자 신뢰를 위한 기본 정책 페이지
+  - `/about`
+  - `/privacy`
+  - `/contact` (문의: `iam.boinkim@gmail.com`)
 - 검색엔진 인덱싱 보조 파일
   - `public/robots.txt`
   - `public/sitemap.xml`

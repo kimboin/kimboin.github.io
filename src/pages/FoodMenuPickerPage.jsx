@@ -12,7 +12,7 @@ import { trackEvent } from '../lib/analytics';
 import { useLanguage } from '../lib/language';
 import ToolListBackLink from '../components/ToolListBackLink';
 
-const SPIN_DURATION_MS = 3000;
+const SPIN_DURATION_MS = 1000;
 const SPIN_INTERVAL_MS = 100;
 
 function FoodMenuPickerPage() {
@@ -20,7 +20,7 @@ function FoodMenuPickerPage() {
   const copy =
     language === 'ko'
       ? {
-          initCountdown: '버튼을 누르면 3초 카운트가 시작됩니다.',
+          initCountdown: '버튼을 누르면 1초 카운트가 시작됩니다.',
           initTitle: '랜덤 돌리기를 눌러보세요.',
           initMeta: '현재 탭의 메뉴 목록에서 랜덤으로 하나를 뽑습니다.',
           basicMode: '기본 모드',
@@ -31,7 +31,7 @@ function FoodMenuPickerPage() {
           saveCustomFirst: '커스텀 메뉴를 먼저 저장해 주세요.',
           remain: (sec) => `남은 ${sec}초`,
           selecting: '랜덤 선택 중...',
-          confirmAfter3: '3초 뒤에 메뉴가 확정됩니다.',
+          confirmAfter3: '1초 뒤에 메뉴가 확정됩니다.',
           spinning: (tab) => `${tab === 'basic' ? '기본' : '커스텀'} 목록 회전 중...`,
           confirmed: (tab) => `오늘의 메뉴 확정 (${tab === 'basic' ? '기본' : '커스텀'})`,
           resultDone: '결과가 확정되었습니다.',
@@ -72,7 +72,7 @@ function FoodMenuPickerPage() {
           delete: '삭제'
         }
       : {
-          initCountdown: 'Press the button to start the 3-second countdown.',
+          initCountdown: 'Press the button to start the 1-second countdown.',
           initTitle: 'Press spin to start.',
           initMeta: 'Randomly picks one item from the current tab menu list.',
           basicMode: 'Basic Mode',
@@ -83,7 +83,7 @@ function FoodMenuPickerPage() {
           saveCustomFirst: 'Please save custom menu items first.',
           remain: (sec) => `${sec}s left`,
           selecting: 'Picking randomly...',
-          confirmAfter3: 'The menu will be finalized in 3 seconds.',
+          confirmAfter3: 'The menu will be finalized in 1 second.',
           spinning: (tab) => `Spinning ${tab === 'basic' ? 'basic' : 'custom'} list...`,
           confirmed: (tab) => `Today menu fixed (${tab === 'basic' ? 'basic' : 'custom'})`,
           resultDone: 'Selection completed.',

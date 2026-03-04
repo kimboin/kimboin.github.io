@@ -18,6 +18,11 @@ function SiteLayoutBody({ children }) {
           products: '사이트',
           now: '현재',
           blog: '블로그',
+          about: '소개',
+          privacy: '개인정보처리방침',
+          contact: '문의',
+          footerNav: '푸터 링크',
+          copyright: '© 2026 kimboin. All rights reserved.',
           languageSwitch: '언어 변경: 영어로 전환',
           mobileMenuOpen: '모바일 메뉴 열기',
           mobileNav: '모바일 메뉴',
@@ -31,6 +36,11 @@ function SiteLayoutBody({ children }) {
           products: 'Sites',
           now: 'Now',
           blog: 'Blog',
+          about: 'About',
+          privacy: 'Privacy Policy',
+          contact: 'Contact',
+          footerNav: 'Footer links',
+          copyright: '© 2026 kimboin. All rights reserved.',
           languageSwitch: 'Language switch: change to Korean',
           mobileMenuOpen: 'Open mobile menu',
           mobileNav: 'Mobile navigation',
@@ -47,6 +57,10 @@ function SiteLayoutBody({ children }) {
     document.addEventListener('keydown', onKeyDown);
     return () => document.removeEventListener('keydown', onKeyDown);
   }, []);
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+  }, [location.pathname]);
 
   return (
     <div className="site-shell">
@@ -114,12 +128,12 @@ function SiteLayoutBody({ children }) {
       <main className={`page-view page-${resolvePageTheme(location.pathname)}`}>{children}</main>
       <footer className="site-footer">
         <div className="container footer-inner">
-          <small>© 2026 kimboin. All rights reserved.</small>
-          <small>
-            <a href="https://github.com/kimboin" target="_blank" rel="noreferrer">
-              GitHub
-            </a>
-          </small>
+          <small>{copy.copyright}</small>
+          <nav className="footer-links" aria-label={copy.footerNav}>
+            <Link to="/about">{copy.about}</Link>
+            <Link to="/privacy">{copy.privacy}</Link>
+            <Link to="/contact">{copy.contact}</Link>
+          </nav>
         </div>
       </footer>
     </div>

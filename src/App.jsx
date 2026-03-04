@@ -19,6 +19,9 @@ import LunarSolarConverterPage from './pages/LunarSolarConverterPage';
 import IpCheckerPage from './pages/IpCheckerPage';
 import WinnerPickerPage from './pages/WinnerPickerPage';
 import BirthdayGiftPickerPage from './pages/BirthdayGiftPickerPage';
+import AboutPage from './pages/AboutPage';
+import PrivacyPolicyPage from './pages/PrivacyPolicyPage';
+import ContactPage from './pages/ContactPage';
 
 function App() {
   return (
@@ -32,6 +35,9 @@ function App() {
         <Route path="/products" element={<Navigate to="/sites" replace />} />
         <Route path="/now" element={<NowPage />} />
         <Route path="/blog" element={<BlogPage />} />
+        <Route path="/about" element={<AboutPage />} />
+        <Route path="/privacy" element={<PrivacyPolicyPage />} />
+        <Route path="/contact" element={<ContactPage />} />
         <Route path="/food-menu-picker" element={<FoodMenuPickerPage />} />
         <Route path="/lotto-random-generator" element={<LottoRandomGeneratorPage />} />
         <Route path="/text-counter" element={<TextCounterPage />} />
