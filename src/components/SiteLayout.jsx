@@ -3,6 +3,7 @@ import { Link, NavLink, useLocation } from 'react-router-dom';
 import AnalyticsTracker from './AnalyticsTracker';
 import SeoMeta from './SeoMeta';
 import { LanguageProvider, useLanguage } from '../lib/language';
+import { tools } from '../data/content';
 
 function SiteLayoutBody({ children }) {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -26,7 +27,10 @@ function SiteLayoutBody({ children }) {
           languageSwitch: '언어 변경: 영어로 전환',
           mobileMenuOpen: '모바일 메뉴 열기',
           mobileNav: '모바일 메뉴',
-          langButton: '한국어'
+          langButton: '한국어',
+          relatedToolsTitle: '같은 종류 도구',
+          moreTools: '더 많은 도구 알아보기',
+          whyTitle: '이 도구를 만든 이유'
         }
       : {
           mainNav: 'Main navigation',
@@ -44,8 +48,15 @@ function SiteLayoutBody({ children }) {
           languageSwitch: 'Language switch: change to Korean',
           mobileMenuOpen: 'Open mobile menu',
           mobileNav: 'Mobile navigation',
-          langButton: 'English'
+          langButton: 'English',
+          relatedToolsTitle: 'Related Tools',
+          moreTools: 'Explore More Tools',
+          whyTitle: 'Why I built this tool'
         };
+  const currentTool = findToolByPath(location.pathname);
+  const relatedTools = currentTool
+    ? tools.filter((tool) => tool.category === currentTool.category && tool.slug !== currentTool.slug)
+    : [];
 
   useEffect(() => {
     function onKeyDown(event) {
@@ -125,7 +136,39 @@ function SiteLayoutBody({ children }) {
           </div>
         </nav>
       </header>
-      <main className={`page-view page-${resolvePageTheme(location.pathname)}`}>{children}</main>
+      <main className={`page-view page-${resolvePageTheme(location.pathname)}`}>
+        {children}
+        {currentTool ? (
+          <section className="section related-tools-section">
+            <div className="container">
+              <article className="card">
+                <h2 className="related-tools-title">{copy.whyTitle}</h2>
+                <p>{language === 'ko' ? currentTool.why : currentTool.whyEn || currentTool.why}</p>
+              </article>
+            </div>
+          </section>
+        ) : null}
+        {relatedTools.length > 0 ? (
+          <section className="section related-tools-section">
+            <div className="container">
+              <div className="related-tools-head">
+                <h2 className="related-tools-title">{copy.relatedToolsTitle}</h2>
+                <Link className="button ghost" to="/tools">
+                  {copy.moreTools}
+                </Link>
+              </div>
+              <div className="grid two">
+                {relatedTools.map((tool) => (
+                  <Link className="card home-tool-card home-tool-link" key={tool.slug} to={tool.openUrl}>
+                    <h3>{language === 'ko' ? tool.nameKo || tool.name : tool.name}</h3>
+                    <p>{language === 'ko' ? tool.oneLiner : tool.oneLinerEn || tool.oneLiner}</p>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          </section>
+        ) : null}
+      </main>
       <footer className="site-footer">
         <div className="container footer-inner">
           <small>{copy.copyright}</small>
@@ -160,6 +203,18 @@ function resolvePageTheme(pathname) {
     return 'blog';
   }
   return 'home';
+}
+
+function normalizePath(path) {
+  if (!path) {
+    return '/';
+  }
+  return path.endsWith('/') && path !== '/' ? path.slice(0, -1) : path;
+}
+
+function findToolByPath(pathname) {
+  const currentPath = normalizePath(pathname);
+  return tools.find((tool) => normalizePath(tool.openUrl) === currentPath) || null;
 }
 
 function SiteLayout({ children }) {
