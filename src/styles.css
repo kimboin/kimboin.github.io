@@ -541,6 +541,17 @@ textarea:focus-visible {
   color: var(--muted);
 }
 
+.home-tools-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.home-tools-head .kicker {
+  margin: 0;
+}
+
 .home-tools-lead {
   margin: 0 0 14px;
   max-width: 760px;
@@ -1970,6 +1981,11 @@ textarea:focus-visible {
 
   .mbti-score-grid {
     grid-template-columns: 1fr;
+  }
+
+  .home-tools-head {
+    align-items: flex-start;
+    flex-direction: column;
   }
 }
 

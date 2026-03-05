@@ -239,9 +239,11 @@ function IdealMbtiFinderPage() {
         <section className="card converter-card">
           <p className="converter-hint">{copy.guide}</p>
           <div className="mbti-question-list">
-            {QUESTIONS.map((question) => (
+            {QUESTIONS.map((question, index) => (
               <article className="mbti-question-item" key={question.id}>
-                <p className="mbti-question-title">{language === 'ko' ? question.promptKo : question.promptEn}</p>
+                <p className="mbti-question-title">
+                  {index + 1}. {language === 'ko' ? question.promptKo : question.promptEn}
+                </p>
                 <div className="grid two">
                   {question.options.map((option) => {
                     const isActive = answers[question.id] === option.letter;

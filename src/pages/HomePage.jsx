@@ -23,9 +23,7 @@ function HomePage() {
           toolsKicker: '도구',
           toolsLead: '카테고리별 대표 도구만 먼저 보여드립니다. 전체 도구는 도구 페이지에서 확인하세요.',
           allTools: '전체 도구 보러가기',
-          learnKicker: '콘텐츠/학습',
-          openAria: '열기',
-          openLabel: '→'
+          learnKicker: '콘텐츠/학습'
         }
       : {
           kicker: 'Home',
@@ -37,9 +35,7 @@ function HomePage() {
           toolsKicker: 'Tools',
           toolsLead: 'Showing one featured tool per category. Browse all tools on the tools page.',
           allTools: 'View all tools',
-          learnKicker: 'Learn',
-          openAria: 'Open',
-          openLabel: '→'
+          learnKicker: 'Learn'
         };
 
   return (
@@ -65,7 +61,12 @@ function HomePage() {
 
       <section className="section">
         <div className="container">
-          <p className="kicker">{copy.toolsKicker}</p>
+          <div className="home-tools-head">
+            <p className="kicker">{copy.toolsKicker}</p>
+            <Link className="button ghost" to="/tools">
+              {copy.allTools}
+            </Link>
+          </div>
           <p className="home-tools-lead">{copy.toolsLead}</p>
           <div className="grid two">
             {featuredTools.map((tool) => (
@@ -75,11 +76,6 @@ function HomePage() {
               </Link>
             ))}
           </div>
-          <div className="actions">
-            <Link className="button ghost" to="/tools">
-              {copy.allTools}
-            </Link>
-          </div>
         </div>
       </section>
 
@@ -88,19 +84,10 @@ function HomePage() {
           <p className="kicker">{copy.learnKicker}</p>
           <div className="grid two">
             {learningContents.map((content) => (
-              <article className="card home-tool-card" key={content.slug}>
-                <div className="home-tool-head">
-                  <h3>{language === 'ko' ? content.nameKo || content.name : content.name}</h3>
-                  <Link
-                    className="button primary home-tool-open-btn"
-                    to={content.openUrl}
-                    aria-label={`${language === 'ko' ? content.nameKo || content.name : content.name} ${copy.openAria}`}
-                  >
-                    {copy.openLabel}
-                  </Link>
-                </div>
+              <Link className="card home-tool-card home-tool-link" key={content.slug} to={content.openUrl}>
+                <h3>{language === 'ko' ? content.nameKo || content.name : content.name}</h3>
                 <p>{language === 'ko' ? content.oneLiner : content.oneLinerEn || content.oneLiner}</p>
-              </article>
+              </Link>
             ))}
           </div>
         </div>
