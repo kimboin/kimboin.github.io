@@ -1,5 +1,43 @@
 export const blogPosts = [
   {
+    slug: 'lidoor-eternity-as-usual-2026-03',
+    category: 'song',
+    platform: 'music',
+    date: '2025년 10월',
+    titleKo: '리도어 - 영원은 그렇듯',
+    titleEn: 'Lidoor - Eternity As Usual',
+    excerptKo: '2025년 10월에 들은 리도어의 영원은 그렇듯 기록입니다.',
+    excerptEn: 'A listening log for Lidoor - Eternity As Usual (October 2025).',
+    contentKo: [
+      '청취 기록: 2025년 10월',
+      '리도어의 영원은 그렇듯을 듣고 남긴 메모입니다.'
+    ],
+    contentEn: [
+      'Listening log: October 2025.',
+      'A short note for Lidoor - Eternity As Usual.'
+    ],
+    youtubeUrl: 'https://youtu.be/E5BLkMGxDgQ?si=4gQLvgfOENu0XJ-n'
+  },
+  {
+    slug: 'lidoor-aesthetics-of-love-2025-10',
+    category: 'song',
+    platform: 'music',
+    date: '2025년 10월',
+    titleKo: '리도어 - 사랑의 미학',
+    titleEn: 'Lidoor - Aesthetics of Love',
+    excerptKo: '2025년 10월에 들은 리도어의 사랑의 미학 기록입니다.',
+    excerptEn: 'A listening log for Lidoor - Aesthetics of Love (October 2025).',
+    contentKo: [
+      '청취 기록: 2025년 10월',
+      '리도어의 사랑의 미학을 듣고 남긴 메모입니다.'
+    ],
+    contentEn: [
+      'Listening log: October 2025.',
+      'A short note for Lidoor - Aesthetics of Love.'
+    ],
+    youtubeUrl: 'https://youtu.be/3VlqlntAOt8?si=Xo2qfDKVL6VRcfMO'
+  },
+  {
     slug: 'ive-blackhole-2026-02',
     category: 'song',
     platform: 'music',
