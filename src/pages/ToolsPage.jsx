@@ -7,6 +7,8 @@ const TOOL_LAST_COMMIT_DATE = {
   'team-splitter': '2026-02-28',
   'winner-picker': '2026-03-02',
   'travel-country-random': '2026-02-28',
+  'balance-game': '2026-03-05',
+  'ideal-mbti-finder': '2026-03-05',
   'image-format-converter': '2026-03-04',
   'image-compressor': '',
   'image-resizer': '',

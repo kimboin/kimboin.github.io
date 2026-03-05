@@ -39,7 +39,8 @@ import LunarSolarConverterPage from './pages/LunarSolarConverterPage';
 import IpCheckerPage from './pages/IpCheckerPage';
 import WinnerPickerPage from './pages/WinnerPickerPage';
 import BirthdayGiftPickerPage from './pages/BirthdayGiftPickerPage';
-import BalanceGamePage from './pages/BalanceGamePage';
+import CelebrityIdealWorldCupPage from './pages/CelebrityIdealWorldCupPage';
+import IdealMbtiFinderPage from './pages/IdealMbtiFinderPage';
 import AboutPage from './pages/AboutPage';
 import PrivacyPolicyPage from './pages/PrivacyPolicyPage';
 import ContactPage from './pages/ContactPage';
@@ -92,7 +93,8 @@ function App() {
         <Route path="/ip-checker" element={<IpCheckerPage />} />
         <Route path="/winner-picker" element={<WinnerPickerPage />} />
         <Route path="/birthday-gift-picker" element={<BirthdayGiftPickerPage />} />
-        <Route path="/balance-game" element={<BalanceGamePage />} />
+        <Route path="/balance-game" element={<CelebrityIdealWorldCupPage />} />
+        <Route path="/ideal-mbti-finder" element={<IdealMbtiFinderPage />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </SiteLayout>

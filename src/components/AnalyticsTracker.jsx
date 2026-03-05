@@ -13,7 +13,8 @@ const TOOL_NAME_BY_PATH = {
   '/winner-picker': 'winner-picker',
   '/lunar-solar-converter': 'lunar-solar-converter',
   '/ip-checker': 'ip-checker',
-  '/balance-game': 'balance-game'
+  '/balance-game': 'balance-game',
+  '/ideal-mbti-finder': 'ideal-mbti-finder'
 };
 
 const CONTENT_NAME_BY_PATH = {

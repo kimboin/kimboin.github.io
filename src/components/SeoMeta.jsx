@@ -116,6 +116,11 @@ const META_BY_ROUTE = [
     description: '2명 중 1명을 선택하며 라운드를 진행해 최종 이상형 1명을 고르는 밸런스게임'
   },
   {
+    match: (path) => path === '/ideal-mbti-finder',
+    title: '이상형 MBTI 찾기 | Ideal MBTI Finder',
+    description: '선택형 질문으로 이상형 선호 성향을 분석해 MBTI 4글자 결과를 보여주는 도구'
+  },
+  {
     match: (path) => path === '/team-splitter',
     title: '랜덤 팀 나누기 | Team Splitter',
     description: '명단을 직접 입력하거나 CSV로 업로드해 원하는 팀 수로 랜덤 배정하는 도구'
