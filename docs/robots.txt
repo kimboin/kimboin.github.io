@@ -1,5 +1,4 @@
 User-agent: *
 Allow: /
 
-Host: kimboin.github.io
 Sitemap: https://kimboin.github.io/sitemap.xml
