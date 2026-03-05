@@ -52,6 +52,18 @@ export const tools = [
     openUrl: '/travel-country-random/'
   },
   {
+    slug: 'balance-game',
+    name: 'Balance Game',
+    nameKo: '밸런스게임',
+    oneLiner: '연예인 이상형 후보를 1:1 선택으로 진행해 최종 1명을 뽑는 토너먼트 도구',
+    oneLinerEn: 'Pick between two celebrity candidates each round and decide one final winner.',
+    why: '재미로 이상형 선택을 해볼 때, 후보를 빠르게 줄여 최종 1명을 고를 수 있는 간단한 게임이 있으면 좋겠다고 생각했습니다.',
+    whyEn: 'I built this for quick and fun ideal-type picks through a simple tournament flow.',
+    how: ['각 라운드에서 두 후보 중 한 명을 선택합니다.', '라운드가 진행되며 우승 후보를 압축합니다.', '최종 1명을 확인하고 다시 시작할 수 있습니다.'],
+    learned: '토너먼트형 도구는 단계 표시와 즉시 반응이 사용자 몰입에 가장 중요했습니다.',
+    openUrl: '/balance-game/'
+  },
+  {
     slug: 'image-format-converter',
     name: 'Image Format Converter',
     nameKo: '이미지 확장자 변환기',

@@ -56,6 +56,11 @@ const META_BY_ROUTE = [
     description: '여행 후보 국가를 버튼 한 번으로 랜덤 추천받는 도구'
   },
   {
+    match: (path) => path === '/balance-game',
+    title: '연예인 이상형 밸런스게임 | Balance Game',
+    description: '2명 중 1명을 선택하며 라운드를 진행해 최종 이상형 1명을 고르는 밸런스게임'
+  },
+  {
     match: (path) => path === '/team-splitter',
     title: '랜덤 팀 나누기 | Team Splitter',
     description: '명단을 직접 입력하거나 CSV로 업로드해 원하는 팀 수로 랜덤 배정하는 도구'

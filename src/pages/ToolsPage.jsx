@@ -22,6 +22,7 @@ function ToolsPage() {
           recommendItems: [
             '행사 추첨/이벤트: 당첨자 뽑기',
             '조별 활동/스터디 배정: 랜덤 팀 나누기',
+            '랜덤/추천 재미 콘텐츠: 밸런스게임',
             '문서 분량 점검/SEO 메타 길이 체크: 글자수 세기',
             '이미지 업로드 오류 해결: 이미지 확장자 변환기'
           ],
@@ -43,6 +44,7 @@ function ToolsPage() {
           recommendItems: [
             'Event giveaway: Winner Picker',
             'Class or team activity: Random Team Splitter',
+            'Fun random picks: Balance Game',
             'Copy length checks: Text Counter',
             'Image upload errors: Image Format Converter'
           ],

@@ -12,7 +12,8 @@ const TOOL_NAME_BY_PATH = {
   '/team-splitter': 'team-splitter',
   '/winner-picker': 'winner-picker',
   '/lunar-solar-converter': 'lunar-solar-converter',
-  '/ip-checker': 'ip-checker'
+  '/ip-checker': 'ip-checker',
+  '/balance-game': 'balance-game'
 };
 
 const CONTENT_NAME_BY_PATH = {
