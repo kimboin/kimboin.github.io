@@ -343,6 +343,7 @@ textarea:focus-visible {
 .tool-category {
   display: grid;
   gap: 14px;
+  scroll-margin-top: 96px;
 }
 
 .tool-category-head {
@@ -408,6 +409,26 @@ textarea:focus-visible {
   margin: 0;
   font-size: 0.82rem;
   color: #6a7585;
+}
+
+.tools-scroll-top-btn {
+  position: fixed;
+  right: 22px;
+  bottom: 22px;
+  z-index: 40;
+  border: 1px solid #0d5f59;
+  background: var(--primary);
+  color: #fff;
+  border-radius: 999px;
+  padding: 10px 14px;
+  font-size: 0.86rem;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 10px 24px rgba(13, 95, 89, 0.26);
+}
+
+.tools-scroll-top-btn:hover {
+  background: var(--primary-strong);
 }
 
 .tool-share-section {

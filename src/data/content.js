@@ -511,7 +511,7 @@ export const products = [
     reasonEn: 'I built this to run a simple experimental site that displays one first-come text submission each day.',
     target: '오늘의 한 줄을 남기고 싶은 누구나',
     targetEn: 'Anyone who wants to leave a one-line message for today.',
-    status: 'Live',
+    status: '작업중',
     visitUrl: 'https://today-banner.vercel.app'
   }
 ];

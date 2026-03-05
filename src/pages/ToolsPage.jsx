@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { tools } from '../data/content';
 import { useLanguage } from '../lib/language';
@@ -39,6 +40,7 @@ const TOOL_LAST_COMMIT_DATE = {
 
 function ToolsPage() {
   const { language } = useLanguage();
+  const [showScrollTop, setShowScrollTop] = useState(false);
   const todayDate = '2026-03-05';
   const copy =
     language === 'ko'
@@ -59,6 +61,7 @@ function ToolsPage() {
             { key: 'image-tools', title: '4) 이미지 도구' },
             { key: 'network-tools', title: '5) 네트워크 도구' }
           ],
+          scrollTop: '맨 위로',
           updatedLabel: '최근 업데이트',
           open: '열기'
         }
@@ -78,6 +81,7 @@ function ToolsPage() {
             { key: 'image-tools', title: '4) Image Tools' },
             { key: 'network-tools', title: '5) Network Tools' }
           ],
+          scrollTop: 'Top',
           updatedLabel: 'Last updated',
           open: 'Open'
         };
@@ -86,6 +90,20 @@ function ToolsPage() {
     count: tools.filter((tool) => tool.category === category.key).length
   }));
   const totalCount = tools.length;
+
+  useEffect(() => {
+    function onScroll() {
+      setShowScrollTop(window.scrollY > 480);
+    }
+
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  function scrollToTop() {
+    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+  }
 
   return (
     <>
@@ -158,6 +176,11 @@ function ToolsPage() {
           })}
         </div>
       </section>
+      {showScrollTop ? (
+        <button type="button" className="tools-scroll-top-btn" onClick={scrollToTop} aria-label={copy.scrollTop}>
+          {copy.scrollTop}
+        </button>
+      ) : null}
     </>
   );
 }
