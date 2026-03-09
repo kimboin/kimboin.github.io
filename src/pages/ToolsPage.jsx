@@ -1,9 +1,47 @@
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { tools } from '../data/content';
 import { useLanguage } from '../lib/language';
 
+const TOOL_LAST_COMMIT_DATE = {
+  'birthday-gift-picker': '2026-03-04',
+  'team-splitter': '2026-02-28',
+  'winner-picker': '2026-03-02',
+  'travel-country-random': '2026-02-28',
+  'balance-game': '2026-03-05',
+  'ideal-mbti-finder': '2026-03-05',
+  'image-format-converter': '2026-03-04',
+  'image-compressor': '',
+  'image-resizer': '',
+  'image-base64-converter': '',
+  'text-counter': '2026-03-04',
+  'json-formatter': '',
+  'base64-encoder': '',
+  'url-encoder-decoder': '',
+  'text-diff-checker': '',
+  'random-string-generator': '',
+  'password-generator': '',
+  'text-sorter': '',
+  'qr-code-generator': '',
+  'qr-code-decoder': '',
+  'uuid-generator': '',
+  'uuid-validator': '',
+  'food-menu-picker': '2026-03-04',
+  'lotto-random-generator': '2026-02-27',
+  'ip-checker': '2026-03-04',
+  'date-anniversary-calculator': '2026-03-04',
+  'd-day-calculator': '',
+  'age-calculator': '',
+  'timestamp-converter': '',
+  'color-code-converter': '',
+  'rgb-to-hex': '',
+  'lunar-solar-converter': '2026-02-28'
+};
+
 function ToolsPage() {
   const { language } = useLanguage();
+  const [showScrollTop, setShowScrollTop] = useState(false);
+  const todayDate = '2026-03-05';
   const copy =
     language === 'ko'
       ? {
@@ -11,44 +49,61 @@ function ToolsPage() {
           title: '내가 쓰려고 만든 도구',
           description:
             '내가 직접 쓰려고 만들었지만, 누구나 써보면 편리할 작은 도구들을 모았습니다. 필요할 때 자유롭게 사용하세요.',
-          notice: '이 페이지는 계산/생성/변환처럼 즉시 결과를 만드는 도구만 모아둡니다.',
-          guideTitle: '도구를 고르는 방법',
-          guideItems: [
-            '즉시 결과가 필요하면 생성형 도구(당첨자/팀/로또/메뉴)를 사용하세요.',
-            '파일 포맷이나 업로드 호환 문제가 있으면 변환형 도구(이미지 확장자 변환기)를 선택하세요.',
-            '입력값 확인/계산이 목적이면 계산형 도구(글자수, 기념일, IP 확인)를 먼저 확인하세요.'
+          quickSummary: '즉시 결과를 만드는 도구만 모아두었습니다. 아래에서 종류별로 바로 이동할 수 있습니다.',
+          totalTools: '전체 도구',
+          toolsCountUnit: '개',
+          categoryTools: '카테고리별 도구 수',
+          countLabel: '도구 수',
+          categories: [
+            { key: 'random-recommend', title: '1) 랜덤 · 추천' },
+            { key: 'calc-convert', title: '2) 계산 · 변환' },
+            { key: 'text-tools', title: '3) 텍스트 도구' },
+            { key: 'image-tools', title: '4) 이미지 도구' },
+            { key: 'network-tools', title: '5) 네트워크 도구' }
           ],
-          recommendTitle: '이런 상황에 추천',
-          recommendItems: [
-            '행사 추첨/이벤트: 당첨자 뽑기',
-            '조별 활동/스터디 배정: 랜덤 팀 나누기',
-            '문서 분량 점검/SEO 메타 길이 체크: 글자수 세기',
-            '이미지 업로드 오류 해결: 이미지 확장자 변환기'
-          ],
-          open: '열기',
-          why: '만들게 된 계기'
+          scrollTop: '맨 위로',
+          updatedLabel: '최근 업데이트',
+          open: '열기'
         }
       : {
           kicker: 'Tools',
           title: 'Small tools that make decisions lighter.',
           description: 'A collection of tools you can use right away.',
-          notice: 'This page only includes utility tools for instant results like generate, convert, and calculate.',
-          guideTitle: 'How to choose a tool',
-          guideItems: [
-            'Use generator tools for instant random outcomes (winner/team/lotto/menu).',
-            'Use converter tools for format and compatibility issues (image converter).',
-            'Use calculator/check tools when input validation or quick metrics are needed.'
+          quickSummary: 'This page lists instant-result tools only. Jump directly by category below.',
+          totalTools: 'Total tools',
+          toolsCountUnit: '',
+          categoryTools: 'Tools by category',
+          countLabel: 'Count',
+          categories: [
+            { key: 'random-recommend', title: '1) Random · Picks' },
+            { key: 'calc-convert', title: '2) Calculators · Converters' },
+            { key: 'text-tools', title: '3) Text Tools' },
+            { key: 'image-tools', title: '4) Image Tools' },
+            { key: 'network-tools', title: '5) Network Tools' }
           ],
-          recommendTitle: 'Recommended by situation',
-          recommendItems: [
-            'Event giveaway: Winner Picker',
-            'Class or team activity: Random Team Splitter',
-            'Copy length checks: Text Counter',
-            'Image upload errors: Image Format Converter'
-          ],
-          open: 'Open',
-          why: 'Why I built this'
+          scrollTop: 'Top',
+          updatedLabel: 'Last updated',
+          open: 'Open'
         };
+  const categoryStats = copy.categories.map((category) => ({
+    ...category,
+    count: tools.filter((tool) => tool.category === category.key).length
+  }));
+  const totalCount = tools.length;
+
+  useEffect(() => {
+    function onScroll() {
+      setShowScrollTop(window.scrollY > 480);
+    }
+
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  function scrollToTop() {
+    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+  }
 
   return (
     <>
@@ -61,50 +116,71 @@ function ToolsPage() {
       </section>
       <section className="section">
         <div className="container">
-          <div className="section-note">
-            <p>{copy.notice}</p>
+          <div className="card tools-quick-panel">
+            <p className="tools-quick-summary">{copy.quickSummary}</p>
+            <div className="tools-quick-total">
+              <p>{copy.totalTools}</p>
+              <strong>
+                {totalCount}
+                {copy.toolsCountUnit ? ` ${copy.toolsCountUnit}` : ''}
+              </strong>
+            </div>
+            <p className="tools-quick-kicker">{copy.categoryTools}</p>
+            <div className="tools-quick-chips">
+              {categoryStats.map((category) => (
+                <a key={category.key} className="tool-category-chip" href={`#tool-category-${category.key}`}>
+                  {category.title} · {category.count}
+                </a>
+              ))}
+            </div>
           </div>
         </div>
       </section>
       <section className="section">
-        <div className="container grid two">
-          <article className="card">
-            <h2>{copy.guideTitle}</h2>
-            <ul className="list">
-              {copy.guideItems.map((item) => (
-                <li key={item}>{item}</li>
-              ))}
-            </ul>
-          </article>
-          <article className="card">
-            <h2>{copy.recommendTitle}</h2>
-            <ul className="list">
-              {copy.recommendItems.map((item) => (
-                <li key={item}>{item}</li>
-              ))}
-            </ul>
-          </article>
+        <div className="container">
+          {categoryStats.map((category) => {
+            const groupedTools = tools.filter((tool) => tool.category === category.key);
+            if (groupedTools.length === 0) {
+              return null;
+            }
+
+            return (
+              <section className="tool-category" key={category.key} id={`tool-category-${category.key}`}>
+                <div className="tool-category-head">
+                  <h2 className="tool-category-title">{category.title}</h2>
+                  <span className="tool-category-count">
+                    {copy.countLabel} · {groupedTools.length}
+                    {copy.toolsCountUnit ? ` ${copy.toolsCountUnit}` : ''}
+                  </span>
+                </div>
+                <div className="grid two">
+                  {groupedTools.map((tool) => (
+                    <article className="card tool-card" key={tool.slug}>
+                      <div className="tool-card-head">
+                        <h3>{language === 'ko' ? tool.nameKo || tool.name : tool.name}</h3>
+                        <Link className="button primary tool-open-btn" to={tool.openUrl}>
+                          {copy.open}
+                        </Link>
+                      </div>
+                      <p className="tool-one-liner">
+                        {language === 'ko' ? tool.oneLiner : tool.oneLinerEn || tool.oneLiner}
+                      </p>
+                      <p className="tool-updated-text">
+                        {copy.updatedLabel}: {TOOL_LAST_COMMIT_DATE[tool.slug] || todayDate}
+                      </p>
+                    </article>
+                  ))}
+                </div>
+              </section>
+            );
+          })}
         </div>
       </section>
-      <section className="section">
-        <div className="container grid two">
-          {tools.map((tool) => (
-            <article className="card tool-card" key={tool.slug}>
-              <div className="tool-card-head">
-                <h2>{language === 'ko' ? tool.nameKo || tool.name : tool.name}</h2>
-                <Link className="button primary tool-open-btn" to={tool.openUrl}>
-                  {copy.open}
-                </Link>
-              </div>
-              <p className="tool-one-liner">{language === 'ko' ? tool.oneLiner : tool.oneLinerEn || tool.oneLiner}</p>
-              <div className="tool-why-box">
-                <p className="tool-why-title">{copy.why}</p>
-                <p className="tool-why-text">{language === 'ko' ? tool.why : tool.whyEn || tool.why}</p>
-              </div>
-            </article>
-          ))}
-        </div>
-      </section>
+      {showScrollTop ? (
+        <button type="button" className="tools-scroll-top-btn" onClick={scrollToTop} aria-label={copy.scrollTop}>
+          {copy.scrollTop}
+        </button>
+      ) : null}
     </>
   );
 }

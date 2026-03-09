@@ -41,6 +41,61 @@ const META_BY_ROUTE = [
     description: '입력한 텍스트의 글자수, 공백 제외 글자수, 단어 수, 줄 수를 실시간으로 계산하는 도구'
   },
   {
+    match: (path) => path === '/json-formatter',
+    title: 'JSON Formatter | JSON 정렬/압축',
+    description: 'JSON 문자열을 유효성 검증하고 Pretty 정렬 또는 Minify 압축으로 변환하는 도구'
+  },
+  {
+    match: (path) => path === '/base64-encoder',
+    title: 'Base64 Encode / Decode | 텍스트 Base64 변환',
+    description: '텍스트를 Base64로 인코딩하고 Base64 문자열을 텍스트로 디코딩하는 도구'
+  },
+  {
+    match: (path) => path === '/url-encoder-decoder',
+    title: 'URL Encode / Decode | URL 인코딩/디코딩',
+    description: '텍스트를 URL 인코딩하거나 URL 인코딩 문자열을 원문으로 디코딩하는 도구'
+  },
+  {
+    match: (path) => path === '/text-diff-checker',
+    title: '텍스트 비교 (Diff) | Text Diff Checker',
+    description: '두 텍스트를 줄 단위로 비교해 변경/추가/삭제 차이를 확인하는 도구'
+  },
+  {
+    match: (path) => path === '/random-string-generator',
+    title: '랜덤 문자열 생성기 | Random String Generator',
+    description: '길이와 문자셋 옵션을 설정해 랜덤 문자열을 생성하는 도구'
+  },
+  {
+    match: (path) => path === '/password-generator',
+    title: '비밀번호 생성기 | Password Generator',
+    description: '길이와 문자 옵션을 선택해 강력한 비밀번호를 생성하는 도구'
+  },
+  {
+    match: (path) => path === '/text-sorter',
+    title: '텍스트 정렬기 | Text Sorter',
+    description: '여러 줄 텍스트를 오름/내림차순으로 정렬하고 중복/빈 줄을 정리하는 도구'
+  },
+  {
+    match: (path) => path === '/qr-code-generator',
+    title: 'QR 코드 생성기 | QR Code Generator',
+    description: '텍스트나 URL을 입력해 QR 코드를 생성하고 PNG로 저장하는 도구'
+  },
+  {
+    match: (path) => path === '/qr-code-decoder',
+    title: 'QR 코드 해석기 | QR Code Decoder',
+    description: '이미지 파일에서 QR 코드를 해석해 텍스트/URL 값을 추출하는 도구'
+  },
+  {
+    match: (path) => path === '/uuid-generator',
+    title: 'UUID 생성기 | UUID Generator',
+    description: 'UUID v4를 원하는 개수만큼 생성하고 한 번에 복사할 수 있는 도구'
+  },
+  {
+    match: (path) => path === '/uuid-validator',
+    title: 'UUID 검사기 | UUID Validator',
+    description: 'UUID 문자열의 유효성 형식과 버전 정보를 확인하는 도구'
+  },
+  {
     match: (path) => path === '/kana-trace',
     title: 'Kana Trace | 히라가나 가타카나 따라쓰기',
     description: '마우스와 터치로 직접 쓰고 정확도를 채점하는 히라가나/가타카나 학습 콘텐츠'
@@ -56,9 +111,34 @@ const META_BY_ROUTE = [
     description: '여행 후보 국가를 버튼 한 번으로 랜덤 추천받는 도구'
   },
   {
+    match: (path) => path === '/balance-game',
+    title: '연예인 이상형 밸런스게임 | Balance Game',
+    description: '2명 중 1명을 선택하며 라운드를 진행해 최종 이상형 1명을 고르는 밸런스게임'
+  },
+  {
+    match: (path) => path === '/ideal-mbti-finder',
+    title: '이상형 MBTI 찾기 | Ideal MBTI Finder',
+    description: '선택형 질문으로 이상형 선호 성향을 분석해 MBTI 4글자 결과를 보여주는 도구'
+  },
+  {
     match: (path) => path === '/team-splitter',
     title: '랜덤 팀 나누기 | Team Splitter',
     description: '명단을 직접 입력하거나 CSV로 업로드해 원하는 팀 수로 랜덤 배정하는 도구'
+  },
+  {
+    match: (path) => path === '/image-compressor',
+    title: '이미지 용량 줄이기 | Image Compressor',
+    description: '이미지 품질과 해상도를 조정해 파일 용량을 줄이고 바로 다운로드하는 도구'
+  },
+  {
+    match: (path) => path === '/image-resizer',
+    title: '이미지 크기 변경 | Image Resizer',
+    description: '이미지의 가로/세로 크기를 원하는 해상도로 변경해 저장하는 도구'
+  },
+  {
+    match: (path) => path === '/image-base64-converter',
+    title: '이미지 ↔ Base64 변환기 | Image Base64 Converter',
+    description: '이미지를 Base64 문자열로 변환하고 Base64 문자열을 이미지로 복원하는 양방향 도구'
   },
   {
     match: (path) => path === '/winner-picker',
@@ -69,6 +149,31 @@ const META_BY_ROUTE = [
     match: (path) => path === '/date-anniversary-calculator',
     title: '기념일 날짜 계산기 | Date Anniversary Calculator',
     description: '기준 날짜를 입력하면 100일/200일/300일 같은 일수 기념일 날짜를 빠르게 계산하는 도구'
+  },
+  {
+    match: (path) => path === '/d-day-calculator',
+    title: 'D-Day 계산기 | D-Day Calculator',
+    description: '기준일과 목표일을 입력해 D-Day(D-, D+, D-Day)를 계산하는 도구'
+  },
+  {
+    match: (path) => path === '/age-calculator',
+    title: '나이 계산기 | Age Calculator',
+    description: '생년월일과 기준일을 입력해 만 나이, 경과일, 다음 생일까지를 계산하는 도구'
+  },
+  {
+    match: (path) => path === '/timestamp-converter',
+    title: 'Timestamp 변환기 | Timestamp Converter',
+    description: 'Unix Timestamp(초/밀리초)와 날짜/시간을 양방향으로 변환하는 도구'
+  },
+  {
+    match: (path) => path === '/color-code-converter',
+    title: '색상 코드 변환기 | Color Code Converter',
+    description: 'HEX, RGB, HSL 색상 코드를 서로 변환하고 색상 미리보기를 확인하는 도구'
+  },
+  {
+    match: (path) => path === '/rgb-to-hex',
+    title: 'RGB → HEX 변환 | RGB to HEX Converter',
+    description: 'RGB 색상 값을 HEX 코드로 변환하고 색상 미리보기를 확인하는 도구'
   },
   {
     match: (path) => path === '/lunar-solar-converter',

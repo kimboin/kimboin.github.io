@@ -5,7 +5,7 @@ import { trackEvent } from '../lib/analytics';
 const CANVAS_SIZE = 300;
 const PASS_SCORE = 60;
 const AUTO_NEXT_DELAY_MS = 650;
-const SCORE_TOAST_MS = 2200;
+const SCORE_TOAST_MS = 3200;
 const SHARE_FEEDBACK_MS = 2200;
 const PEN_WIDTH = 17;
 const STROKE_ANIM_MS = 1100;

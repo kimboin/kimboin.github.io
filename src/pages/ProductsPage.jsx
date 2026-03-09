@@ -50,11 +50,13 @@ function ProductsPage() {
               <p>
                 <strong>{copy.reason}:</strong> {language === 'ko' ? product.reason : product.reasonEn || product.reason}
               </p>
-              <div className="actions">
-                <a className="button primary" href={product.visitUrl} target="_blank" rel="noreferrer">
-                  {copy.visit}
-                </a>
-              </div>
+              {product.status === 'Live' && product.visitUrl ? (
+                <div className="actions">
+                  <a className="button primary" href={product.visitUrl} target="_blank" rel="noreferrer">
+                    {copy.visit}
+                  </a>
+                </div>
+              ) : null}
             </article>
           ))}
         </div>
