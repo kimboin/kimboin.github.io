@@ -6,6 +6,8 @@ import LearnPage from './pages/LearnPage';
 import ProductsPage from './pages/ProductsPage';
 import NowPage from './pages/NowPage';
 import BlogPage from './pages/BlogPage';
+import DevPage from './pages/DevPage';
+import DevDetailPage from './pages/DevDetailPage';
 import FoodMenuPickerPage from './pages/FoodMenuPickerPage';
 import LottoRandomGeneratorPage from './pages/LottoRandomGeneratorPage';
 import TextCounterPage from './pages/TextCounterPage';
@@ -35,6 +37,8 @@ function App() {
         <Route path="/products" element={<Navigate to="/sites" replace />} />
         <Route path="/now" element={<NowPage />} />
         <Route path="/blog" element={<BlogPage />} />
+        <Route path="/dev" element={<DevPage />} />
+        <Route path="/dev/:slug" element={<DevDetailPage />} />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/privacy" element={<PrivacyPolicyPage />} />
         <Route path="/contact" element={<ContactPage />} />

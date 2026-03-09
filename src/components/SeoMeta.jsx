@@ -91,6 +91,11 @@ const META_BY_ROUTE = [
     description: '최근 집중하고 있는 개발 주제와 운영 관심사를 정리한 페이지'
   },
   {
+    match: (path) => path === '/dev' || path.startsWith('/dev/'),
+    title: '개발 | kimboin.github.io',
+    description: '개발 중 새롭게 알게 된 개념과 실무 적용 방법을 정리한 페이지'
+  },
+  {
     match: (path) => path === '/blog',
     title: 'Blog | kimboin.github.io',
     description: 'OTT, 유튜브, 방송에서 본 콘텐츠를 기록해두는 페이지'

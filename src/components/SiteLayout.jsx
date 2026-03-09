@@ -16,6 +16,7 @@ function SiteLayoutBody({ children }) {
           tools: '도구',
           learn: '콘텐츠/학습',
           products: '사이트',
+          dev: '개발',
           now: '현재',
           blog: '블로그',
           about: '소개',
@@ -34,6 +35,7 @@ function SiteLayoutBody({ children }) {
           tools: 'Tools',
           learn: 'Learn',
           products: 'Sites',
+          dev: 'Dev',
           now: 'Now',
           blog: 'Blog',
           about: 'About',
@@ -76,6 +78,7 @@ function SiteLayoutBody({ children }) {
             <NavLink to="/tools">{copy.tools}</NavLink>
             <NavLink to="/learn">{copy.learn}</NavLink>
             <NavLink to="/sites">{copy.products}</NavLink>
+            <NavLink to="/dev">{copy.dev}</NavLink>
             <NavLink to="/blog">{copy.blog}</NavLink>
             <NavLink to="/now">{copy.now}</NavLink>
           </nav>
@@ -116,6 +119,9 @@ function SiteLayoutBody({ children }) {
             <NavLink to="/sites" onClick={() => setMenuOpen(false)}>
               {copy.products}
             </NavLink>
+            <NavLink to="/dev" onClick={() => setMenuOpen(false)}>
+              {copy.dev}
+            </NavLink>
             <NavLink to="/blog" onClick={() => setMenuOpen(false)}>
               {copy.blog}
             </NavLink>
@@ -155,6 +161,9 @@ function resolvePageTheme(pathname) {
   }
   if (pathname.startsWith('/now')) {
     return 'now';
+  }
+  if (pathname.startsWith('/dev')) {
+    return 'dev';
   }
   if (pathname.startsWith('/blog')) {
     return 'blog';

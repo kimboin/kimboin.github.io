@@ -31,6 +31,16 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://kimboin.github.io/dev</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://kimboin.github.io/dev/ngrok-universal-link-deeplink-https-test</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://kimboin.github.io/about</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>

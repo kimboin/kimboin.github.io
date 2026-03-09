@@ -459,6 +459,12 @@ textarea:focus-visible {
   --page-kicker: #4252a0;
 }
 
+.page-view.page-dev {
+  --page-hero-bg: linear-gradient(180deg, #edf6ff 0%, rgba(237, 246, 255, 0) 100%);
+  --page-hero-border: #d3e3f8;
+  --page-kicker: #2e5e91;
+}
+
 .blog-card {
   display: grid;
   gap: 10px;
@@ -516,6 +522,126 @@ textarea:focus-visible {
   color: var(--primary-strong);
   font-weight: 700;
   font-size: 0.88rem;
+}
+
+.dev-note {
+  display: grid;
+  gap: 14px;
+}
+
+.dev-note-link {
+  color: inherit;
+  border: 1px solid var(--border);
+  transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.dev-note-link:hover {
+  border-color: #bfd2ea;
+  transform: translateY(-1px);
+  box-shadow: 0 10px 24px rgba(23, 55, 99, 0.08);
+}
+
+.dev-note-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 14px;
+}
+
+.dev-note-meta {
+  margin: 0;
+  color: var(--primary-strong);
+  font-weight: 700;
+  font-size: 0.88rem;
+}
+
+.dev-topic {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 3px 10px;
+  color: var(--muted);
+  font-size: 0.76rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.dev-note h2,
+.dev-note h3 {
+  margin: 0;
+}
+
+.dev-note p {
+  margin: 0;
+}
+
+.dev-note ul {
+  margin: 0;
+  padding-left: 18px;
+  display: grid;
+  gap: 6px;
+}
+
+.dev-open-label {
+  margin-top: 2px;
+  color: var(--primary-strong);
+  font-weight: 700;
+}
+
+.dev-detail-section {
+  display: grid;
+  gap: 10px;
+}
+
+.dev-code-block {
+  display: grid;
+  gap: 8px;
+}
+
+.dev-code-title {
+  color: var(--muted);
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.dev-code-block pre {
+  margin: 0;
+  padding: 12px 14px;
+  border: 1px solid #dbe6f6;
+  border-radius: 10px;
+  background: #f5f9ff;
+  overflow-x: auto;
+}
+
+.dev-code-block code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+  font-size: 0.9rem;
+}
+
+.dev-stack-section {
+  padding-top: 4px;
+}
+
+.dev-stack-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.dev-stack-chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 12px;
+  border-radius: 999px;
+  border: 1px solid #d6e2f4;
+  background: #f4f8ff;
+  color: #2c4e7e;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
 }
 
 .privacy-layout {
