@@ -257,6 +257,51 @@ const notes = [
     ]
   },
   {
+    slug: 'git-pull-vs-fetch-and-rebase-vs-merge',
+    topic: 'git',
+    titleKo: 'git pull vs git fetch origin, git rebase vs git merge',
+    titleEn: 'git pull vs git fetch origin, and git rebase vs git merge',
+    excerptKo:
+      'pull은 fetch와 통합 작업을 한 번에 수행하고, fetch는 원격 상태만 받아옵니다. 이후 rebase와 merge 중 어떤 전략을 쓰는지에 따라 히스토리 형태와 협업 방식이 달라집니다.',
+    excerptEn:
+      'pull combines fetching and integration, while fetch only downloads remote refs. Rebase and merge then shape your history and collaboration flow differently.',
+    background:
+      '팀 개발에서 브랜치를 최신 상태로 맞추는 과정은 단순해 보이지만, 어떤 명령을 언제 쓰는지에 따라 충돌 처리 시점과 히스토리 가독성이 크게 달라집니다. 특히 `git pull`을 습관적으로 먼저 실행하면 내부에서 무엇이 일어나는지 모른 채 병합 커밋이 생기거나, 충돌 원인을 추적하기 어려운 상태가 되기 쉽습니다. 반대로 `git fetch origin`으로 원격 브랜치 상태만 먼저 받아오면 변경 범위를 확인한 뒤 `merge` 또는 `rebase`를 의도적으로 선택할 수 있어 실수가 줄어듭니다.',
+    importance:
+      '원격 변경 수집 단계와 통합 전략 선택 단계를 분리해서, 협업 중 불필요한 충돌과 난해한 커밋 히스토리를 줄이는 것',
+    keywords: [
+      { term: 'git pull', definition: '원격 변경을 가져오는 fetch와 현재 브랜치에 반영하는 merge 또는 rebase를 한 번에 수행하는 명령입니다.' },
+      { term: 'git fetch origin', definition: '원격 저장소 origin의 최신 참조를 로컬로 가져오되, 현재 작업 브랜치에는 자동 반영하지 않는 명령입니다.' },
+      { term: 'git merge', definition: '두 브랜치의 변경 이력을 보존한 채 병합 커밋 또는 fast-forward로 통합하는 방식입니다.' },
+      { term: 'git rebase', definition: '내 커밋의 기준점을 다른 브랜치 최신 커밋 위로 다시 쌓아 히스토리를 직선형으로 재구성하는 방식입니다.' }
+    ],
+    steps: [
+      '1) 먼저 `git fetch origin`으로 원격 브랜치 정보를 갱신합니다.',
+      '2) `git log --oneline --graph --all` 또는 `git status`로 현재 브랜치와 `origin/main` 차이를 확인합니다.',
+      '3) 팀이 병합 이력 보존을 선호하면 `git merge origin/main`을, 선형 히스토리를 선호하면 `git rebase origin/main`을 선택합니다.',
+      '4) 충돌이 나면 어느 커밋에서 충돌이 발생했는지 확인하고 파일 단위로 해결합니다.',
+      '5) rebase를 사용했다면 히스토리가 바뀌었는지 확인한 뒤 원격 반영 전략(force-with-lease 필요 여부)을 신중히 결정합니다.'
+    ],
+    mistakes: [
+      'pull이 단순 다운로드라고 생각하고 실행했다가 의도치 않은 merge commit이 생성됨',
+      'fetch 후 차이를 확인하지 않고 바로 push해서 원격과 충돌',
+      '공유 브랜치에서 rebase 후 무분별하게 force push하여 팀원 히스토리를 꼬이게 만듦',
+      'merge와 rebase의 목적 차이를 이해하지 못한 채 팀 규칙 없이 혼용함'
+    ],
+    checklist: [
+      '최신화 전에 현재 브랜치가 작업 브랜치인지, main인지 먼저 확인한다.',
+      '충돌 해결 전후로 `git diff`와 테스트를 통해 의도한 코드가 유지되는지 점검한다.',
+      '공유 브랜치에서는 rebase 사용 정책과 force push 허용 범위를 팀 규칙으로 정한다.',
+      '초보자 교육 시 pull 한 줄보다 fetch -> 확인 -> merge/rebase 흐름을 먼저 익히게 한다.'
+    ],
+    codeBlocks: [
+      { title: '원격 변경만 먼저 가져오기', code: 'git fetch origin' },
+      { title: '가져온 main을 현재 브랜치에 병합', code: 'git merge origin/main' },
+      { title: '가져온 main 위로 내 커밋 재배치', code: 'git rebase origin/main' },
+      { title: 'pull을 rebase 전략으로 수행', code: 'git pull --rebase origin main' }
+    ]
+  },
+  {
     slug: 'deep-link-vs-universal-link',
     topic: 'mobile',
     titleKo: 'Deep Link vs Universal Link',
